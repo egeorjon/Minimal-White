@@ -1,0 +1,81 @@
+{
+    "rows": [
+        {
+            "name"    : "series-gallery",
+            "columns" : { "xs": 1, "sm": 1, "md": 2, "lg": 2, "xl": 2 },
+            "weight"  : 1,
+            "groups": [
+                {
+                    "widgets" : [
+                        {
+                            "widget"  : "series-list",
+                            "cache"   : true,
+                            "weight"  : 1,
+                            "params"  : { }
+                        }
+                    ]
+                },
+                {
+                    "widgets" : [
+                        {
+                            "widget" : "gallery",
+                            "cache"  : false,
+                            "weight" : 1,
+                            "params" : { "term": "galerie" }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name"    : "about-follow-links",
+            "columns" : { "xs": 1, "sm": 1, "md": 2, "lg": 2, "xl": 2 },
+            "weight"  : 1,
+            "groups": [
+                {
+                    "widgets" : [
+                        {
+                            "widget": "page",
+                            "cache": false,
+                            "weight": 2,
+                            "params": { "post": "/pages/a-propos"}
+                        }
+                    ]
+                },
+                {
+                    "widgets" : [
+                        {
+                            "widget"  : "follow-me",
+                            "cache"   : true,
+                            "weight"  : 1,
+                            "params"  : { }
+                        },
+                        {
+                            "widget": "page",
+                            "cache": false,
+                            "weight": 2,
+                            "params": { "post": "/pages/links"}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name"    : "copyright",
+            "columns" : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+            "weight"  : 1,
+            "groups": [
+                {
+                    "widgets" : [
+                        {
+                            "widget"  : "copyright",
+                            "cache"   : true,
+                            "weight"  : 1,
+                            "params"  : { }
+                        }
+                    ]
+                }
+            ]        
+        }
+        ]
+    }

@@ -1,0 +1,19 @@
+{{- $current  := . -}}
+{{- $title    := .params.title    | default site.Params.widgets.lastposts.title    | default site.Data.defaults.widgets.title.numposts     -}}
+{{- $numposts := .params.numposts | default site.Params.widgets.lastposts.numposts | default site.Data.defaults.widgets.lastposts.numposts -}}
+{{- $section  := .params.section  | default site.Params.widgets.lastposts.section  | default ""                                            -}}
+{{- $posts    := slice   -}}
+{{- $params   := .params -}}
+{{- if ne $section "" -}}
+    {{- $section_page := site.GetPage "Section" $section -}}
+    {{- with $section_page -}}
+        {{- $posts  = where site.RegularPages "Section" $section | first $numposts -}}
+        {{- $params = merge $params (dict "title" .Title) -}}
+    {{- end -}}
+{{- else -}}
+    {{- $posts  = where site.RegularPages "Type" "in" site.Params.mainSections  | first $numposts -}}
+    {{- $params = merge $params (dict "title" (i18n $title)) -}}
+{{- end -}}
+{{- if $posts -}}
+    {{- partial "widgets/widget-posts.html" (dict "current" .current "params" $params "config" "lastposts" "widgetclass" "lastposts" "posts" $posts) -}}
+{{- end -}}

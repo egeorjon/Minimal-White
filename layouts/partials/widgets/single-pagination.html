@@ -1,0 +1,43 @@
+{{- $current     := .current -}}
+{{- $heading_tag :=       .Params.heading | default site.Params.widgets.single_pagination.heading | default site.Data.defaults.widgets.single_pagination.heading  | default site.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.Params.title   | default site.Params.widgets.single_pagination.title   | default site.Data.defaults.widgets.single_pagination.title) -}}
+{{- $n           := int  (.Params.prev    | default site.Params.widgets.single_pagination.prev    | default site.Data.defaults.widgets.single_pagination.prev)  -}}
+{{- $m           := int  (.Params.next    | default site.Params.widgets.single_pagination.next    | default site.Data.defaults.widgets.single_pagination.next)  -}}
+{{- $formatdate := site.Params.FormatDate -}} 
+<aside class="col widget widget-single-pagination">
+    <div class="widget-inner">
+        <div class="widget-header">
+            {{- with $title -}}
+                {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+            {{- end -}}
+        </div>
+        {{- $list := slice -}}
+        {{/* $n := 2 */}}  <!-- Number of previous posts -->
+        {{/* $m := 2 */}}  <!-- Number of next posts -->
+        <!-- Previous Posts -->
+        {{- $prev := $current -}}
+        {{- range seq $n -}}
+            {{- with $prev -}}
+                {{- $prev = $prev.PrevInSection -}}
+                {{- with $prev -}}
+                    {{- $list = (slice (printf "<a class=\"list-group-item list-group-item-action\" href=\"%s\"><i class=\"bi-arrow-up-circle\"></i> %s (%s)</a>" .RelPermalink .Title (.Date | time.Format $formatdate))) | append $list -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+        <!-- Current Post -->
+        {{- $list =  $list | append (printf "<a class=\"list-group-item list-group-item-action active\" aria-current=\"true\">%s (%s)</a>" $current.Title ($current.Date | time.Format $formatdate)) -}}
+        <!-- Next Posts -->
+        {{- $next := $current -}}
+        {{- range seq $m -}}
+            {{- with $next -}}
+                {{- $next = $next.NextInSection -}}
+                {{- with $next -}}
+                    {{- $list = $list | append (printf "<a class=\"list-group-item list-group-item-action\" href=\"%s\"><i class=\"bi-arrow-down-circle\"></i> %s (%s)</a>" .RelPermalink .Title (.Date | time.Format $formatdate)) -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+        <div class="list-group list-group-flush widget-content">
+            {{- delimit $list " " | safeHTML -}}
+        </div>
+    </div>
+</aside>

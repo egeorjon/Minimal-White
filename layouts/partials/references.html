@@ -1,0 +1,28 @@
+{{- $current_page := .Context -}}
+{{- $ref_list     := .refs    -}}
+{{- $ref_heading_tag := printf "h%d" 3 -}}  {{/*(int site.Data.default_params.params.ref_heading) -*/}}
+{{- $title           := i18n "references" -}}  {{/*-site.Data.default_params.params.ref_title -*/}}
+<div class="post-ref">
+    {{- printf "<%s>%s</%s>" $ref_heading_tag $title $ref_heading_tag | safeHTML -}}
+    <ul>
+    {{- range $ref_list -}}
+        {{- $ref := . -}}
+        <li>
+        {{- if eq .url "" -}}
+            {{- .title -}}
+        {{- else -}}
+            <a href="{{- .url -}}" title="{{- (.title | plainify) -}}" target="_blank" rel="noopener noreferrer">{{- .title -}}<i class="bi-link-45deg"></i></a>
+        {{- end -}}
+        {{ with .site -}}
+            {{ i18n "on-the-site" }} <a href="{{- $ref.site_url -}}" title="{{- $ref.site | plainify -}}" target="_blank" rel="noopener noreferrer">{{- $ref.site -}}<i class="bi-link-45deg"></i></a>
+        {{- end -}}
+        {{ with .lic -}}
+            ,{{ i18n "available-under-lic" }} <a href="{{- $ref.lic_url -}}" title="{{- $ref.lic | plainify -}}" target="_blank" rel="noopener noreferrer">{{- $ref.lic -}}<i class="bi-link-45deg"></i></a>
+        {{- end -}}
+        {{- with .comment -}}
+            . {{ . | markdownify -}}
+        {{- end -}}
+        </li>
+    {{- end -}}
+    </ul>
+</div>

@@ -1,0 +1,56 @@
+{{/* shortcode attachments.html */}}
+{{/* Parameters    */}}
+{{/*   files     string  relative path to the image (default: none, value mandatory) */}}
+{{/*   fields    list of fields to display (comma separated). Possible values: icon,title,filename,size */}}
+{{- $listfiles   := .Get "files"  | default site.Params.shortcodes.attachments.files  | default site.Data.defaults.shortcodes.attachments.files -}}
+{{- $fields      := .Get "fields" | default site.Params.shortcodes.attachments.fields | default site.Data.defaults.shortcodes.attachments.fields -}}
+{{- $table_class := site.Params.markup.table.table | default site.Data.defaults.markup.table.table -}}
+{{- $table_body  := site.Params.markup.table.body  | default site.Data.defaults.markup.table.body  -}}
+{{- $table_head  := site.Params.markup.table.head  | default site.Data.defaults.markup.table.head  -}}
+{{- with .Page.Resources.Match $listfiles }}
+<div class="table-responsive-md">
+    <table class="{{- $table_class }} attachments">
+        <thead {{ with $table_head -}}class="{{- . -}}"{{- end -}}>
+            <tr>
+            {{- range (split $fields ",") -}}
+                <th>attachment-{{- . -}}</th>
+            {{- end -}}
+            </tr>
+        </thead>
+        <tbody {{ with $table_body -}}class="{{- . -}}"{{- end -}}>
+        {{- range . -}}
+            <tr>
+            {{- $stats := os.Stat (path.Join $.Page.File.Dir .Name) -}}
+            {{- if in $fields "icon" -}}
+                {{- $icon := index site.Data.mimetype (string .MediaType) -}}
+                {{- if not $icon -}}{{- $icon = "bi-file-earmark" -}}{{- end -}}
+                <td><span class="{{- $icon -}}" style="font-size: 1.5rem;"> </span></td>
+            {{- end -}}
+            {{- if in $fields "title" -}}
+                {{- $title := .Title -}}
+                {{- if eq $stats.Name (path.Base .Title) -}}{{- $title = $stats.Name -}}{{- end -}}
+                <td><a href="{{- .RelPermalink -}}">{{- $title -}}</a></td>
+            {{- end -}}
+            {{- if in $fields "filename" -}}
+                <td><a href="{{- .RelPermalink -}}">{{- $stats.Name -}}</a></td>
+            {{- end -}}
+            {{- if in $fields "size" -}}
+                <td>{{- template "filesize" (dict "Fsize" $stats.Size) -}}</td>
+            {{- end -}}
+            </tr>
+        {{- end -}}
+        </tbody>
+    </table>
+</div>
+{{- end -}}
+{{- define "filesize" -}}
+    {{- if ge .Fsize 1000000000 -}}
+        {{- div .Fsize 1000000000 }} GB
+    {{- else if ge .Fsize 1000000 -}}
+        {{ div .Fsize 1000000 }} MB
+    {{- else if ge .Fsize 1000 -}}
+        {{- div .Fsize 1000 }} kB
+    {{- else -}}
+        {{- .Fsize }} "Bytes"
+    {{- end -}}
+{{- end -}}

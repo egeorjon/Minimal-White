@@ -1,0 +1,41 @@
+{{- $table_class := site.Params.markup.table.table | default site.Data.defaults.markup.table.table -}}
+{{- $table_body  := site.Params.markup.table.body  | default site.Data.defaults.markup.table.body  -}}
+{{- $table_head  := site.Params.markup.table.head  | default site.Data.defaults.markup.table.head  -}}
+<div class="table-responsive-md">
+    <table
+    {{- with .Attributes -}}
+        {{- range $k, $v := .Attributes -}}
+            {{- if $v -}}
+                {{- printf " %s=%q" $k $v | safeHTMLAttr -}}
+            {{- end -}}
+        {{- end -}}
+    {{- else -}}
+        {{- printf " class=\"%s\"" $table_class | safeHTMLAttr -}}
+    {{- end -}}>
+    <thead {{ with $table_head -}}class="{{- . -}}"{{- end -}}>
+        {{- range .THead }}
+        <tr>
+            {{- range . }}
+            <th>
+                {{- .Text -}}
+            </th>
+            {{- end }}
+        </tr>
+        {{- end }}
+    </thead>
+    <tbody {{ with $table_body -}}class="{{- . -}}"{{- end -}}>
+        {{- range .TBody }}
+        <tr>
+            {{- range . }}
+            <td
+                {{- with .Alignment -}}
+                    {{- printf " class=\"table-cell-align-%s\"" . | safeHTMLAttr -}}
+                {{- end -}}>
+                {{- .Text -}}
+            </td>
+            {{- end }}
+        </tr>
+        {{- end }}
+    </tbody>
+    </table>
+</div>

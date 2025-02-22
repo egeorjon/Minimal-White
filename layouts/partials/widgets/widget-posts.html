@@ -1,0 +1,64 @@
+{{- $current := .current -}}
+
+{{- $widget_def  := index site.Data.defaults.widgets .config -}}
+{{- $widget_conf := index site.Params.widgets .config        -}}
+
+{{- $heading_tag    := .params.heading    | default $widget_conf.heading    | default $widget_def.heading    | default site.Data.defaults.widgets.heading    -}}
+{{- $subheading_tag := .params.subheading | default $widget_conf.subheading | default $widget_def.subheading | default site.Data.defaults.widgets.subheading -}}
+{{- $summary        := .params.summary    | default $widget_conf.summary    | default $widget_def.summary                                                    -}}
+{{- $columns        := .params.columns    | default $widget_conf.columns    | default $widget_def.columns                                                    -}}
+{{- $meta           := .params.meta       | default $widget_conf.meta       | default $widget_def.meta                                                       -}}
+{{- $length         := .params.length     | default $widget_conf.length     | default $widget_def.length                                                     -}}
+{{- $title          := .params.title      | default $widget_conf.title      | default $widget_def.title      | default ""                                    -}}
+{{- $view_all       := .params.view_all   | default $widget_conf.view_all   | default ""                                                                     -}}
+{{- $widget_class   := .widgetclass       | default "posts"  -}}
+{{- $class          := partialCached "partials/class-columns.html" $columns (delimit $columns "-") -}}
+{{- with .posts -}}
+    {{- $posts := . -}}
+    <section class="col widget widget-{{- $widget_class -}}">
+        <div class="widget-inner">
+            <div class="widget-header">
+            {{- with $title -}}
+                {{- with $view_all -}}
+                    <span class="see-all"><a href="{{- $view_all | safeURL -}}">{{- i18n "view-all" -}}</a></span>
+                {{- end -}}
+                {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+            {{- end -}}
+            </div>
+            <div class="widget-content {{ $class -}}">
+                {{- range $posts -}}
+                    {{- $post := . -}}
+                    <aside class="col widget-posts">
+                        <div class="row">
+                            {{- with $meta.top -}}
+                                <div class="col-12 col-md-3">
+                                    {{- partial "partials/meta.html" (dict "current" $post "context" $post.Parent "meta" . "class" "meta-top") -}}
+                                </div><!-- col -->
+                            {{- end -}}
+                            <div class="col-12 {{ with $meta.top -}}col-md-9{{- end -}}">
+                                {{- with $meta.middle -}}
+                                    {{- partial "partials/meta.html" (dict "current" $post "context" $post.Parent "meta" . "class" "meta-middle") -}}
+                                {{- end -}}
+                                {{- (printf "<%s class=\"widget-title\"><a href=\"%s\" title=\"%s\">%s</a></%s>" $subheading_tag .RelPermalink (.Title | plainify) .Title $subheading_tag) | safeHTML -}}
+                                {{- if $summary -}}
+                                    {{- with .Summary -}}
+                                        {{- $string := . -}}
+                                        {{- if gt $length 0 -}}
+                                            {{- $string = $string | truncate $length "..." -}}
+                                        {{- end -}}
+                                        {{- $string = $string | plainify -}}
+                                        {{- printf "<p class=\"widget-content\">%s</p>" $string | safeHTML -}}
+                                        </p>
+                                    {{- end -}}
+                                {{- end -}}
+                                {{- with $meta.bottom -}}
+                                    {{- partial "partials/meta.html" (dict "current" $post "context" $post.Parent "meta" . "class" "meta-bottom") -}}
+                                {{- end -}}
+                            </div><!-- col -->
+                        </div><!-- row -->
+                    </aside><!--col -->
+                {{- end -}}
+            </div><!-- end of row -->
+        </div><!-- end of widget-inner -->
+    </section><!-- end of col -->
+{{- end -}}

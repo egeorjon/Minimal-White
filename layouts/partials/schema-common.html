@@ -1,0 +1,40 @@
+<!-- -------------------- Organization logo -------------------- -->
+{{- $logo := dict -}}
+{{- $logo_id := false -}}
+{{- if isset site.Params "brandlogo" -}}
+    {{- $logo_id = printf "%s#logo" site.BaseURL -}}
+    {{- $logo = dict "@type" "ImageObject" "@id" $logo_id "url" (printf "%s%s" (site.BaseURL | absURL) (index site.Params "brandlogo")) "contentUrl" (printf "%s%s" (site.BaseURL | absURL) (index site.Params "brandlogo")) "caption" site.Title -}}
+{{- end -}}
+<!-- -------------------- Organization ---------------------->
+{{- $org_id := (printf "%s#organization" site.BaseURL ) -}}
+{{- $org := dict "@type" "Organization" "@id" (printf "%s#organization" site.BaseURL) "name" site.Title "url" site.BaseURL -}}
+{{- if $logo_id -}}
+    {{- $org = merge $org (dict "logo" $logo) -}}
+    {{- $org = merge $org (dict "image" (dict "@id" $logo_id)) -}}
+{{- end -}}
+{{- with site.Params.FollowLinks -}}
+    {{- $list_url := slice -}}
+    {{- range . -}}
+        {{- if .account -}}
+            {{- $acc := .account}}
+            {{- if and (ne .id nil) (ne site.Data.socials.config nil) -}}
+                {{- with (index site.Data.socials.config .id) -}}
+                    {{- $list_url = $list_url | append (printf .follow $acc) -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if (gt (len $list_url) 0 ) -}}
+        {{- $org = merge $org (dict "sameAs" (apply $list_url "chomp" ".")) -}}
+    {{- end -}}
+{{- end -}}
+<!-- -------------- Website ----------------- -->
+{{- $website_id := (printf "%s#website" site.BaseURL) -}}
+{{- $website := dict "@type" "WebSite" "@id" $website_id "url" site.BaseURL "name" site.Title "inLanguage" (site.LanguageCode | default site.Data.default_params.languagecode) -}}
+{{- $website = merge $website (dict "publisher" (dict "@id" $org_id) "copyrightHolder" (dict "@id" $org_id)) -}}
+{{- with site.Params.Description -}}
+  {{- $website = merge $website (dict "description" .) -}}
+{{- end -}}
+<!-- ----------- Search box -------------- -->
+{{- $website = merge $website (dict "potentialAction" (dict "@type" "SearchAction" "target" (dict "@type" "EntryPoint" "urltemplate" (printf "%s%s" site.BaseURL "/search/?s={search_term_string}")) "query-input" "required name=search_term_string")) -}}
+{{- return (dict "org_id" $org_id "org" $org "website_id" $website_id "website" $website ) -}}

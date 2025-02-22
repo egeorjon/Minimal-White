@@ -1,0 +1,12 @@
+{{- $lic_text       :=  site.Params.licenceText -}} {{/* | default site.Data.defaults.params.licencetext */}}
+{{- $lic_short_text :=  site.Params.licenceShortText -}} {{/* | default site.Data.defaults.params.licenceshorttext */}}
+{{- $lic_url        :=  site.Params.licenceURL  -}} {{/* | default site.Data.defaults.params.licenceurl */}}
+{{- $string := "" -}}
+{{- with $lic_text -}}
+    {{- with $lic_short_text -}}
+        {{- with $lic_url -}}
+            {{- $string = printf "<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"%s\" >%s</a>" $lic_url $lic_text $lic_short_text -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $string -}}

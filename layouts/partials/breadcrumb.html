@@ -1,0 +1,18 @@
+<nav aria-label="breadcrumb" class="row">
+    <div class="col">
+        <ol class="breadcrumb">
+            {{- range .Ancestors.Reverse -}}
+            <li class="breadcrumb-item">
+                {{- if .IsHome -}}
+                    <a href="/" title="{{- i18n "gohome" -}}"><i class="bi-house-fill"></i><span class="visually-hidden">{{- i18n "home" -}}</span></a>
+                {{- else -}}
+                    <a href="{{- .RelPermalink -}}" title="{{- .Title -}}">{{- .LinkTitle -}}</a>
+                {{- end -}}
+            </li>
+            {{- end -}}
+            <li class="breadcrumb-item active">
+                <a aria-current="page">{{- .LinkTitle -}}</a>
+            </li>
+        </ol>
+    </div><!-- end of col -->
+</nav><!-- end of row -->

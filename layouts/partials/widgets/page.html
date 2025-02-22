@@ -1,0 +1,48 @@
+{{- $current      := .current                        -}}
+{{- $method       := .params.method | default "path" -}}
+{{- $value        := .params.value  | default ""     -}}
+{{- $format_date  := .params.format_date  | default site.Data.defaults.format_date                                                                -}}
+{{- $display_date := .params.display_date | default site.Params.widgets.page.display_date  | default site.Data.defaults.widgets.page.display_date -}}
+{{- $heading_tag  := .params.heading      | default site.Params.widgets.serieslist.heading | default site.Data.defaults.widgets.heading           -}}
+{{- $title        := i18n (.params.title  | default site.Params.widgets.serieslist.title   | default site.Data.defaults.widgets.serieslist.title) -}}
+{{- $post         := .params.post         | default "" -}}
+{{- if eq $method "field" -}}
+    {{- $post = where site.Pages (printf "Params.%s" $value) true -}}
+    {{- range first 1 $post -}}
+        <aside class="col widget widget-page">
+            <div class="widget-inner">
+                <div class="widget-header">
+                    {{- (printf "<%s class=\"widget-title\">%s</%s>" $heading_tag .Title $heading_tag) | safeHTML -}}
+                </div>
+                <div class="widget-content">
+                    {{- .Content -}}
+                    {{- if $display_date -}}
+                        <p>{{- .Date | time.Format $format_date -}}</p>
+                    {{- end -}}
+                </div>
+            </div>
+        </aside>
+    {{- else -}}
+        <div class="col">
+            <p>{{- i18n "error-post-not-found" -}}</p>
+        </div>
+    {{- end -}}
+{{- else -}}
+    {{- with site.GetPage $post -}}
+        <aside class="col widget widget-page">
+            <div class="widget-inner">
+                <div class="widget-header">
+                {{- with .Title -}}
+                    {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+                {{- end -}}
+                </div>
+                <div class="widget-content">
+                    {{- .Content -}}
+                    {{- if $display_date -}}
+                        <p>{{- .Date | time.Format $format_date -}}</p>
+                    {{- end -}}
+                </div>
+            </div><!-- end of widget-inner -->
+        </aside>
+    {{- end -}}
+{{- end -}}

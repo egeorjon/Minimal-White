@@ -1,0 +1,42 @@
+{{- $current     := .current -}}
+{{- $heading_tag := .params.heading     | default site.Params.widgets.followme.heading | default site.Data.defaults.widgets.followme.heading | default site.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.params.title | default site.Params.widgets.followme.title   | default site.Data.defaults.widgets.followme.title) -}}
+{{- with site.Params.followlinks -}}
+<aside class="col widget widget-followme">
+    <div class="widget-inner">
+        <div class="widget-header">
+            {{- with $title -}}
+                {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+            {{- end -}}
+        </div>
+        <div class="widget-content">
+            <ul><!-- class="inline-list" -->
+                {{- range sort . "weight" -}}
+                    {{- if eq .id "rss" -}}
+                        {{- with ((site.GetPage "home").OutputFormats.Get "rss") -}}
+                            <li>
+                                <a href="{{- .Permalink -}}" title="{{- i18n "rss-feeds" -}}"><i class="bi-rss"></i><span class="visually-hidden">{{- i18n "rss-feeds" -}}</span>{{/* i18n "rss-feeds" -*/}}</a>
+                            </li>
+                        {{ end -}}
+                    {{- else -}}
+                        {{- if .account -}}
+                            {{- $media := . -}}
+                            {{- if and (ne site.Data.socials nil) (ne .id nil) -}}
+                                {{- with (index site.Data.socials .id) }}
+                                    {{- $target := "" -}}
+                                    {{- with .target -}}
+                                        {{- $target = printf "target=\"%s\"" . -}}
+                                    {{- end -}}
+                                <li>
+                                    <a href="{{- printf .follow $media.account -}}" rel="noopener noreferrer" title="{{- i18n .followtext . -}}" {{ $target | safeHTMLAttr -}} ><i class="{{- .icon }}"></i><span class="visually-hidden">{{- i18n .followtext . }}</span>{{/* .name -*/}}</a>
+                                </li>
+                                {{- end -}}
+                            {{- end -}}
+                        {{- end -}}
+                    {{- end -}}
+                {{- end -}}
+            </ul>
+        </div>
+    </div><!-- end of widget-inner -->
+</aside>
+{{- end -}}

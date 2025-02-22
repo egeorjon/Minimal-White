@@ -1,0 +1,29 @@
+{{- define "main" -}}
+{{- $current_page  := . -}}
+
+{{/* ---- Get page parameters ---- */}}
+{{- $def_params  := index site.Params "sitepage" | default site.Params.single -}}
+{{- $display_img := $def_params.image  -}}
+
+{{/* ---- Get  image ---- */}}
+{{- $image := "" -}}
+{{- if and ($display_img) (isset .Params "images") -}}
+  {{- $image = .Resources.GetMatch (index .Params.images 0) -}}
+{{- end -}}
+
+{{- partial "partials/headline.html" (dict "current" $current_page "prefix" "sitepage" "display_img" $display_img "meta" (dict)) -}}
+<section class="single-main">
+  <div class="container">
+    <div class="row">
+      <article class="single-content col">
+        {{- replace .Content .Summary "" | replaceRE "<p> </p>" "" | safeHTML -}}
+      </article><!-- col -->
+    </div><!-- end of row -->
+  </div><!-- end of container -->
+</section>
+<footer class="single-footer">
+  {{- with site.Data.sitepage.rows -}}
+    {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
+  {{- end -}}
+</footer>
+{{- end -}}

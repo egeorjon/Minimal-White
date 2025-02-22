@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{- site.Language.LanguageCode -}}" dir="{{- or site.Language.LanguageDirection `ltr` -}}">
+<head>
+  {{- partial "inline/cache.html" . -}}
+  {{- partial "head.html" .         -}}
+</head>
+<body>
+  <header>
+    {{- partial "header.html" . -}}
+    {{/*- printf "===Kind:%s===Type:%s===Layout:%s===Section:%s===" .Kind .Type .Layout .Section -*/}}
+  </header>
+  <main>
+    {{- block "main" . -}}{{- end -}}
+  </main>
+  <footer>
+    {{- partialCached "footer.html" . -}}
+  </footer>
+</body>
+</html>
+{{- define "partials/inline/cache.html" -}}
+  {{- $cache := false -}}
+  {{- if eq .Kind "home" -}}
+    {{- $cache = "home" -}}
+  {{- else if eq .Kind "page" -}}
+    {{- $cache = .Title | anchorize -}}
+  {{- else if eq .Kind "section" -}}
+    {{- $cache = printf "section-%s" (.Title | anchorize) -}}
+  {{- else if or (eq .Kind "taxonomy") (eq .Kind "term") -}}
+    {{- $cache = printf "%s-%s-%s" .Kind .Type (.Title | anchorize) -}}
+  {{- end -}}
+  {{- .Scratch.Set "page-cache" $cache -}}
+{{- end -}}

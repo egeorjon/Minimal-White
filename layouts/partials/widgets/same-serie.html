@@ -1,0 +1,30 @@
+{{- $current     := .current -}}
+{{- $heading_tag := .params.heading     | default site.Params.widgets.sameserie.heading | default site.Data.defaults.widgets.heading          -}}
+{{- $title       := i18n (.params.title | default site.Params.widgets.sameserie.title   | default site.Data.defaults.widgets.sameserie.title) -}}
+{{- $serie       := first 1 ($current.GetTerms "series") -}}
+{{- with $serie -}}
+    <aside class="col widget widget-same-serie">
+    {{- range $serie -}}
+        <div class="widget-inner">
+            <div class="widget-header">
+                {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag (printf $title .Title) $heading_tag | safeHTML -}}
+            </div>
+            <div class="list-group list-group-flush widget-content">
+                {{- $i := 1 -}}
+                {{- range .Pages.ByPublishDate }}
+                    {{- if eq . $current -}}
+                        <a class="list-group-item list-group-item-action active" aria-current="true">
+                            {{- printf "%d. %s" $i .Title -}}
+                        </a>
+                    {{- else -}}
+                        <a href="{{- .RelPermalink -}}" class="list-group-item list-group-item-action" rel="bookmark">
+                            {{- printf "%d. %s (%s)" $i .Title (.Date | time.Format (site.Params.FormatDate | default site.Data.defaults.formatdate))  -}}
+                        </a>
+                    {{- end -}}
+                    {{- $i = math.Add $i 1 -}}
+                {{- end }}
+            </div>
+        </div>
+    {{- end -}}
+    </aside>
+{{- end -}}

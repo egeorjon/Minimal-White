@@ -1,0 +1,36 @@
+{{- $fav_path  := site.Params.favicons.folder -}}  {{/*-| default site.Data.defaults.favicons.folder -*/}}
+{{- $base_path := path.Join "/static" $fav_path -}}
+{{- if fileExists $base_path -}}
+    {{- range (readDir $base_path) -}}
+        {{- $fullname := path.Join $base_path .Name -}}
+        {{- $url := (path.Join $fav_path .Name) | relURL -}}
+        {{- $ext := path.Ext .Name -}}
+        {{- if eq (substr .Name 0 5) "apple" -}}
+            {{ with (imageConfig $fullname) }}
+                <link rel="apple-touch-icon" href="{{- $url -}}" sizes="{{- .Width -}}x{{- .Height -}}" />
+            {{- end -}}   
+        {{- else if eq (substr .Name 0 6) "safari" -}}
+            <link rel="mask-icon" href="{{- $url -}}" color="{{- site.Params.safaritabColor -}}"> {{/* | default site.Data.defaults.favicons.safaritabColor */}}
+        {{- else if eq (substr .Name 0 2) "ms" -}}
+            <meta name="msapplication-TileColor" content="{{- site.Params.mstileColor -}}" /> {{/* | default site.Data.defaults.favicons.mstilecolor */}}
+            <meta name="msapplication-TileImage" content="{{- $url -}}" />
+        {{- else if eq (substr .Name 0 8) "favicon-" -}}
+            {{ with (imageConfig $fullname) }}
+                <link rel="icon" type="image/png" href="{{- $url -}}" sizes="{{- .Width -}}x{{- .Height -}}" />
+            {{- end -}}
+        {{- else if eq .Name "favicon.ico" -}}
+            <link rel="icon" href="{{- $url -}}"  type="image/png" />            
+        {{- end }}
+    {{- end }}
+{{- end -}}
+{{- if fileExists "/static/favicon.ico" -}}
+    <link rel="shortcut icon" href="/favicon.ico"  type="image/x-icon" />            
+{{- end -}}
+{{- with site.Params.themeColor | default site.Data.defaults.favicons.themecolor -}}
+    <meta name="theme-color" content="{{- . -}}" />
+{{- end -}}
+{{ with site.Params.appName }}
+    <meta name="application-name" content="{{- . -}}" />
+    <meta name="apple-mobile-web-app-title" content="{{- . -}}" />
+{{- end -}}
+<meta name="msapplication-config" content="{{- path.Join $fav_path "browserconfig.xml" -}}" />

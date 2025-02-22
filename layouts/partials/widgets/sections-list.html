@@ -1,0 +1,44 @@
+{{/* Parameters    */}}
+{{/* .context      */}}
+{{/* Params        */}}
+{{/*    .title     */}}
+{{/*    .type      */}}
+{{/*    .columns   */}}
+{{/*    .heading   */}}
+{{- $context        := .context -}}
+{{- $title          := i18n (.params.title      | default site.Params.widgets.sections.title      | default site.Data.defaults.widgets.sections.title)                                                     -}}
+{{- $heading_tag    :=       .params.heading    | default site.Params.widgets.sections.heading    | default site.Data.defaults.widgets.sections.heading | default site.Data.defaults.widgets.heading       -}}
+{{- $subheading_tag :=       .params.subheading | default site.Params.widgets.sections.subheading | default site.Data.defaults.widgets.sections.subheading | default site.Data.defaults.widgets.subheading -}}
+{{- $columns        :=       .params.columns    | default site.Params.widgets.sections.columns    | default site.Data.defaults.widgets.sections.columns                                                    -}}
+{{- $summary        :=       .params.summary    | default site.Params.widgets.sections.summary    | default site.Data.defaults.widgets.sections.summary                                                    -}}
+{{- $length         :=       .params.length     | default site.Params.widgets.sections.length     | default site.Data.defaults.widgets.sections.length                                                    -}}
+{{- $class          := partialCached "partials/class-columns.html" $columns (delimit $columns "-")       -}}
+{{- with site.Params.mainSections -}}
+    <section class="col widget widget-sections widget-sections-images">
+        <div class="widget-inner">
+            <div class="widget-header">
+                {{- with $title -}}
+                    {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+                {{- end -}}
+            </div>
+            <div class="widget-content {{ $class -}}">
+                {{- range . -}}
+                    {{- with site.GetPage . -}} 
+                        <aside class="col">
+                            {{- (printf "<%s class=\"widget-title\"><a href=\"%s\" title=\"%s\">%s</a></%s>" $subheading_tag .RelPermalink (.Title | plainify | htmlUnescape) .Title $subheading_tag) | safeHTML -}}
+                            {{- if $summary -}}
+                                {{- with .Params.Description -}}
+                                    {{- $string := . -}}{{/* | replaceRE "^<p>(.*)</p>" "$1" */}}
+                                    {{- if gt $length 0 -}}
+                                        {{- $string = $string | truncate $length "..." -}}
+                                    {{- end -}}
+                                    <p class="widget-content">{{- $string | safeHTML -}}</p>
+                                {{- end -}}
+                            {{- end -}}
+                        </aside>
+                    {{- end -}}
+                {{- end -}}
+            </div><!-- row -->
+        </div><!-- widget-inner -->
+    </section><!-- col -->
+{{- end -}}

@@ -1,0 +1,38 @@
+{{- $list := slice -}}
+{{- $list  = $list | append (printf "\"%s\": \"%s\"" "name"        (site.Params.Manifest.name         | default site.Title)) -}}
+{{- $list  = $list | append (printf "\"%s\": \"%s\"" "shortname"   (site.Params.Manifest.shortname    | default site.Title)) -}}
+{{- $list  = $list | append (printf "\"%s\": \"%s\"" "display"     (site.Params.Manifest.display))      -}} {{/*| default site.Data.defaults.manifest.display)) -*/}}
+{{- $list  = $list | append (printf "\"%s\": \"%s\"" "lang"        (site.Params.Manifest.languageCode | default site.LanguageCode)) -}} {{/*| default site.Data.defaults.languagecode)) -*/}}
+{{- $list  = $list | append (printf "\"%s\": \"%s\"" "startUrl"    (site.Params.Manifest.startUrl     | default site.BaseURL)) -}}
+{{- $list  = $list | append (printf "\"%s\": \"%s\"" "theme_color" (site.Params.Manifest.themeColor   | default site.Params.themeColor)) -}} {{/*-| default site.Data.defaults.favicons.themecolor)) -*/}}
+{{- with site.Params.Manifest.backgroundcolor -}}  {{/*- | default site.Data.defaults.manifest.backgroundcolor -*/}}
+    {{- $list  = $list | append (printf "\"%s\": \"%s\"" "background_color" .) -}}
+{{- end -}}
+{{- with (site.Params.Manifest.description | default site.Params.Description) -}}
+    {{- $list  = $list | append (printf "\"%s\": \"%s\"" "description" (. | plainify | htmlUnescape)) -}}
+{{- end -}}
+{{- with (site.Params.Manifest.orientation) -}}  {{/*- | default site.Data.defaults.Manifest.orientation) -*/}}
+    {{- $list  = $list | append (printf "\"%s\": \"%s\"" "orientation" .) -}}
+{{- end }}
+{{- with (site.Params.Manifest.scope) -}}  {{/*- | default site.Data.defaults.Manifest.scope) -*/}}
+    {{- $list  = $list | append (printf "\"%s\": \"%s\"" "scope" .) -}}
+{{- end -}}
+{{- $fav_path  := site.Params.Manifest.favicons -}}  {{/*- | default site.Data.defaults.manifest.favicons -*/}}
+{{- $base_path := path.Join "/static" $fav_path -}}
+{{- if fileExists $base_path -}}
+    {{ $icon_list := slice -}}
+    {{- range (readDir $base_path) -}}
+        {{- $url := (path.Join $fav_path .Name) | relURL -}}
+        {{- if or (eq (substr .Name 0 7) "android") (eq (substr .Name 0 8) "favicon-") -}}
+            {{- with imageConfig (path.Join $base_path .Name) -}}
+                {{- $icon_list = $icon_list | append (dict "src" $url "sizes" (printf "%dx%d" .Width .Height) "type" "image/png") -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if gt (len $icon_list) 0 -}}
+        {{- $list  = $list | append (printf "\"%s\": %s" "icons" ($icon_list | jsonify)) -}}
+    {{- end -}}
+{{- end -}}
+{
+    {{- delimit $list ",\n" -}}
+}

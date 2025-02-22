@@ -1,0 +1,71 @@
+{{- define "main" -}}
+    {{- $current_page  := . -}}
+
+    {{/* ---- Get page parameters ---- */}}
+    {{- $def_params := index site.Params "serach" | default (index site.Data.defaults "serach") -}}
+
+    {{- partial "partials/headline.html" (dict "current" $current_page "prefix" "search" "display_img" $def_params.image "meta" (dict)) -}}
+    <section class="search-main">
+        <div class="container">
+            <div class="row">
+                <aside class="search-content col">
+                    {{- replace .Content .Summary "" | safeHTML -}}
+                    <h2>{{- i18n "search-form" -}}</h2>
+                    {{- $page := .GetPage "search" -}}
+                    {{- with $page -}}
+                        <form action="{{- .Permalink }}" method="GET" class="row justify-content-center form-search">
+                            <label for="search-query" class="col-form-label col-auto"><span class="visually-hidden">{{- i18n "search-please-enter" -}}</span></label>
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="search-query" aria-describedby="searchHelp" name="s" placeholder="{{- i18n "search-please-enter" -}}" />
+                               <div id="searchHelp" class="form-text visually-hidden">{{- i18n "search-help" -}}</div>
+                            </div><!-- end of col -->
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-dark">
+                                    <i class="bi-search" aria-hidden="true"></i>
+                                    <span class="visually-hidden">{{- "search" -}}</span>
+                                </button>
+                            </div><!-- end of col -->
+                        </form><!-- end of row -->
+                    {{- end -}}
+                </aside><!-- end of col -->
+            </div><!-- end of row -->
+        </div><!-- end of container -->
+        <div class="container">
+            <div class="row">
+                <div id="search-results" class="col d-none">
+                    <h2 id="search-results-title">{{- i18n "search-results" -}}</h2>
+                    <div id="search-results-items" class="post-list row">
+                        <p id="not-found" class="hidden-visibility">{{- i18n "no-post-found" -}}</p>{{/*  */}}
+                    </div><!-- search-results-items -->
+                </div><!-- col -->
+            </div><!-- end of row -->
+        </div><!-- end of container -->
+    </section>
+    {{- with site.Data.search.rows -}}
+    <footer class="search-footer">
+        {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
+    </footer>
+    {{- end -}}
+    <script id="search-result-template" type="text/x-js-template">
+        <article class="col-12">
+            <div class="row">
+                <div class="col">
+                    <h3 class="post-title"><a href="${link}">${title}</a></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <ul class="post-meta inline-list">
+                        ${ isset section }<li class="post-section"><i class="bi-folder2-open"></i> <span class="visually-hidden">{{- "In" -}}</span><span class="in-category">${section}</span></li>${end}
+                        ${ isset publish }<li class="post-date"><i class="bi-calendar3"></i> <span class="visually-hidden">{{- "posted-on" -}}</span><time class="entry-date published" datetime="${publish}">${publish}</time></li>${end}
+                        ${ isset tags }<li class="post-tags"><i class="bi-tags"></i> <span class="visually-hidden" aria-label="hidden">{{- i18n "tags" -}}:</span>${tags}</li>${end}
+                        <li class="post-score"><i class="bi-reception-4"></i> <span class="visually-hidden" aria-label="hidden">{{- i18n "score" -}}</span>${score}</li>
+                    </ul>
+                </div><!-- col -->
+                <div class="col-12 col-md-8 col-lg-9 post-summary">
+                    ${summary}
+                </div><!-- col -->
+            </div><!-- row -->
+        </article>
+    </script>
+{{- end -}}

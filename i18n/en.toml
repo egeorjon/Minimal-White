@@ -1,0 +1,12 @@
+[copy-link]
+    other = "Copy the link to this chapter: {{ .text }}"
+
+[reading-time]
+    one   = "One minute reading"
+    other = "{{ .Count }} minutes reading"
+
+[external]
+    other = "External source"
+
+[image-not-found]
+    other = "Image not found: %s"

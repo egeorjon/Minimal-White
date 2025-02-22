@@ -1,0 +1,36 @@
+{{- $current        := .current -}}
+{{- $authors        := $current.GetTerms "authors" -}}
+{{- $heading_tag    :=       .Params.heading | default site.Params.widgets.authors.heading    | default site.Data.defaults.widgets.authors.heading    | default site.Data.defaults.widgets.heading -}}
+{{- $subheading_tag :=    .Params.subheading | default site.Params.widgets.authors.subheading | default site.Data.defaults.widgets.authors.subheading | default site.Data.defaults.widgets.subheading -}}
+{{- $title          := i18n (.Params.title   | default site.Params.widgets.authors.title      | default site.Data.defaults.widgets.authors.title) ($authors | len) -}}
+
+
+<section class="col widget widget-authors">
+    <div class="row widget-inner">
+        <div class="col widget-header">
+        {{- with $title -}}
+            {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+        {{- end -}}
+    </div>
+    <div class="row widget-content">
+    {{- range $authors -}}
+        <aside class="col">
+            {{- printf "<%s><a href=\"%s\" title=\"%s\">%s</a></%s>" $subheading_tag .RelPermalink (i18n "page-of-author") .Params.Title $subheading_tag | safeHTML -}}
+            {{- with .Params.Description -}}
+                <p>{{- . | safeHTML -}}</p>
+            {{- end -}}
+            {{- with .Params.Socials -}}
+                <ul class="author-socials"><!-- class="inline-list" -->
+                    {{- range . -}}
+                        {{- $target := "" -}}
+                        {{- with .target -}}
+                            {{- $target = printf "target=\"%s\"" . | safeHTMLAttr -}}
+                        {{- end -}}
+                        <li><a href="{{- .url -}}" title="{{- .alt -}}" {{ $target -}}><i class="bi-{{- .icon -}}"></i></a></li>
+                    {{- end -}}
+                </ul>
+            {{- end -}}
+        </aside>
+    {{- end -}}
+    </div>
+</section>

@@ -1,0 +1,73 @@
+{{- $rfc822_date := "Mon, 02 Jan 2006 15:04:05 -0700" -}}
+{{- $protocol := "https" -}}
+{{- if hugo.IsServer -}}{{- $protocol = "http:" -}}{{- end -}}
+{{- $limit := 20 -}}
+{{- if ge site.Config.Services.RSS.Limit 1 -}}
+    {{- $limit = site.Config.Services.RSS.Limit | default site.Data.default_params.services.rss -}}
+{{- end -}}
+{{- $pages := .RegularPages | first $limit -}}
+{{- if .IsHome -}}
+  {{- $pages = first $limit (where site.RegularPages "Type" "in" site.Params.mainSections) -}}
+{{- end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule">
+  <channel>
+    {{- $title := site.Title -}}
+    {{- if not .IsHome -}}
+        {{- $title = printf "%s on %s" .Title site.Title -}}
+    {{- end -}}
+    <title>{{- printf "%d" site.Config.Services.RSS.Limit -}}</title>
+    <title>{{- $title | plainify | htmlUnescape -}}</title>
+    {{- $current_link := printf "%s%s" $protocol .Permalink -}}
+    <link>{{- $current_link -}}</link>
+    {{ with .OutputFormats.Get "RSS" -}}
+        {{ printf "<atom:link href=\"%s%s\" rel=\"self\" type=%q />" $protocol .Permalink .MediaType | safeHTML }}
+    {{- end }}
+    <description>{{- printf "%s %s" "Recent content in" $title -}}</description>
+    <generator>Hugo</generator>
+    {{- with site.Params.licenceURL -}}<creativeCommons:license>{{- . | safeHTML | htmlEscape -}}</creativeCommons:license>{{- end -}}
+    {{- with site.LanguageCode -}}<language>{{.}}</language>{{- end }}
+    {{ with site.Author.email -}}
+        <managingEditor>{{- . -}}{{- with site.Author.name }} ({{- . -}}){{- end -}}</managingEditor>
+    {{- end }}
+    {{ with site.Author.email -}}
+        <webMaster>{{- . -}}{{- with site.Author.name }} ({{- . -}}){{- end -}}</webMaster>
+    {{ end -}}
+    {{ with site.Copyright -}}
+        <copyright>{{- . -}}</copyright>
+    {{- end }}
+    {{ if not .Date.IsZero -}}
+        <lastBuildDate>{{- (index $pages.ByLastmod.Reverse 0).Lastmod.Format $rfc822_date | safeHTML -}}</lastBuildDate>
+    {{- end }}
+    {{- with site.Params.BrandLogo -}}
+        {{- $abs_path := path.Join "/static" . -}}
+        {{- if fileExists $abs_path -}}
+            {{- with imageConfig $abs_path -}}
+                <image url="{{- $protocol -}}{{- absLangURL site.Params.BrandLogo -}}" title="{{- $title -}}" link="{{- $current_link -}}" width="{{- .Width -}}" height="{{- .Height }}" />
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{ range $pages }}
+    <item>
+        <title>{{- .Title | plainify | htmlUnescape -}}</title>
+        <link>{{- $protocol -}}{{- .Permalink -}}</link>
+        <guid>{{- .Permalink -}}</guid>
+        <pubDate>{{ .Date.Format $rfc822_date | safeHTML }}</pubDate>
+        {{ with site.Author.email -}}
+            <author>{{- . -}}{{- with site.Author.name }} ({{- . -}}){{- end -}}</author>
+        {{ end -}}
+        <description>{{- .Summary | plainify | htmlEscape -}}</description><!-- replaceRE "^<p>(.*)</p>$" "$1"  -->
+        {{- if isset .Params "images" -}}
+            {{- $img_size := site.Params.rss_imgsize | default site.Data.default_params.services.imgsize -}}
+            {{- $image    := .Resources.GetMatch (index .Params.Images 0) -}}
+            {{- with $image -}}
+              {{- $img := $image.Resize (printf "%dx" $img_size) -}}
+              {{- with $img -}}
+                <enclosure url="{{- $protocol -}}{{- .Permalink -}}" length="{{- len .Content -}}" type="{{- .MediaType.Type -}}" />
+              {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    </item>
+    {{ end }}
+  </channel>
+</rss>

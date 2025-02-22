@@ -1,0 +1,16 @@
+{{- $current  := . -}}
+{{- $numposts := .params.numposts | default site.Params.widgets.popular.numposts | default site.Data.defaults.widgets.popular.numposts -}}
+{{- $title    := .params.title    | default site.Params.widgets.popular.title    | default site.Data.defaults.widgets.popular.title    -}}
+{{- with site.Data.popularposts -}}
+    {{- $posts := slice -}}
+    {{- range first $numposts (sort .posts "visit" "desc") -}}
+        {{- $p := site.GetPage .post -}}
+        {{- with $p -}}
+            {{- $posts = $posts | append (slice .) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $params := merge $.params (dict "title" (i18n $title)) -}}
+    {{- with $posts -}}
+        {{- partial "widgets/widget-posts.html" (dict "current" $.current "params" $params "config" "popular" "widgetclass" "popular" "posts" $posts) -}}
+    {{- end -}}
+{{- end -}}

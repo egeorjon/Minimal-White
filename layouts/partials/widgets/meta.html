@@ -1,0 +1,20 @@
+{{- $current     := .current -}}
+{{- $heading_tag := .params.heading         | default site.Params.widgets.meta.heading | default site.Data.defaults.widgets.meta.heading | default site.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.params.title     | default site.Params.widgets.meta.title   | default site.Data.defaults.widgets.meta.title) -}}
+{{- $meta        := site.Params.single.meta | default site.Data.defaults.single.meta -}}
+{{- $list        := index $meta .params.meta -}}
+{{- $class       := printf "meta-%s" .params.meta -}}
+{{- with $list -}}
+    <aside class="col widget widget-meta widget-{{- $class -}}">
+        <div class="widget-inner">
+            <div class="widget-header">
+                {{- with $title -}}
+                    {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+                {{- end -}}
+            </div>
+            <div class="widget-content">
+                {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" $class) -}}
+            </div>
+        </div>
+    </aside>
+{{- end -}}

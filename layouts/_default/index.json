@@ -1,0 +1,18 @@
+{{- if .IsHome -}}
+    {{- $.Scratch.Add "index" slice -}}
+    {{- range (where site.RegularPages "Type" "in" site.Params.mainsections) -}}
+        {{- $tags := "" -}}
+        {{- with .Params.tags -}}{{- $tags = delimit . ", " -}}{{- end -}}
+        {{- $.Scratch.Add "index" (dict 
+                "title" .Title 
+                "tags" $tags 
+                "categories" (.Params.categories | default slice)
+                "contents" (substr (.Plain | htmlUnescape) 0 500) 
+                "permalink" .Permalink 
+                "section" .Parent.Name 
+                "publish" (.Date | time.Format (site.Params.FormatDate | default site.Data.default_params.formatdate))
+            ) 
+        -}}
+    {{- end -}}
+    {{- $.Scratch.Get "index" | jsonify -}}
+{{- end -}}

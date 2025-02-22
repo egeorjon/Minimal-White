@@ -1,0 +1,17 @@
+<a href="{{- .Destination | safeURL -}}"{{- with .Title }} title="{{ . }}"{{- end -}} {{- if strings.HasPrefix .Destination "http" -}}target="_blank" rel="noopener noreferrer"{{- end -}}>
+    {{- .Text | safeHTML -}}
+    {{- if strings.HasPrefix .Destination "http" -}}
+        {{- if strings.HasPrefix .Destination "https://github" }}
+            <i class="bi-github"></i>
+        {{- else if strings.HasPrefix .Destination "https://www.wikipedia.org" -}}
+            <i class="bi bi-wikipedia"></i>
+        {{- else }}
+            {{- if strings.HasPrefix .Destination "http:" -}}
+                <i class="bi bi-shield-x"></i>
+            {{- end -}}
+            <i class="bi-link-45deg"></i>
+        {{- end -}}
+    {{- else if strings.HasPrefix .Destination "mailto:" -}}
+        <i class="bi-envelope"></i>
+    {{- end -}}
+</a>

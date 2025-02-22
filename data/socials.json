@@ -1,0 +1,82 @@
+{
+    "email": {
+      "follow": "",
+      "followtext": "",
+      "icon": "bi-envelope",
+      "mobile": false,
+      "name": "e-mail",
+      "share": "mailto:?subject=%%TITLE%%&body=%%BODY%%",
+      "sharetext": "share-by",
+      "target": ""
+    },
+    "facebook": {
+      "follow": "https://www.facebook.com/%s",
+      "followtext": "follow-me-on",
+      "icon": "bi-facebook",
+      "mobile": false,
+      "name": "Facebook",
+      "share": "https://www.facebook.com/sharer.php?u=%%URL%%%%PICTURE%%&title=%%TITLE%%&description=%%DESC%%&caption=%%SITE%%",
+      "sharetext": "share-on",
+      "target": "_blank"
+    },
+    "github": {
+      "follow": "https://github.com/%s",
+      "followtext": "see-my-work-on",
+      "icon": "bi-github",
+      "mobile": false,
+      "name": "GitHub",
+      "share": "",
+      "sharetext": "",
+      "target": "_blank"
+    },
+    "instagram": {
+      "follow": "https://www.instagram.com/%s",
+      "followtext": "see-my-work-on",
+      "icon": "bi-instagram",
+      "mobile": true,
+      "name": "Instagram",
+      "share": "",
+      "sharetext": "",
+      "target": "_blank"
+    },
+    "linkedin": {
+      "follow": "https://linkedin.com/in/%s",
+      "followtext": "follow-me-on",
+      "icon": "bi-linkedin",
+      "mobile": false,
+      "name": "LinkedIn",
+      "share": "http://www.linkedin.com/shareArticle?mini=true&url=%%URL%%&title=%%TITLE%%&summary=%%DESC%%&source=%%HOME%%",
+      "sharetext": "share-on",
+      "target": "_blank"
+    },
+    "pinterest": {
+      "follow": "https://www.pinterest.com/%s",
+      "followtext": "follow-me-on",
+      "icon": "bi-pinterest",
+      "mobile": false,
+      "name": "Pinterest",
+      "share": "https://pinterest.com/pin/create/bookmarklet/?url=%%URL%%%%MEDIA%%&desc=%%TITLE%%",
+      "sharetext": "share-on",
+      "target": "_blank"
+    },
+    "twitter": {
+      "follow": "https://twitter.com/%s",
+      "followtext": "follow-me-on",
+      "icon": "bi-twitter-x",
+      "mobile": false,
+      "name": "Twitter",
+      "share": "https://twitter.com/share?url=%%URL%%&text=%%TITLE%%%%HASHTAGS%%%%VIA%%",
+      "sharetext": "share-on",
+      "target": "_blank"
+    },
+    "whatsapp": {
+      "follow": "",
+      "followtext": "",
+      "icon": "bi-whatsapp",
+      "mobile": true,
+      "name": "Whatsapp",
+      "share": "https://wa.me/?text=%%URL%%",
+      "sharetext": "share-on",
+      "target": ""
+    }
+}

@@ -1,0 +1,73 @@
+{{/*  Available attributes                        */}}
+{{/*  context     : The Page being rendered.      */}}
+{{/*  Destination :  The related path             */}}
+{{/*  Title       : The title attribute           */}}
+{{/*  Text        : The rendered (HTML) link text */}}
+{{/*  class       : CSS Class to be added         */}}
+
+{{- $imgpath := index .Destination 0 -}}
+{{- $colnum  := .colnum | default "mono" -}}
+
+{{- $title := "" -}}
+{{- $alt   := "" -}}
+{{- with .Title -}}
+    {{- $title = printf "title=\"%s\"" . -}}
+    {{- $alt   = printf "alt=\"%s\"" . -}}
+{{- end -}}
+
+{{- $image   := "" -}}
+{{- $exts    := (slice ".jpg" ".jpeg" ".gif" ".tif" ".png" ".webp") -}}
+
+{{- $imgtype := 0  -}}{{/* 0: not found, 1: external, 2: found but not manageable, 3: found and manageable */}}
+{{- if strings.HasPrefix $imgpath "http" -}}
+    {{- $imgtype = 1 -}}
+{{- else -}}
+    {{- $image = .current.Resources.GetMatch $imgpath -}}
+    {{- with $image -}}
+        {{- $imgtype = 2 -}}
+        {{- if in $exts (path.Ext $imgpath) -}}
+            {{- $imgtype = 3 -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- if eq $imgtype 0 -}}
+    <div class="ratio ratio-47x20">
+        <p>{{- printf (i18n "image-not-found") $imgpath -}}</p>
+    </div>
+{{- else if lt $imgtype 3 -}}
+    <img class="img-fluid round-corner {{ with .class -}}{{- . | safeHTMLAttr -}}{{- end -}}" src="{{- $imgpath | safeURL -}}" {{ $alt }} {{ $title -}} />
+{{- else -}}
+    {{- $width       := int $image.Width            -}}
+    {{- $imgsizes    := slice 320 540 720 960 1140  -}}
+    {{- $breakpoints := slice 1200 992 768 576      -}}
+    {{- $viewports   := slice 33 33 50 97           -}}
+    {{- $srcsets     := slice                       -}}
+    {{- $sizes       := slice                       -}}
+    {{- range $size := $imgsizes -}}
+        {{- if gt $width $size -}}
+            {{- $img := $image.Resize (printf "%dx" $size) -}}
+            {{- $srcsets = $srcsets | append (printf "%s %dw" $img.RelPermalink $size) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $srcsets = $srcsets | append (printf "%s %dw" $image.RelPermalink $width) -}}
+
+    {{- if eq $colnum "mono" -}}
+        {{- $sizes = $sizes | append (printf "(min-width: %dpx) %dpx" $width $width) -}}
+        {{- $sizes = $sizes | append (printf "%dvw" 97) -}}
+    {{- else -}}
+        {{- $index := 0 -}}
+        {{- range $bkpts := $breakpoints -}}
+            {{- $vpts := index $viewports $index -}}
+            {{- $sizes = $sizes | append (printf "(min-width: %dpx) %dvw" $bkpts $vpts) -}}
+            {{- $index = add $index 1 -}}
+        {{- end -}}
+        {{- $sizes = $sizes | append (printf "%dvw" 95) -}}
+    {{- end -}}
+    {{- $class := "img-fluid round-corner" -}}
+    {{- with .class -}}
+        {{- $class = (printf "%s %s" $class .) | safeHTMLAttr -}}
+    {{- end -}}
+    {{- if .Link -}}<a href="{{- .Link -}}" {{ $title | safeHTMLAttr -}}>{{- end -}}
+    {{- printf "<img sizes=\"%s\" srcset=\"%s\" class=\"%s\" src=\"%s\" %s />" (delimit $sizes ",") (delimit $srcsets ",") $class ($image.RelPermalink | safeURL) $alt | safeHTML -}}
+    {{- if .Link -}}</a>{{- end -}}
+{{- end -}}

@@ -1,0 +1,249 @@
+[copy-link]
+    other = "Copier le lien de ce chapitre : {{ .text }}"
+
+[external]
+    other = "Source externe"
+
+[image-not-found]
+    other = "Image absente: %s"
+
+[series-posts]
+    other = "Les articles du dossier :"
+
+[not-post-yet]
+    other = "Pas encore d'articles dans ce dossier"
+
+[home]
+    other = "Accueil"
+
+[gohome]
+    other = "Aller à l'accueil du site"
+
+[blog]
+    other = "Blog"
+
+[architecture]
+    other = "Architecture IT"
+
+[project]
+    other = "Projet"
+
+[photo]
+    other = "Photo"
+
+[references]
+    one   = "Référence"
+    other = "Références"
+
+[in]
+    other = "dans"
+
+[posted-on]
+    other = "Publié le"
+
+[reading-label]
+    other = "Temps de lecture"
+
+[reading-time]
+    one   = "Une minute de lecture"
+    other = "{{ .Count }} minutes de lecture"
+
+[tags]
+    one   = "Mot-clé"
+    other = "Mots-clés"
+
+[series]
+    one   = "Le dossier"
+    other = "Les dossiers"
+
+[post-category]
+    other = "Article de la catégorie {{ .Name }}"
+
+[posts-of]
+    one   = "Article de la rubrique"
+    other = "Articles de la rubrique"
+
+[posts-of-section]
+    one   = "Article de la rubrique {{ .Title }}"
+    other = "Articles de la rubrique {{ .Title }}"
+
+[on-the-site]
+    other = "sur le site"
+
+[available-under-lic]
+    other = "disponible sous licence"
+
+[widget-not-found]
+    other = "Widget non trouvé"
+
+[widget-x-not-found]
+    other = "Widget <b>%s</b> non trouvé"
+
+[tags_for_section]
+    other = "Mots-clés disponibles dans cette rubrique"
+
+[series-list]
+    other = "Liste des dossiers"
+
+[gallery]
+    one   = "Galerie"
+    other = "Galeries"
+
+[see-all-galleries]
+    other = "Voir toutes les galeries"
+
+[rss-feeds]
+    other = "Flux RSS"
+
+[follow-me]
+    other = "Suivez-moi"
+
+[follow-me-on]
+    other = "Suivez-moi sur "
+
+[see-my-work-on]
+    other = "Suivez mon travail sur "
+
+[share-this-post]
+    other = "Partagez cet article"
+
+[share-by]
+    other = "Partagez cet article par %s"
+
+[share-on]
+    other = "Partagez cet article sur %s"
+
+[post-meta]
+    other = "Complément d'information"
+
+[older]
+    other = "Article plus ancien"
+
+[newer]
+    other = "Article plus récent"
+
+[related-posts]
+    other = "Les articles suivants pourraient également vous intéresser :"
+
+[popular-posts]
+    other = "Articles populaires"
+
+[search]
+    other = "Recherche"
+
+[menu-section]
+    other = "Aller à la rubrique &laquo; %s &raquo;"
+
+[search-form]
+    other = "Formulaire de recherche"
+
+[search-please-enter]
+    other = "Que recherchez-vous ?"
+
+[what-you-looking-for]
+    other = "Mots recherchés"
+
+[search-help]
+    other = "Merci de saisir les mots ou la phrase que vous recherchez"
+
+[search-results]
+    other = "Résultat de la recherche"
+
+[contact-me]
+    other = "Contactez-moi"
+
+[your-name]
+	other = "Votre nom"
+
+[placeholder-name]
+	other = "Merci de saisir votre nom"
+
+[email-address]
+	other = "Votre adresse de messagerie"
+
+[placeholder-email]
+	other = "Merci de saisir votre adresse mail"
+
+[the-subject]
+	other = "Le sujet"
+
+[subject]
+	other = "Le sujet de votre message"
+
+[placeholder-subject]
+	other = "Merci de saisir le sujet"
+
+[your-message]
+	other = "Votre message"
+
+[placeholder-message]
+	other = "Merci de saisir votre message"
+
+[submit]
+	other = "Envoyer le message"
+
+[message-recorded]
+	other = "Message envoyé"
+
+[error-post-not-found]
+    other = "Erreur: Page non trouvée"
+
+[score]
+    other = "Score"
+
+[last-posts]
+    one   = "Dernier article"
+    other = "Derniers articles"
+
+[view-all]
+    other = "Tous les articles"
+
+[view-all-tags]
+    other = "Tous les tags du site"
+
+[sections-list]
+    other = "Liste des rubriques"
+
+[tags-section]
+    other = "Les tags de cette section"
+
+[fist-last-name]
+    other = "Nom et/ou Prénom"
+
+[text]
+    other = "Votre message"
+
+[email-username]
+    other = "email première partie"
+
+[email-suffix]
+    other = "email seconde partie"
+
+[single_pagination]
+    other = "Articles suivants et précédents"
+
+[table-of-content]
+    other = "Table des matières"
+
+[same-serie]
+    other = "Cet article fait parti du dossier &laquo;%s&raquo; : "
+
+[see-series]
+    one   = "Voir la série"
+    other = "Voir toutes les séries"
+
+[no-post-found]
+    other = "Aucun article ne correspond aux critères."
+
+[published-posts]
+    other = "Articles publiés: "
+
+[see-all-posts-section]
+    other = "Tous les articles de la section"
+
+[post-authors]
+    one   = "L'auteur de cet article"
+    other = "Les auteurs de cet article"
+
+[page-of-author]
+    other = "La page de l'auteur"

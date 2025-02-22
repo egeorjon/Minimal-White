@@ -1,0 +1,12 @@
+{{- $columns     := . -}}
+{{- $colnum      := int (math.Max 1 (int (index $columns "xs" ))) -}}
+{{- $class       := printf "row row-cols-%d" $colnum -}}
+{{- $breakpoints := slice "sm" "md" "lg" "xl" -}}
+{{- range $brk := $breakpoints -}}
+    {{- $cn := int (index $columns $brk ) -}}
+    {{- if ne $colnum $cn -}}
+        {{- $class = (printf "%s row-cols-%s-%d" $class $brk (int $cn) ) -}}
+        {{- $colnum = $cn -}}
+    {{- end -}}
+{{- end -}}
+{{- return $class -}}

@@ -1,0 +1,100 @@
+{
+    "rows": [
+        {
+            "name"    : "share",
+            "columns" : { "xs": 1, "sm": 1, "md": 2, "lg": 2, "xl": 2 },
+            "weight"  : 1,
+            "groups": [
+                {
+                    "widgets" : [
+                        {
+                            "widget"  : "share-links",
+                            "cache"   : true,
+                            "weight"  : 1,
+                            "params"  : { }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name"    : "same-series-single-navigation",
+            "columns" : { "xs": 1, "sm": 1, "md": 1, "lg": 2, "xl": 2 },
+            "weight"  : 2,
+            "groups": [
+                {
+                    "widgets"   : [
+                        {
+                            "widget"  : "single-pagination",
+                            "cache"   : false,
+                            "weight"  : 1,
+                            "params"  : { }
+                        }
+                    ]
+                },
+                {
+                    "widgets"   : [
+                        {
+                            "widget"  : "same-serie",
+                            "cache"   : false,
+                            "weight"  : 1,
+                            "params"  : { }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name"    : "authors",
+            "width"   : 800,
+            "columns" : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+            "weight"  : 3,
+            "groups": [
+                {
+                    "widgets"   : [
+                        {
+                            "widget"  : "authors",
+                            "cache"   : false,
+                            "weight"  : 1,
+                            "params"  : {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name"    : "related",
+            "columns" : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+            "weight"  : 4,
+            "groups": [
+                {
+                    "widgets"   : [
+                        {
+                            "widget"  : "related-posts",
+                            "cache"   : false,
+                            "weight"  : 1,
+                            "params"  : {}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name"    : "popular",
+            "columns" : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+            "weight"  : 5,
+            "groups": [
+                {
+                    "widgets"   : [
+                        {
+                            "widget"  : "popular-posts",
+                            "cache"   : true,
+                            "weight"  : 1,
+                            "params"  : {}
+                        }
+                    ]
+                }
+            ]
+        }
+      ]
+    }

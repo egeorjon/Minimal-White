@@ -1,0 +1,128 @@
+<!-- Available attributes                       -->
+<!-- Page        : The Page being rendered.     -->
+<!-- Destination : The URL.                     -->
+<!-- Title       : The title attribute          -->
+<!-- Text        : The rendered (HTML) link text -->
+<!-- PlainText                                  -->
+{{- $alt_caption  := .Text  | default "" -}}
+{{- $title        := .Title | default "" -}}
+{{- $imgtype      := 0                   -}}{{/* 0: not found, 1: external, 2: found but not manageable, 3: found and manageable */}}
+{{- $image        := ""                  -}}
+{{- $exts         := (slice ".jpg" ".jpeg" ".gif" ".tif" ".png" ".webp") -}}
+{{- $columns      := 1                   -}}
+{{- $lic_string   := ""                  -}}
+{{- $caption_list := slice               -}}
+{{- $img_id       := ""                  -}}
+{{/* Define the type of the image */}}
+{{/* 0: Image not found, 1: External images, 2: Internal images but without exif (like svg), 3: images with exif */}}
+{{- if or (strings.HasPrefix .Destination "http") (strings.HasPrefix .Destination "/") -}}
+    {{- $imgtype = 1 -}}
+{{- else -}}
+    {{- $image = .Page.Resources.GetMatch .Destination -}}
+    {{- with $image -}}
+        {{- $imgtype = 2 -}}
+        {{- if in $exts (path.Ext $.Destination) -}}
+            {{- $imgtype = 3 -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{/* Image not found */}}
+{{- if eq $imgtype 0 -}}
+    <div class="ratio ratio-47x20">
+        <p>{{- printf (i18n "image-not-found") .Destination -}}</p>
+    </div>
+{{- else -}}
+    {{- $img_id = printf "id=\"%s\"" (anchorize (replace (path.Base .Destination) "_" "")) -}}
+    {{- with $alt_caption -}}
+        {{- $caption_list = $caption_list | append . -}}
+    {{- else -}}
+        {{- with $title -}}
+            {{- $caption_list = $caption_list | append . -}}
+        {{- end -}}
+    {{- end -}}
+    {{/* "Internal" image, display the licence */}}
+    {{- if gt $imgtype 1 -}}
+        {{- with $image.Params.lic -}}
+            {{- $lic_string = partial "image-lic.html" . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if eq $imgtype 1 -}}
+        {{- $caption_list = $caption_list | append (i18n "external") -}}
+    {{- else -}}
+        {{- with $lic_string -}}
+            {{- $caption_list = $caption_list | append . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if lt $imgtype 3 -}} {{/* External images or image not manageable */}}
+        {{- $caption_string := delimit $caption_list " - " -}}
+        <figure class="figure figure-center">
+            <img class="img-fluid" src="{{- .Destination | safeURL -}}" {{ with $caption_string -}}alt="{{- . | safeHTML -}}"{{- end }} />
+            {{- with $caption_string -}}<figcaption class="figure-caption">{{- . | safeHTML -}}</figcaption>{{- end -}}
+        </figure>
+    {{- else -}} {{/* manageable images*/}}
+        {{- with $image.Params.exif -}}
+            {{- $exif_list := slice -}}
+            {{- range $index, $value := $image.Exif.Tags -}}
+                {{- if eq $index "ISO" -}}
+                    {{- $exif_list = $exif_list | append (printf "ISO%d" $value) -}}
+                {{- else if eq $index "ApertureValue" -}}
+                    {{- $exif_list = $exif_list | append (printf "f/%.1f" $value) -}}
+                {{- else if eq $index "ExposureTime" -}}
+                    {{- $exif_list = $exif_list | append (printf "%s sec." (string $value)) -}}
+                {{- else if eq $index "FocalLength" -}}
+                    {{- $exif_list = $exif_list | append (printf "%dmm" $value) -}}
+                {{- end -}}
+            {{- end -}}
+            {{- with $exif_list -}}
+                {{- $caption_list = $caption_list | append (delimit $exif_list ", ") -}}
+            {{- end -}}
+        {{- end -}}
+        {{- $caption_string := delimit $caption_list " - " -}}
+        {{- $width      := int $image.Width                -}}
+        {{- $height     := int $image.Height               -}}
+        {{- $link       := .Destination                    -}}
+        {{- $max_width  := int (site.Params.Lightbox.Max_width) -}} {{/* | default site.Data.defaults.lightbox.max_width)  */}}
+        {{- $max_height := int (site.Params.Lightbox.Max_height) -}} {{/* | default site.Data.defaults.lightbox.max_height)  */}}
+        {{- $lightbox   := and (or (gt $width $max_width) (gt $height $max_height)) (site.Params.Lightbox.Enable) -}} {{/* | default site.Data.defaults.lightbox.enable)  */}}
+        {{/*- printf "Width: %d (%T), Height: %d (%T), max_width: %d (%T), max_heght: %d (%T)" $width $width $height $height $max_width $max_width $max_height $max_height -*/}}
+        {{- $imgsizes   := slice 320 540 720 960 1140 -}}
+        {{- if $lightbox -}}
+            {{- if ge $width $height -}}
+                {{- $width = int ( math.Min $width $max_width) -}}
+            {{- else -}}
+                {{- if gt $height $max_height -}}
+                    {{- $width = int ( math.Min $max_width (div (mul $width $max_height) $height)) -}}
+                {{- end -}}
+            {{- end -}}
+            {{- $imgsizes = $imgsizes | append $width -}}
+        {{- end -}}
+        {{- $srcsets := slice -}}
+        {{- range $size := sort $imgsizes -}}
+            {{- if ge $width $size -}}
+                {{- $img := $image.Resize (printf "%dx" $size) -}}
+                {{- $srcsets = $srcsets | append (printf "%s %dw" $img.RelPermalink $size) -}}
+                {{- if $lightbox -}}{{- $link = $img.RelPermalink -}}{{- end -}}
+            {{- end -}}
+        {{- end -}}
+        {{- if not $lightbox -}}
+            {{- $srcsets = $srcsets | append (printf "%s %dw" $link $width) -}}
+        {{- end -}}
+        {{- $sizes := printf "(min-width: %dpx) %dpx, 100vw" $width $width -}}
+        <figure {{ $img_id | safeHTMLAttr }} class="figure figure-center">
+            {{- if $lightbox -}}
+                <a href="{{- $image.RelPermalink -}}" {{ with $title -}}title="{{- . | safeHTML -}}"{{- end }}>
+            {{- end -}}
+            <img
+                {{ with $sizes -}} sizes="{{- $sizes -}}" {{ end }}
+                {{ with $srcsets -}} srcset="{{ delimit $srcsets "," }}" {{- end }}
+                class="img-fluid"
+                src="{{- $link | safeURL -}}"
+                {{- with $caption_string -}}alt="{{- . | safeHTML -}}"{{- end -}}
+                />
+            {{- if $lightbox -}}
+                </a>
+            {{- end -}}
+            {{- with $caption_string -}}<figcaption class="figure-caption">{{- . | safeHTML -}}</figcaption>{{- end -}}
+        </figure>
+    {{- end -}}
+{{- end -}}

@@ -1,0 +1,29 @@
+{{-
+  $scripts_list := slice (dict "url" "bootstrap-533/js/collapse.js" "minify" true)
+                         (dict "url" "bootstrap-533/js/offcanvas.js" "minify" true)
+                         (dict "url" "simple-lightbox/simple-lightbox.js" "minify" true)
+                         (dict "url" "js/main.js" "minify" true)
+-}}
+{{- $target       := "/js/minimum-white.js" -}}
+{{- $res          := slice -}}
+{{- range $script := $scripts_list -}}
+  {{- with resources.Get $script.url -}}
+    {{- with . | js.Build (dict "minify" $script.minify) -}}
+      {{- $res = $res | append . -}}
+    {{- end -}}{{/*- end of js.build -*/}}
+  {{- end -}}{{/*- end of with resources.get -*/}}
+{{- end -}}{{/*- end of range -*/}}
+{{- $final := $res | resources.Concat $target | fingerprint -}}
+{{- with $final -}}
+  <script defer src="{{- .RelPermalink -}}" integrity="{{- .Data.Integrity -}}" crossorigin="anonymous"></script>
+{{- end -}}
+{{- if eq "search" (.Layout | default "standard") -}}
+  {{- with resources.Get "fuse-7.0.0/fuse.min.js" -}}
+    <script defer src="{{- .RelPermalink -}}" integrity="{{- .Data.Integrity -}}" crossorigin="anonymous"></script>
+  {{- end -}}
+  {{- with resources.Get "js/search.js" -}}
+    {{- with . | js.Build (dict "minify" true) -}}
+      <script defer src="{{- .RelPermalink -}}" integrity="{{- .Data.Integrity -}}" crossorigin="anonymous"></script>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

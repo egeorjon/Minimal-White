@@ -1,0 +1,15 @@
+{{- $anchorID := .Anchor | anchorize | urlize -}}
+{{- $text := .Text | safeHTML -}}
+{{- if (gt .Level 3) -}}
+    <h{{- .Level }} id="{{- $anchorID -}}">{{- $text -}}</h{{- .Level -}}>
+{{- else -}}
+    <h{{- .Level }} id="{{- $anchorID -}}" data-text="{{- $text -}}">
+        <span role="heading" aria-level="2">{{- $text  -}}</span>
+        <button type="button" class="headings-anchor" 
+            aria-label="{{- i18n "copy-link" (dict "text" $text) -}}"
+            data-title="{{- i18n "copy-link" (dict "text" $text) -}}"
+            data-permalink="{{- path.Join .Page.Permalink (printf "#%s" $anchorID) -}}"
+            data-id="{{- $anchorID -}}"><i class="bi-link"> </i>
+        </button>
+    </h{{- .Level -}}>
+{{- end -}}

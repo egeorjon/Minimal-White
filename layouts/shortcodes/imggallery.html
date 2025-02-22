@@ -1,0 +1,76 @@
+{{/* shortcode imggallery.html */}}
+{{/* Parameters    */}}
+{{/*   files         string  relative path to the image (default: none, value mandatory) */}}
+{{/*   size          int     size of the thumbnails */}}
+{{/*   caption       int     display caption below the thumbnails */}}
+{{/*   overlay       string  top, bottom, or center */}}
+{{- $files      := .Get "files"      | default site.Params.shortcodes.gallery.files      | default site.Data.defaults.shortcodes.gallery.files      -}}
+{{- $size       := int (.Get "size"  | default site.Params.shortcodes.gallery.size       | default site.Data.defaults.shortcodes.gallery.size)      -}}
+{{- $ratio      := .Get "ratio"      | default site.Params.shortcodes.gallery.ratio      | default site.Data.defaults.shortcodes.gallery.ratio      -}}
+{{- $caption    := .Get "caption"    | default site.Params.shortcodes.gallery.caption    | default site.Data.defaults.shortcodes.gallery.caption    -}}
+{{- $overlay    := .Get "overlay"    | default site.Params.shortcodes.gallery.overlay    | default site.Data.defaults.shortcodes.gallery.overlay    -}}
+{{- $exif       := .Get "exif"       | default site.Params.shortcodes.gallery.exif       | default site.Data.defaults.shortcodes.gallery.exif       -}}
+{{- $galcaption := .Get "galcaption" | default site.Params.shortcodes.gallery.galcaption | default site.Data.defaults.shortcodes.gallery.galcaption -}}
+{{- $lic        := .Get "licence"    | default site.Params.shortcodes.gallery.licence    | default site.Data.defaults.shortcodes.gallery.licence    -}}
+
+{{- $images := slice -}}
+{{- if eq (path.Dir $files) "." -}}
+    {{- $files = path.Join $files "*" -}}
+    {{- $images = $.Page.Resources.Match $files -}}
+{{- else -}}
+    {{- $files := split $files "," -}}
+    {{- range $files -}}
+        {{- $img := $.Page.Resources.Match . -}}
+        {{- with $img -}}
+            {{- $images = $images | append $img -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- with $images -}}
+<div class="gallery-wrapper" id="gallery-{{- $.Ordinal -}}-wrapper">{{/*- anchorize $files -*/}}
+    <div class="gallery" id="gallery-{{- $.Ordinal -}}">
+        {{- range . -}}
+        {{- $rw := $size -}}
+        {{- $rh := $size -}}
+        {{- if ne $ratio "1:1" -}}
+            {{- if gt .Width .Height -}}
+                {{- $rh = int ( math.Min $size (div (mul .Height $size) .Width)) -}}
+            {{- else -}}
+            {{- $rw = int ( math.Min $size (div (mul .Width $size) .Height)) -}}
+            {{- end -}}
+        {{- end -}}
+        {{- $thumb := .Fill (printf "%sx%s smart" (string $rw) (string $rh)) }}
+        <figure class="gallery-thumb">
+            {{- $title := .Title | default "" -}}
+            {{- if eq $title .Name -}}
+                {{- $title = path.Base .Name | safeHTML -}}
+            {{- end -}}
+            {{- if $exif -}}
+                {{- with .Exif -}}
+                    {{- $string := printf "ISO%d, f/%.1f, %s sec. (%.0fmm)" .Tags.ISOSpeedRatings .Tags.FNumber (string .Tags.ExposureTime) .Tags.FocalLength -}}
+                    {{- $title = delimit (slice $title $string) " - " -}}
+                {{- end -}}
+            {{ end }}
+            <a href="{{- .RelPermalink -}}" {{ with .Title -}}title="{{- . | plainify  }}"{{- end -}}>
+                <img src="{{- $thumb.RelPermalink}}"
+                    class="gallery-image" 
+                    {{ with $title -}}alt="{{- . | plainify -}}"{{- end }}
+                    {{ with $title -}}title="{{- . | plainify -}}"{{- end }} />
+            {{- if $caption -}}
+                <figcaption class="{{- $overlay -}}">
+                    {{- $title | plainify -}}
+                </figcaption>
+            {{- end }}
+            </a>
+        </figure>
+        {{- end }}
+    </div><!-- gallery -->
+    {{- with $galcaption -}}
+        {{- $galcaptionStr := . -}}
+        {{- if and $lic site.Params.licenceImagesText -}}
+            {{- $galcaptionStr = printf "%s - %s" $galcaptionStr site.Params.licenceImagesText -}}
+        {{- end -}}
+        <div class="gallery-caption">{{- $galcaptionStr | safeHTML -}}</div>
+    {{- end -}}
+</div><!-- gallery-wrapper -->
+{{- end -}}

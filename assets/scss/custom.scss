@@ -1,0 +1,390 @@
+// Custom.scss
+
+// Option B: Include parts of Bootstrap
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../bootstrap-533/scss/functions";
+
+// 2. Include any default variable overrides here
+
+$font-size-base:  1.125rem;
+$font-size-sm:    $font-size-base * 0.8889;
+$font-size-lg:    $font-size-base * 1.3333;
+$small-font-size: 0.8889em;
+$large-font-size: 1.1111em;
+
+// Style p element.
+$paragraph-margin-bottom: $font-size-base * 1.5;
+
+$h1-font-size:    $font-size-base * 2;
+$h2-font-size:    $font-size-base * 1.77777778;
+$h3-font-size:    $font-size-base * 1.55555556;
+$h4-font-size:    $font-size-base * 1.33333333;
+$h5-font-size:    $font-size-base * 1.22222222;
+$h6-font-size:    $font-size-base * 1.11111111;
+
+$font-sizes: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size
+);
+
+
+// scss-docs-start theme-color-variables
+$primary:       #457B9D; // $blue !default;
+// $secondary:     $gray-600 !default;
+// $success:       $green !default;
+// $info:          $cyan !default;
+// $warning:       $yellow !default;
+// $danger:        $red !default;
+// $light:         $gray-100 !default;
+// $dark:          $gray-900 !default;
+// scss-docs-end theme-color-variables
+
+$blockquote-margin-y:         $paragraph-margin-bottom; // $spacer !default;
+$blockquote-font-size:        $font-size-base; //  * 1.25 !default;
+// $blockquote-footer-color:     $gray-600 !default;
+// $blockquote-footer-font-size: $small-font-size !default;
+
+// $font-family-sans-serif: Lucida Sans, Arial, Helvetica, sans-serif;
+// $font-family-serif:      Lucida Bright, Georgia, serif;
+// $font-family-monospace:  "Courier New", monospace !default;
+
+// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+@import "../bootstrap-533/scss/variables";
+// @import "../bootstrap-533/scss/variables-dark";
+
+// 4. Include any default map overrides here
+
+//$component-active-color:      $white; // !default;
+$component-active-bg:         $black; // $primary !default;
+
+// scss-docs-start navbar-variables
+// $navbar-padding-y:                  $spacer;
+// $navbar-nav-link-padding-x:         1.25rem;
+
+// scss-docs-start breadcrumb-variables
+// ----------------------------------------------------
+// $breadcrumb-font-size:              null;
+// $breadcrumb-padding-y:              0;
+// $breadcrumb-padding-x:              0;
+// $breadcrumb-item-padding-x:         .5rem;
+$breadcrumb-margin-bottom:          $paragraph-margin-bottom;
+// $breadcrumb-bg:                     null;
+$breadcrumb-divider-color:          #ddd;
+$breadcrumb-active-color:           #ddd;
+// $breadcrumb-divider:                quote("/");
+// $breadcrumb-divider-flipped:        $breadcrumb-divider;
+// $breadcrumb-border-radius:          null;
+
+// scss-docs-start navbar-variables
+// $navbar-padding-y:                  $spacer * .5 !default;
+// $navbar-padding-x:                  2em; // null !default;
+
+$navbar-nav-link-padding-x:         1em; // .5rem !default;
+
+// Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link
+// $nav-link-height:                   $font-size-base * $line-height-base + $nav-link-padding-y * 2 !default;
+// $navbar-brand-font-size:            $font-size-lg !default;
+$navbar-brand-height:               (1rem * $line-height-base) /  $navbar-brand-font-size; // $navbar-brand-font-size * $line-height-base !default;
+$navbar-brand-padding-y:            0; // ($nav-link-height - $navbar-brand-height) * .5 !default;
+// $navbar-brand-margin-end:           1rem !default;
+
+// $navbar-toggler-padding-y:          .25rem !default;
+// $navbar-toggler-padding-x:          .75rem !default;
+// $navbar-toggler-font-size:          $font-size-lg !default;
+// $navbar-toggler-border-radius:      $btn-border-radius !default;
+// $navbar-toggler-focus-width:        $btn-focus-width !default;
+// $navbar-toggler-transition:         box-shadow .15s ease-in-out !default;
+
+// $navbar-light-color:                rgba(var(--#{$prefix}emphasis-color-rgb), .65) !default;
+// $navbar-light-hover-color:          rgba(var(--#{$prefix}emphasis-color-rgb), .8) !default;
+// $navbar-light-active-color:         rgba(var(--#{$prefix}emphasis-color-rgb), 1) !default;
+// $navbar-light-disabled-color:       rgba(var(--#{$prefix}emphasis-color-rgb), .3) !default;
+// $navbar-light-icon-color:           rgba($body-color, .75) !default;
+// $navbar-light-toggler-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+// $navbar-light-toggler-border-color: rgba(var(--#{$prefix}emphasis-color-rgb), .15) !default;
+// $navbar-light-brand-color:          $navbar-light-active-color !default;
+// $navbar-light-brand-hover-color:    $navbar-light-active-color !default;
+// scss-docs-end navbar-variables
+
+// scss-docs-start navbar-dark-variables
+// $navbar-dark-color:                 rgba($white, .55) !default;
+// $navbar-dark-hover-color:           rgba($white, .75) !default;
+// $navbar-dark-active-color:          $white !default;
+// $navbar-dark-disabled-color:        rgba($white, .25) !default;
+// $navbar-dark-icon-color:            $navbar-dark-color !default;
+// $navbar-dark-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-icon-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+// $navbar-dark-toggler-border-color:  rgba($white, .1) !default;
+// $navbar-dark-brand-color:           $navbar-dark-active-color !default;
+// $navbar-dark-brand-hover-color:     $navbar-dark-active-color !default;
+// scss-docs-end navbar-dark-variables
+
+// Pagination
+// ----- scss-docs-start pagination-variables --------------------------------
+// $pagination-padding-y:              .375rem !default;
+$pagination-padding-x:              1rem; //.75rem !default;
+// $pagination-padding-y-sm:           .25rem !default;
+// $pagination-padding-x-sm:           .5rem !default;
+// $pagination-padding-y-lg:           .75rem !default;
+// $pagination-padding-x-lg:           1.5rem !default;
+
+// $pagination-font-size:              $font-size-base !default;
+
+$pagination-color:                  $black; // var(--#{$prefix}link-color) !default;
+// $pagination-bg:                     var(--#{$prefix}body-bg) !default;
+$pagination-border-radius:          1.8rem; // var(--#{$prefix}border-radius) !default;
+$pagination-border-width:           0; // var(--#{$prefix}border-width) !default;
+$pagination-margin-start:           .25rem; // calc(#{$pagination-border-width} * -1) !default; // stylelint-disable-line function-disallowed-list
+// $pagination-border-color:           var(--#{$prefix}border-color) !default;
+
+// $pagination-focus-color:            var(--#{$prefix}link-hover-color) !default;
+// $pagination-focus-bg:               var(--#{$prefix}secondary-bg) !default;
+// $pagination-focus-box-shadow:       $focus-ring-box-shadow !default;
+// $pagination-focus-outline:          0 !default;
+
+$pagination-hover-color:            $black;    //var(--#{$prefix}link-hover-color) !default;
+$pagination-hover-bg:               $gray-300; // var(--#{$prefix}tertiary-bg) !default;
+$pagination-hover-border-color:     $gray-300; // var(--#{$prefix}border-color) !default; // Todo in v6: remove this?
+
+$pagination-active-color:           $white; // $component-active-color !default;
+$pagination-active-bg:              $black; // $component-active-bg !default;
+$pagination-active-border-color:    $black; // $component-active-bg !default;
+
+// $pagination-disabled-color:         var(--#{$prefix}secondary-color) !default;
+// $pagination-disabled-bg:            var(--#{$prefix}secondary-bg) !default;
+// $pagination-disabled-border-color:  var(--#{$prefix}border-color) !default;
+
+// $pagination-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
+
+// $pagination-border-radius-sm:       var(--#{$prefix}border-radius-sm) !default;
+// $pagination-border-radius-lg:       var(--#{$prefix}border-radius-lg) !default;
+// ----- scss-docs-end pagination-variables --------------------------------
+
+// $input-border-radius: 1.5em;
+$input-border-radius-sm: 1em;
+
+
+$colors: map-remove($colors,
+   "indigo",
+   "purple",
+   "pink",
+   "teal"
+);
+
+$indigos: map-remove($indigos,
+  "indigo-100", "indigo-200", "indigo-300", "indigo-400", "indigo-500", "indigo-600", "indigo-700", "indigo-800", "indigo-900"
+);
+
+$purples: map-remove($purples,
+  "purple-100", "purple-200", "purple-300", "purple-400", "purple-500", "purple-600", "purple-700", "purple-800", "purple-900"
+);
+
+$pinks: map-remove($pinks,
+  "pink-100", "pink-200", "pink-300", "pink-400", "pink-500", "pink-600", "pink-700", "pink-800", "pink-900"
+);
+
+$teals: map-remove($teals,
+  "teal-100", "teal-200", "teal-300", "teal-400", "teal-500", "teal-600", "teal-700", "teal-800", "teal-900"
+);
+
+$grid-breakpoints: map-remove($grid-breakpoints,
+  xxl
+);
+
+$container-max-widths: map-remove($container-max-widths,
+  xxl
+);
+
+$border-widths:  map-remove($border-widths,
+  2, 3, 4, 5
+);
+
+$aspect-ratios: map-remove($aspect-ratios,
+  "4x3",
+  "21x9"
+);
+
+$aspect-ratios: map-merge($aspect-ratios,
+  ( "2.34": calc(50 / 117 * 100%))
+);
+
+$table-variants: map-remove($table-variants,
+   "secondary",
+   "success",
+   "info",
+   "warning",
+   "danger"
+);
+
+// 5. Include remainder of required parts
+@import "../bootstrap-533/scss/maps";
+@import "../bootstrap-533/scss/mixins";
+@import "../bootstrap-533/scss/root";
+
+// 6. Optionally include any other parts as needed
+@import "../bootstrap-533/scss/utilities";
+
+$utilities: map-remove($utilities,
+    "align",
+    "float",
+    "object-fit",
+    "opacity",
+    "overflow",
+    "overflow-x",
+    "overflow-y",
+  /* "display", */
+    "shadow",
+    "focus-ring",
+    "position",
+    "top",
+    "bottom",
+    "start",
+    "end",
+    "translate-middle",
+    "border",
+    "border-top",
+    "border-end",
+    "border-bottom",
+    "border-start",
+    "border-color",
+    "subtle-border-color",
+    "border-width",
+    "border-opacity",
+    "width",
+    "max-width",
+    "viewport-width",
+    "min-viewport-width",
+  /*  "height", */
+    "max-height",
+    "viewport-height",
+    "min-viewport-height",
+    "flex",
+    "flex-direction",
+    "flex-grow",
+    "flex-shrink",
+    "flex-wrap",
+  /*  "justify-content", */
+    "align-items",
+    "align-content",
+    "align-self",
+    "order",
+  /*  "margin", */
+    "margin-x",
+    "margin-y",
+    "margin-top",
+    "margin-end",
+    "margin-bottom",
+  /*  "margin-start", */
+    "negative-margin",
+    "negative-margin-x",
+    "negative-margin-y",
+    "negative-margin-top",
+    "negative-margin-end",
+    "negative-margin-bottom",
+    "negative-margin-start",
+    "padding"
+    "padding-x",
+    "padding-y",
+    "padding-top",
+    "padding-end",
+    "padding-bottom",
+    "padding-start",
+    "gap",
+    "row-gap",
+    "column-gap",
+    "font-family",
+    "font-size",
+    "font-style",
+    "font-weight",
+    "line-height",
+    "text-align",
+    "text-decoration",
+    "text-transform",
+    "white-space",
+    "word-wrap",
+    "color",
+    "text-opacity",
+    "text-color",
+    "link-opacity",
+    "link-offset",
+    "link-underline",
+    "link-underline-opacity",
+    "background-color",
+    "bg-opacity",
+    "subtle-background-color",
+    "gradient",
+    "user-select",
+    "pointer-events",
+    "rounded",
+    "rounded-top",
+    "rounded-end",
+    "rounded-bottom",
+    "rounded-start",
+    "visibility",
+    "z-index"
+);
+
+
+// @import "../bootstrap-533/scss/accordion";
+// @import "../bootstrap-533/scss/alert";
+// @import "../bootstrap-533/scss/badge";
+@import "../bootstrap-533/scss/breadcrumb";
+// @import "../bootstrap-533/scss/button-group";
+@import "../bootstrap-533/scss/buttons";
+@import "../bootstrap-533/scss/card";
+// @import "../bootstrap-533/scss/carousel";
+@import "../bootstrap-533/scss/close";
+@import "../bootstrap-533/scss/containers";
+// @import "../bootstrap-533/scss/dropdown";
+// @import "../bootstrap-533/scss/forms";
+  @import "../bootstrap-533/scss/forms/labels";
+  @import "../bootstrap-533/scss/forms/form-text";
+  @import "../bootstrap-533/scss/forms/form-control";
+    // @import "../bootstrap-533/scss/forms/form-select";
+    // @import "../bootstrap-533/scss/forms/form-check";
+    // @import "../bootstrap-533/scss/forms/form-range";
+    // @import "../bootstrap-533/scss/forms/floating-labels";
+  @import "../bootstrap-533/scss/forms/input-group";
+    // @import "../bootstrap-533/scss/forms/validation";
+@import "../bootstrap-533/scss/grid";
+// @import "../bootstrap-533/scss/helpers";
+    // @import "../bootstrap-533/scss/helpers/clearfix";
+    // @import "../bootstrap-533/scss/helpers/color-bg";
+    // @import "../bootstrap-533/scss/helpers/colored-links";
+    // @import "../bootstrap-533/scss/helpers/focus-ring";
+    // @import "../bootstrap-533/scss/helpers/icon-link";
+    // @import "../bootstrap-533/scss/helpers/ratio";
+    // @import "../bootstrap-533/scss/helpers/position";
+    // @import "../bootstrap-533/scss/helpers/stacks";
+    @import "../bootstrap-533/scss/helpers/visually-hidden";
+    // @import "helpers/stretched-link";
+    // @import "helpers/text-truncation";
+    // @import "helpers/vr";
+@import "../bootstrap-533/scss/images";
+@import "../bootstrap-533/scss/list-group";
+// @import "../bootstrap-533/scss/modal";
+// @import "../bootstrap-533/scss/nav";
+// For display the menu icons
+@import "../bootstrap-533/scss/navbar";
+@import "../bootstrap-533/scss/offcanvas";
+@import "../bootstrap-533/scss/pagination";
+// @import "../bootstrap-533/scss/placeholders";
+// @import "../bootstrap-533/scss/popover";
+// @import "../bootstrap-533/scss/progress";
+@import "../bootstrap-533/scss/reboot";
+// @import "../bootstrap-533/scss/spinners";
+@import "../bootstrap-533/scss/tables";
+// @import "../bootstrap-533/scss/toasts";
+// @import "../bootstrap-533/scss/tooltip";
+// For enabling the hide/show navbar
+@import "../bootstrap-533/scss/transitions";
+@import "../bootstrap-533/scss/type";
+
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import "../bootstrap-533/scss/utilities/api";
+
+// 8. Add additional custom code here

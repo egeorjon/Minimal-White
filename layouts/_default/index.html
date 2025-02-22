@@ -1,0 +1,10 @@
+{{- define "main" -}}
+  {{- $current_page := . -}}
+  <section class="homepage-main-wrapper">
+    <div class="container homepage-main">
+      {{- with site.Data.homepage.rows -}}
+        {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
+      {{- end -}}
+    </div>
+  </section>
+{{- end -}}

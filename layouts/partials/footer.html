@@ -1,0 +1,4 @@
+{{- $current := . -}}
+{{- with site.Data.footer.rows -}}
+    {{- partial "widget-area.html" (dict "current" $current "config" .) -}}
+{{- end -}}

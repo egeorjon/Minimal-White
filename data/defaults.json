@@ -1,0 +1,107 @@
+{
+    "contact": {
+        "image": true 
+    },
+    "authors": {
+        "headerimage": true
+    },
+    "author": {
+        "headerimage": true
+    },
+    "search": {
+        "image": true 
+    },
+    "single": {
+        "image": true 
+    },
+    "widgets": {
+        "heading"       : "h2",
+        "subheading"    : "h3",
+
+        "gallery": {
+            "title"     : "gallery"
+        },
+        "tags_section"  : {
+            "title"         : "tags_for_section",
+            "font_largest"  : 36,
+            "font_smallest" : 12,
+            "line_height"   : 54
+        },
+        "not_found"     : {
+            "title"     : "widget-not-found"
+        },
+        "followme"      : {
+            "title"     : "follow-me"
+        },
+        "share"         : {
+            "title"     : "share-this-post"
+        },
+        "serieslist"    : {
+            "title"     : "series-list",
+            "num"       : 10
+        },
+        "page"          : {
+            "heading"       : "h3",
+            "display_date"  : false,
+            "format_date"   : ":date_medium"
+        },
+        "meta"          : {
+            "title"     : "post-meta"
+        },
+        "sections"      : {
+            "title"     : "sections-list",
+            "length"    : 100,
+            "summary"   : true
+        },
+        "tags_secion": {
+            "title"     : "tags-section"
+        },
+        "popular"       : {
+            "title"     : "popular-posts",
+            "numposts"  : 4,
+            "length"    : 100,
+            "summary"   : true,
+            "columns"   : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+            "meta"      : {
+                "top"       : [ "date" ],
+                "middle"    : [],
+                "bottom"    : [ "section", "reading" ]
+            }
+        },
+        "lastposts"     : {
+            "title"     : "last-posts",
+            "numposts"  : 4,
+            "length"    : 250,
+            "summary"   : true,
+            "columns"   : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+            "meta"      : {
+                "top"       : [ "date" ],
+                "middle"    : [ ],
+                "bottom"    : [ ]
+            }
+        },
+        "related"       : {
+            "title"     : "related-posts",
+            "numposts"  : 4,
+            "length"    : 100,
+            "summary"   : true,
+            "columns"   : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+            "meta"      : {
+                "top"       : [ "date" ],
+                "middle"    : [ ],
+                "bottom"    : [ "section", "reading" ]
+            }
+        },
+        "single_pagination": {
+            "title"     : "single_pagination",
+            "prev"      : 2,
+            "next"      : 2
+        },
+        "sameserie": {
+            "title"     : "same-serie"
+        },
+        "authors": {
+            "title"     : "post-authors"
+        }
+    }
+}
