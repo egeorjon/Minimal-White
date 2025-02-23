@@ -59,16 +59,6 @@
       "sharetext": "share-on",
       "target": "_blank"
     },
-    "twitter": {
-      "follow": "https://twitter.com/%s",
-      "followtext": "follow-me-on",
-      "icon": "bi-twitter-x",
-      "mobile": false,
-      "name": "Twitter",
-      "share": "https://twitter.com/share?url=%%URL%%&text=%%TITLE%%%%HASHTAGS%%%%VIA%%",
-      "sharetext": "share-on",
-      "target": "_blank"
-    },
     "whatsapp": {
       "follow": "",
       "followtext": "",
