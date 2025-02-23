@@ -12,11 +12,13 @@
 {{- $long_string := partial "inline/share_regex" (dict "pattern" "%%START%%"   "param" "%s" "value" $start   "string" $long)        -}}
 {{- $long_string := partial "inline/share_regex" (dict "pattern" "%%END%%"     "param" "%s" "value" $end     "string" $long_string) -}}
 {{- $long_string := partial "inline/share_regex" (dict "pattern" "%%COMPANY%%" "param" "%s" "value" $company "string" $long_string) -}}
+
 <aside class="col widget widget-copyright">
     <div class="widget-inner">
         {{- $long_string -}}
     </div>
 </aside>
+
 {{- define "partials/inline/share_regex" -}}
     {{- $new_value := "" -}}
     {{- if eq .value "" -}}
