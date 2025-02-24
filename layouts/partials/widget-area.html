@@ -48,7 +48,7 @@
   {{- end -}}
 {{- end -}}
 {{- range $rid, $rwrapper := $rows -}}
-  <div id="{{- $rwrapper.name -}}">
+  <div id="{{- $rwrapper.name -}}" class="widget-area">
     <div class="container">
       <div class="{{- $rwrapper.class -}}">
         {{- range $gid, $gwrapper := $rwrapper.content -}}
