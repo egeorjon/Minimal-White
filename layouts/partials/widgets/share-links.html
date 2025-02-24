@@ -3,8 +3,8 @@
 {{- $title       := i18n (.params.title | default site.Params.widgets.share.title   | default site.Data.defaults.widgets.share.title) -}}
 {{- with site.Params.sharelinks -}}
     <aside class="col widget widget-share-links">
-        <div class="widget-inner">
-            <div class="widget-header">
+        <div class="widget-inner row row-cols-1 row-cols-lg-2">
+            <div class="widget-header col">
                 {{- with $title -}}
                     {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
                 {{- end -}}
@@ -26,7 +26,7 @@
             {{- if isset $current.Params "tags" -}}
                 {{- $tags = (delimit $current.Params.tags ",") | safeURL -}}
             {{- end -}}
-            <div class="widget-content">
+            <div class="widget-content col">
                 <ul><!-- class="inline-list" -->
                 {{- range sort . "weight" -}}
                     {{- $share_id := .id -}}
