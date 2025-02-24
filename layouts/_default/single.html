@@ -16,7 +16,8 @@
            {{- .TableOfContents -}}
           </div>
         {{- end -}}
-        {{- replace .Content .Summary "" | replaceRE "<p> </p>" "" | safeHTML -}}
+        {{- .ContentWithoutSummary -}}
+        {{/*- replace .Content .Summary "" | replaceRE "<p> </p>" "" | safeHTML -*/}}
         {{- with .Params.references -}}
           {{- partial "partials/references.html" (dict "context" $current_page "refs" .) -}}
         {{- end -}}

@@ -9,7 +9,8 @@
         <div class="container">
             <div class="row">
                 <aside class="search-content col">
-                    {{- replace .Content .Summary "" | safeHTML -}}
+                    {{/*- replace .Content .Summary "" | safeHTML -*/}}
+                    {{- .ContentWithoutSummary -}}
                     <h2>{{- i18n "search-form" -}}</h2>
                     {{- $page := .GetPage "search" -}}
                     {{- with $page -}}

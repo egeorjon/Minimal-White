@@ -10,7 +10,8 @@
     <div class="container">
         <div class="row">
             <article class="single-content col">
-                {{- replace .Content .Summary "" | replaceRE "<p> </p>" "" | safeHTML -}}
+                {{/*- replace .Content .Summary "" | replaceRE "<p> </p>" "" | safeHTML -*/}}
+                {{- .ContentWithoutSummary -}}
                 {{- $table := dict -}}
                 {{- range .Parent.Pages -}}
                     {{- if .Params.references -}}

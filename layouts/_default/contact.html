@@ -12,7 +12,8 @@
                     <div id="form-alert" class="alert alert-success d-none" role="alert">
                         {{- i18n "message-recorded" -}}<br />
                     </div>
-                    {{- replace .Content .Summary "" | safeHTML -}}
+                    {{/*- replace .Content .Summary "" | safeHTML -*/}}
+                    {{- .ContentWithoutSummary -}}
                     <form id="contact-form" name="contact" method="POST" data-netlify-recaptcha="true" data-netlify="true">
                         <div class="form-group">
                             <label for="form-your-name">{{- i18n "your-name" -}}</label>
