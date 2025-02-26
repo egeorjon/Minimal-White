@@ -1,0 +1,6 @@
+{{- $term := .Get "term" -}}
+{{- with .Page.Params.abbr -}}
+    {{- with index . $term -}}
+        <abbr title="{{- . | safeHTML -}}">{{- $term -}}</abbr>
+    {{- end -}}
+{{- end -}}
