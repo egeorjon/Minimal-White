@@ -4,10 +4,10 @@
         {{- if strings.HasPrefix .Destination "https://github" }}
             <i class="bi-github"></i>
         {{- else if strings.HasPrefix .Destination "https://www.wikipedia.org" -}}
-            <i class="bi bi-wikipedia"></i>
+            <i class="bi-wikipedia"></i>
         {{- else }}
             {{- if strings.HasPrefix .Destination "http:" -}}
-                <i class="bi bi-shield-x"></i>
+                <i class="bi-shield-x"></i>
             {{- end -}}
             <i class="bi-link-45deg"></i>
         {{- end -}}
