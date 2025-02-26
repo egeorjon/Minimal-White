@@ -29,6 +29,7 @@
                         <form class="search-form input-group input-group-sm" action="{{- $search_page.Permalink -}}" method="GET">
                             <input class="form-control" type="text" name="s" placeholder="{{- i18n "search-please-enter" -}}" />
                             <span class="input-group-text" id="basic-addon2"><i class="bi-search"> </i></span>
+                            <button type="submit" class="visually-hidden">{{- i18n "search" -}}</button>
                         </form>
                     </li>
                     {{- $contact_page := site.GetPage "contact" -}}
