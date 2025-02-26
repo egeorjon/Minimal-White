@@ -1,6 +1,7 @@
 {{- define "main" -}}
   {{- $current_page  := . -}}
   {{- $display_image := site.Params.author.headerimage | default site.Data.defaults.author.headerimage -}}
+  {{- $formatdate := site.Params.Shortdate | default site.Data.defaults.Shortdate -}}
   {{- partial "partials/headline.html" (dict "current" . "prefix" "author" "display_img" $display_image "meta" (dict)) -}}
   {{- $class := "odd" -}}
   <section class="author-content">
@@ -21,7 +22,7 @@
                 <ul>
                   {{- range first 5 (sort .Pages "Date" "desc") -}}  <!-- Show latest 5 posts -->
                       <li>
-                          <a href="{{- .RelPermalink -}}">{{- .Title -}}</a> - {{ .Date.Format "Jan 2, 2006" -}}
+                          <a href="{{- .RelPermalink -}}">{{- .Title -}}</a><span class="author-lastposts-date">{{ .Date | time.Format $formatdate -}}</span>
                       </li>
                   {{- end -}}
                 </ul>
