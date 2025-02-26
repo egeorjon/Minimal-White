@@ -154,9 +154,9 @@ $pagination-active-color:           $white; // $component-active-color !default;
 $pagination-active-bg:              $black; // $component-active-bg !default;
 $pagination-active-border-color:    $black; // $component-active-bg !default;
 
-// $pagination-disabled-color:         var(--#{$prefix}secondary-color) !default;
-// $pagination-disabled-bg:            var(--#{$prefix}secondary-bg) !default;
-// $pagination-disabled-border-color:  var(--#{$prefix}border-color) !default;
+$pagination-disabled-color:         $gray-400; //var(--#{$prefix}secondary-color) !default;
+$pagination-disabled-bg:            $white; //var(--#{$prefix}secondary-bg) !default;
+$pagination-disabled-border-color:  $white; // var(--#{$prefix}border-color) !default;
 
 // $pagination-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
