@@ -1,6 +1,6 @@
 {
     "contact": {
-        "image": true 
+        "image": true
     },
     "authors": {
         "headerimage": true
@@ -9,10 +9,38 @@
         "headerimage": true
     },
     "search": {
-        "image": true 
+        "image": true
     },
     "single": {
-        "image": true 
+        "image": true,
+        "meta" : {
+            "top"       : [ "date" ],
+            "middle"    : [ "post-series" ],
+            "bottom"    : [ "tags", "reading" ]
+        }
+    },
+    "markup": {
+        "table": {
+            "wrapper"   : "table-responsive-md",
+            "table"     : "table table-striped",
+            "body"      : "table-group-divider",
+            "head"      : "table-primary"
+        }
+    },
+    "shortcodes": {
+        "attachments": {
+            "fields"    : "icon,title,size",
+            "files"     : "*"
+        },
+        "gallery": {
+            "files"     : "gallery",
+            "size"      :  250,
+            "caption"   : true,
+            "overlay"   : "bottom",
+            "ratio"     : "1:1",
+            "galcaption": "",
+            "licence"   : false
+        }
     },
     "widgets": {
         "heading"       : "h2",
