@@ -9,7 +9,7 @@
                     "widgets" : [
                         {
                             "widget"  : "share-links",
-                            "cache"   : true,
+                            "cache"   : false,
                             "weight"  : 1,
                             "params"  : { }
                         }
@@ -54,7 +54,7 @@
                     "widgets"   : [
                         {
                             "widget"  : "authors",
-                            "cache"   : false,
+                            "cache"   : "contextual",
                             "weight"  : 1,
                             "params"  : {}
                         }
@@ -88,7 +88,7 @@
                     "widgets"   : [
                         {
                             "widget"  : "popular-posts",
-                            "cache"   : true,
+                            "cache"   : "permanent",
                             "weight"  : 1,
                             "params"  : {}
                         }

@@ -9,7 +9,7 @@
                     "widgets" : [
                         {
                             "widget"  : "series-list",
-                            "cache"   : true,
+                            "cache"   : false,
                             "weight"  : 1,
                             "params"  : { }
                         }
@@ -20,7 +20,7 @@
                         {
                             "widget" : "gallery",
                             "cache"  : false,
-                            "weight" : 1,
+                            "weight" : 2,
                             "params" : { "term": "galerie" }
                         }
                     ]
@@ -46,7 +46,7 @@
                     "widgets" : [
                         {
                             "widget"  : "follow-me",
-                            "cache"   : true,
+                            "cache"   : false,
                             "weight"  : 1,
                             "params"  : { }
                         },
@@ -69,13 +69,13 @@
                     "widgets" : [
                         {
                             "widget"  : "copyright",
-                            "cache"   : true,
+                            "cache"   : false,
                             "weight"  : 1,
                             "params"  : { }
                         }
                     ]
                 }
-            ]        
+            ]
         }
         ]
     }
