@@ -11,13 +11,13 @@
         {{- if eq .url "" -}}
             {{- .title -}}
         {{- else -}}
-            <a href="{{- .url -}}" title="{{- (.title | plainify) -}}" target="_blank" rel="noopener noreferrer">{{- .title -}}<i class="bi-link-45deg"></i></a>
+            <a href="{{- .url -}}" title="{{- (.title | plainify) -}}" target="_blank" rel="noopener noreferrer">{{- .title | markdownify -}}<i class="bi-link-45deg"></i></a>
         {{- end -}}
         {{ with .site -}}
-            {{ i18n "on-the-site" }} <a href="{{- $ref.site_url -}}" title="{{- $ref.site | plainify -}}" target="_blank" rel="noopener noreferrer">{{- $ref.site -}}<i class="bi-link-45deg"></i></a>
+            {{ i18n "on-the-site" }} <a href="{{- $ref.site_url -}}" title="{{- $ref.site | plainify -}}" target="_blank" rel="noopener noreferrer">{{- $ref.site  | markdownify -}}<i class="bi-link-45deg"></i></a>
         {{- end -}}
         {{ with .lic -}}
-            ,{{ i18n "available-under-lic" }} <a href="{{- $ref.lic_url -}}" title="{{- $ref.lic | plainify -}}" target="_blank" rel="noopener noreferrer">{{- $ref.lic -}}<i class="bi-link-45deg"></i></a>
+            ,{{ i18n "available-under-lic" }} <a href="{{- $ref.lic_url -}}" title="{{- $ref.lic | plainify -}}" target="_blank" rel="noopener noreferrer">{{- $ref.lic  | markdownify -}}<i class="bi-link-45deg"></i></a>
         {{- end -}}
         {{- with .comment -}}
             . {{ . | markdownify -}}
