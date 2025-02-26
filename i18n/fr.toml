@@ -247,3 +247,18 @@
 
 [page-of-author]
     other = "La page de l'auteur"
+
+[this-post]
+    other = "Cet article"
+
+[first-page]
+    other = "Première page"
+
+[last-page]
+    other = "Dernière page"
+
+[next-page]
+    other = "Page suivante"
+
+[previous-page]
+    other = "Page précédente"
