@@ -2,13 +2,14 @@
 {{/* Parameters    */}}
 {{/*   files     string  relative path to the image (default: none, value mandatory) */}}
 {{/*   fields    list of fields to display (comma separated). Possible values: icon,title,filename,size */}}
-{{- $listfiles   := .Get "files"  | default site.Params.shortcodes.attachments.files  | default site.Data.defaults.shortcodes.attachments.files -}}
-{{- $fields      := .Get "fields" | default site.Params.shortcodes.attachments.fields | default site.Data.defaults.shortcodes.attachments.fields -}}
-{{- $table_class := site.Params.markup.table.table | default site.Data.defaults.markup.table.table -}}
-{{- $table_body  := site.Params.markup.table.body  | default site.Data.defaults.markup.table.body  -}}
-{{- $table_head  := site.Params.markup.table.head  | default site.Data.defaults.markup.table.head  -}}
+{{- $listfiles     := .Get "files"  | default site.Params.shortcodes.attachments.files  | default site.Data.defaults.shortcodes.attachments.files -}}
+{{- $fields        := .Get "fields" | default site.Params.shortcodes.attachments.fields | default site.Data.defaults.shortcodes.attachments.fields -}}
+{{- $wrapper_class := site.Params.markup.table.wrapper | default site.Data.defaults.markup.table.wrapper -}}
+{{- $table_class   := site.Params.markup.table.table   | default site.Data.defaults.markup.table.table   -}}
+{{- $table_body    := site.Params.markup.table.body    | default site.Data.defaults.markup.table.body    -}}
+{{- $table_head    := site.Params.markup.table.head    | default site.Data.defaults.markup.table.head    -}}
 {{- with .Page.Resources.Match $listfiles }}
-<div class="table-responsive-md">
+<div class="{{- $wrapper_class -}}">
     <table class="{{- $table_class }} attachments">
         <thead {{ with $table_head -}}class="{{- . -}}"{{- end -}}>
             <tr>
