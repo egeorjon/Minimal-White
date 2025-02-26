@@ -1,7 +1,8 @@
-{{- $table_class := site.Params.markup.table.table | default site.Data.defaults.markup.table.table -}}
-{{- $table_body  := site.Params.markup.table.body  | default site.Data.defaults.markup.table.body  -}}
-{{- $table_head  := site.Params.markup.table.head  | default site.Data.defaults.markup.table.head  -}}
-<div class="table-responsive-md">
+{{- $wrapper_class := site.Params.markup.table.wrapper | default site.Data.defaults.markup.table.wrapper -}}
+{{- $table_class   := site.Params.markup.table.table   | default site.Data.defaults.markup.table.table   -}}
+{{- $table_body    := site.Params.markup.table.body    | default site.Data.defaults.markup.table.body    -}}
+{{- $table_head    := site.Params.markup.table.head    | default site.Data.defaults.markup.table.head    -}}
+<div class="{{- $wrapper_class -}}">
     <table
     {{- with .Attributes -}}
         {{- range $k, $v := .Attributes -}}
