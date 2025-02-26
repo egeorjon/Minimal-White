@@ -201,8 +201,12 @@ main {
    --- Lists
    --------------------------------------------------- */
 
-.pagination {
+.list-pagination {
     margin-bottom: 3 * $paragraph-margin-bottom;
+
+    ul {
+        margin-bottom: 0;
+    }
 }
 
 .list-main {
@@ -563,14 +567,9 @@ li > p {
    --- Footer styles
    --------------------------------------------------- */
 
-footer > div > div {
+.widget-area > div > div {
     padding-top: 2 * $paragraph-margin-bottom;
     border-top: 1px solid $gray-400;
-}
-
-footer > div > div:empty {
-    padding-top: 0;
-    border-top: 0!important;
 }
 
 /* -------------------------------------------------
@@ -653,4 +652,28 @@ footer > div > div:empty {
 
 .author-content .card {
     margin-bottom: $paragraph-margin-bottom;
+}
+
+.author-socials {
+    li {
+        display: inline;
+        margin-right: 2em;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.author-lastposts-date {
+    display: block;
+}
+
+@media (min-width: map-get($grid-breakpoints, "lg")) {
+    .author-lastposts-date {
+        display: inline;
+
+        &:before {
+            content: " - "
+        }
+    }
 }
