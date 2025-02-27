@@ -1,6 +1,6 @@
 {{- define "main" -}}
   {{- $current_page := . -}}
-  {{- $def_params   := index site.Params "list_tags" -}}
+  {{- $def_params   := index site.Params "list_tags" | default (index site.Data.defaults "list_tags")  | default (index site.Data.defaults "list") -}}
    <header class="tags-headline-wrapper">
     <div class="tags-headline-background"></div>
     <div class="container tags-headline">

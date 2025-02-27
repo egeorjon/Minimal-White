@@ -5,7 +5,7 @@
   {{- if or (eq .Kind "taxonomy") (eq .Kind "term") -}}
     {{- $list_type = printf "list_%s" .Type -}}
   {{- end -}}
-  {{- $def_params := index site.Params $list_type | default (index site.Params "list") -}}
+  {{- $def_params := index site.Params $list_type | default (index site.Data.defaults $list_type)  | default (index site.Data.defaults "list") -}}
 
   {{/* ---- Get page parameters ---- */}}
   {{- $meta         := (index $def_params "meta") -}}
@@ -13,6 +13,8 @@
   {{- $post_format  := $def_params.post_format    -}}
   {{- $partial_path := path.Join "posts-format" (printf "%s%s%s" "posts-list-" $post_format ".html") -}}
   {{- $columns      := (index $def_params "cols") -}}
+
+{{/*- $columns := dict "xs" 1 "sm" 1 "md" 1 "lg" 1 "xl" 1 -*/}}
 
   {{/* ---- Get background image ---- */}}
   {{- partial "partials/headline.html" (dict "current" . "prefix" "list" "display_img" $display_img "meta" (dict)) -}}
@@ -43,7 +45,6 @@
     {{- end -}}
   </footer>
 {{- end -}}
-
 
 {{- define "partials/inline/pagination2.html" -}}
   {{- $paginator    := .Paginator                     -}}
