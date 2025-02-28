@@ -6,9 +6,9 @@
   {{- $string := "" -}}
   {{- $image  := $current.Resources.GetMatch (index $current.Params.images 0) -}}
   {{- with $image -}}
-    {{- $string = printf "style='background: url(%s) center center / cover no-repeat;'" .Permalink -}}
+    {{- $string = printf "@media not print { style='background: url(%s) center center / cover no-repeat;' }" .Permalink -}}
   {{- end -}}
-  <header class="{{- $prefix -}}-headline-wrapper-img" {{ $string | safeHTMLAttr -}}>
+  <header class="{{- $string | safeHTMLAttr }} {{ $prefix -}}-headline-wrapper-img">
     <div class="{{- $prefix -}}-headline-top-img"></div>
     <div class="container {{ $prefix -}}-headline-img">
       {{- partial "partials/breadcrumb.html" $current -}}
@@ -26,13 +26,13 @@
             </div><!-- meta -->
             {{- end -}}
             <p class="page-summary">
-            {{- with $current.Summary -}}
-                {{- . -}}
-            {{- else -}}
-                {{- with $current.Description -}}
-                    {{- . -}}
-                {{- end -}}
-            {{- end -}}
+              {{- with $current.Summary -}}
+                  {{- . | safeHTML -}}
+              {{- else -}}
+                  {{- with $current.Description -}}
+                      {{- . | safeHTML -}}
+                  {{- end -}}
+              {{- end -}}
             </p>
             {{- with $meta.bottom -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-bottom">
@@ -61,13 +61,13 @@
             </div><!-- meta -->
             {{- end -}}
             <p class="page-summary">
-            {{- with $current.Summary -}}
-                {{- . -}}
-            {{- else -}}
-                {{- with $current.Description -}}
-                    {{- . -}}
-                {{- end -}}
-            {{- end -}}
+              {{- with $current.Summary -}}
+                  {{- . | safeHTML -}}
+              {{- else -}}
+                  {{- with $current.Description -}}
+                      {{- . | safeHTML -}}
+                  {{- end -}}
+              {{- end -}}
             </p>
             {{- with $meta.bottom -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-bottom">
