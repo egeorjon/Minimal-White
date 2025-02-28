@@ -1,12 +1,263 @@
 [copy-link]
-    other = "Copy the link to this chapter: {{ .text }}"
-
-[reading-time]
-    one   = "One minute reading"
-    other = "{{ .Count }} minutes reading"
+    other = "Copy the paragraph's link: {{ .text }}"
 
 [external]
     other = "External source"
 
 [image-not-found]
-    other = "Image not found: %s"
+    other = "Image not found"
+
+[series-posts]
+    other = "The post of this serie:"
+
+[not-post-yet]
+    other = "This serie is still empty"
+
+[home]
+    other = "Home"
+
+[gohome]
+    other = "Go to the homepage"
+
+[blog]
+    other = "Blog"
+
+[architecture]
+    other = "IT architecture"
+
+[project]
+    other = "Project"
+
+[photo]
+    other = "Photo"
+
+[references]
+    one   = "Reference"
+    other = "References"
+
+[in]
+    other = "in"
+
+[posted-on]
+    other = "posted on"
+
+[reading-label]
+    other = "Reading time"
+
+[reading-time]
+    one   = "One minute of reading"
+    other = "{{ .Count }} minutes of reading"
+
+[tags]
+    one   = "Tag"
+    other = "Tags"
+
+[series]
+    one   = "The serie"
+    other = "The series"
+
+[post-category]
+    other = "Post of the category {{ .Name }}"
+
+[posts-of]
+    one   = "Post of the section"
+    other = "Posts of the section"
+
+[posts-of-section]
+    one   = "Post of the section {{ .Title }}"
+    other = "Posts of the section {{ .Title }}"
+
+[on-the-site]
+    other = "in the site"
+
+[available-under-lic]
+    other = "available under the license"
+
+[widget-not-found]
+    other = "Error: Widget not found"
+
+[widget-x-not-found]
+    other = "Widget <b>%s</b> not found"
+
+[tags_for_section]
+    other = "Tags available in this section"
+
+[series-list]
+    other = "List of the files"
+
+[gallery]
+    one   = "Gallery"
+    other = "Galleries"
+
+[see-all-galleries]
+    other = "See all the galleries"
+
+[rss-feeds]
+    other = "RSS feeds"
+
+[follow-me]
+    other = "Follow me"
+
+[follow-me-on]
+    other = "Follow me on {{ .name }}"
+
+[see-my-work-on]
+    other = "See my work on {{ .name }}"
+
+[share-this-post]
+    other = "Share this post"
+
+[share-by]
+    other = "Share this post by %s"
+
+[share-on]
+    other = "Share this post on {{ .name }}"
+
+[post-meta]
+    other = "Complément d'information"
+
+[older]
+    one   = "Older post"
+    other = "Older posts"
+
+[newer]
+    one   = "Newer post"
+    other = "Newer posts"
+
+[related-posts]
+    other = "You could be interested by the following posts: "
+
+[popular-posts]
+    other = "Popular posts"
+
+[search]
+    other = "Search"
+
+[menu-section]
+    other = "Go to the section &laquo; %s &raquo;"
+
+[search-form]
+    other = "Search form"
+
+[search-please-enter]
+    other = "What are you looking for?"
+
+[what-you-looking-for]
+    other = "Searched sentence"
+
+[search-help]
+    other = "Thanks to enter the words, or the sentence you are looking for"
+
+[search-results]
+    other = "Search result"
+
+[contact-me]
+    other = "Contact me !"
+
+[message-recorded]
+	other="Message sent"
+
+[your-name]
+	other="Your name"
+
+[placeholder-name]
+	other="Please enter your name"
+
+[email-address]
+	other="Your e-mail address"
+
+[placeholder-email]
+	other="Pleas enter your e-mail address"
+
+[subject]
+	other="The subject of your message"
+
+[placeholder-subject]
+	other="Please enter the subject here"
+
+[your-message]
+	other="Your message"
+
+[placeholder-message]
+	other="Please enter your message here"
+
+[submit]
+	other="Send the message"
+
+[error-post-not-found]
+    other = "Error: The post <strong>{{ .page }}</strong> doesn't exist."
+
+[score]
+    other = "Score"
+
+[last-posts]
+    one   = "Last post published"
+    other = "Last posts published"
+
+[view-all]
+    other = "See all posts"
+
+[view-all-tags]
+    other = "See all tags"
+
+[sections-list]
+    other = "The sections of this blog"
+
+[tags-section]
+    other = "The tags for the current section"
+
+[fist-last-name]
+    other = "First Name and/or last name"
+
+[text]
+    other = "Your message"
+
+[email-username]
+    other = "First part of the email address"
+
+[email-suffix]
+    other = "Second part of the email address"
+
+[single_pagination]
+    other = "Previous and next posts"
+
+[table-of-content]
+    other = "Table of content"
+
+[same-serie]
+    other = "This post is part of the file &laquo;%s&raquo;: "
+
+[see-series]
+    one   = "See the serie"
+    other = "See all the series"
+
+[no-post-found]
+    other = "Sorry, no posts matched your criteria."
+
+[published-posts]
+    other = "Published posts: "
+
+[see-all-posts-section]
+    other = "All posts for the section"
+
+[post-authors]
+    one   = "The author of the post"
+    other = "The authors of the post"
+
+[page-of-author]
+    other = "Author's posts {{ .Params.Title }}"
+
+[this-post]
+    other = "This post"
+
+[first-page]
+    other = "First page"
+
+[last-page]
+    other = "Last page"
+
+[next-page]
+    other = "Next page"
+
+[previous-page]
+    other = "Previous page"
