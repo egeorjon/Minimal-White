@@ -366,6 +366,10 @@ main {
 .widget-gallery .col {
     margin-bottom: $paragraph-margin-bottom;
 }
+
+.widget-sections .card {
+    margin-bottom: $paragraph-margin-bottom;
+}
 /*
 .widget-single-pagination {
     dl {
@@ -526,8 +530,10 @@ li > p {
     margin-bottom: 2 * $paragraph-margin-bottom;
 }
 
-.see-all {
-    float: right;
+@media (min-width: map-get($grid-breakpoints, "md")) {
+    .see-all {
+        float: right;
+    }
 }
 
 .round-corner {
@@ -675,5 +681,47 @@ li > p {
         &:before {
             content: " - "
         }
+    }
+}
+
+/* -------------------------------------------------
+   --- Print                                     ---
+   ------------------------------------------------- */
+
+@media print {
+
+    * {
+        color: black;
+        background-color: none; // #fff;
+    }
+
+    body, .breadcrumb-item, .breadcrumb-item a  {
+        color: black!important;
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+    }
+
+    .main-menu,
+    main > footer,
+    body > footer {
+        display: none;
+    }
+
+    .single-headline-top-img,
+    .list-headline-top-img,
+    .contact-headline-top-img,
+    .search-headline-top-img,
+    .sitepage-headline-top-img,
+    .authors-headline-top-img,
+    .author-headline-top-img {
+        background: none;
+
+        a, a:visited {
+            color: black;
+        }
+    }
+
+    a:after {
+        content: "( "attr(href)" )"
     }
 }
