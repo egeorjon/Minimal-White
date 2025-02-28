@@ -20,7 +20,7 @@
             <div class="widget-header">
             {{- with $title -}}
                 {{- with $view_all -}}
-                    <span class="see-all"><a href="{{- $view_all | safeURL -}}">{{- i18n "view-all" -}}</a></span>
+                    <span class="d-none d-md-block see-all"><a href="{{- $view_all | safeURL -}}">{{- i18n "view-all" -}}</a></span>
                 {{- end -}}
                 {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
             {{- end -}}
@@ -59,6 +59,9 @@
                     </aside><!--col -->
                 {{- end -}}
             </div><!-- end of row -->
+            {{- with $view_all -}}
+                <p class="d-md-none see-all"><a href="{{- $view_all | safeURL -}}">{{- i18n "view-all" -}}</a></p>
+            {{- end -}}
         </div><!-- end of widget-inner -->
     </section><!-- end of col -->
 {{- end -}}
