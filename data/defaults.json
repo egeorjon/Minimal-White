@@ -19,6 +19,41 @@
             "bottom"    : [ "tags", "reading" ]
         }
     },
+    "list": {
+        "display_image"     : true,
+        "display_summary"   : true,
+        "post_format"       : "two-cols-no-image",
+        "cols"              : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+        "meta"              : {
+            "bottom"        : [ "tags", "series", "reading"],
+            "middle"        : [],
+            "top"           : [ "date" ]
+        }
+    },
+    "list_series": {
+        "display_image"     : false,
+        "display_summary"   : false,
+        "post_format"       : "two-cols-no-image",
+        "cols"              : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+        "meta"              : {
+            "bottom"        : [ ],
+            "middle"        : [ ],
+            "top"           : [ "linkedsection" ]
+        }
+    },
+    "list_tags": {
+        "display_image"     : true,
+        "display_summary"   : true,
+        "font_largest"      : 32,
+        "font_smallest"     : 12,
+        "post_format"       : "two-cols-no-image",
+        "cols"              : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+        "meta"              : {
+            "bottom"        : [ "series", "reading" ],
+            "middle"        : [ "tags" ],
+            "top"           : [ "date" ]
+        }
+    },
     "markup": {
         "table": {
             "wrapper"   : "table-responsive-md",
@@ -34,7 +69,7 @@
         },
         "gallery": {
             "files"     : "gallery",
-            "size"      :  250,
+            "size"      : 250,
             "caption"   : true,
             "overlay"   : "bottom",
             "ratio"     : "1:1",
