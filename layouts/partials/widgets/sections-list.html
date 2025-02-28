@@ -14,7 +14,7 @@
 {{- $length         :=       .params.length     | default site.Params.widgets.sections.length     | default site.Data.defaults.widgets.sections.length                                                    -}}
 {{- $class          := partialCached "partials/class-columns.html" $columns (delimit $columns "-") -}}
 {{- with site.Params.mainSections -}}
-    <section class="col widget widget-sections widget-sections-images">
+    <section class="col widget widget-sections widget-sections-no-images">
         <div class="widget-inner">
             <div class="widget-header">
                 {{- with $title -}}
