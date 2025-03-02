@@ -244,6 +244,9 @@
     one   = "The author of the post"
     other = "The authors of the post"
 
+[last-author-posts]
+    other = "The last posts of the author"
+
 [page-of-author]
     other = "Author's posts {{ .Params.Title }}"
 

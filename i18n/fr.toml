@@ -245,6 +245,9 @@
     one   = "L'auteur de cet article"
     other = "Les auteurs de cet article"
 
+[last-author-posts]
+    other = "Les derniers articles de l'auteur"
+
 [page-of-author]
     other = "La page de l'auteur"
 
