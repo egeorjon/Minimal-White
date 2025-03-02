@@ -1,15 +1,10 @@
 {
+    "shortdate"         : "02-Jan-06",
     "contact": {
         "image": true
     },
-    "authors": {
-        "headerimage": true
-    },
-    "author": {
-        "headerimage": true
-    },
     "search": {
-        "image": true
+        "headerimage": true
     },
     "single": {
         "image": true,
@@ -20,7 +15,7 @@
         }
     },
     "list": {
-        "display_image"     : true,
+        "headerimage"       : true,
         "display_summary"   : true,
         "post_format"       : "two-cols-no-image",
         "cols"              : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
@@ -31,7 +26,7 @@
         }
     },
     "list_series": {
-        "display_image"     : false,
+        "headerimage"       : true,
         "display_summary"   : false,
         "post_format"       : "two-cols-no-image",
         "cols"              : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
@@ -42,7 +37,7 @@
         }
     },
     "list_tags": {
-        "display_image"     : true,
+        "headerimage"       : true,
         "display_summary"   : true,
         "font_largest"      : 32,
         "font_smallest"     : 12,
@@ -54,67 +49,73 @@
             "top"           : [ "date" ]
         }
     },
+    "list_authors": {
+        "headerimage"       : true
+    },
     "markup": {
         "table": {
-            "wrapper"   : "table-responsive-md",
-            "table"     : "table table-striped",
-            "body"      : "table-group-divider",
-            "head"      : "table-primary"
+            "wrapper"       : "table-responsive-md",
+            "table"         : "table table-striped",
+            "body"          : "table-group-divider",
+            "head"          : "table-primary"
         }
     },
     "shortcodes": {
         "attachments": {
-            "fields"    : "icon,title,size",
-            "files"     : "*"
+            "fields"        : "icon,title,size",
+            "files"         : "*"
         },
         "gallery": {
-            "files"     : "gallery",
-            "size"      : 250,
-            "caption"   : true,
-            "overlay"   : "bottom",
-            "ratio"     : "1:1",
-            "galcaption": "",
-            "licence"   : false
+            "files"         : "gallery",
+            "size"          : 250,
+            "caption"       : true,
+            "overlay"       : "bottom",
+            "ratio"         : "1:1",
+            "galcaption"    : "",
+            "licence"       : false
         }
     },
     "widgets": {
-        "heading"       : "h2",
-        "subheading"    : "h3",
+        "authors": {
+            "title"         : "post-authors"
+        },
+        "heading"           : "h2",
+        "subheading"        : "h3",
 
         "gallery": {
-            "title"     : "gallery"
+            "title"         : "gallery"
         },
-        "tags_section"  : {
+        "tags_section": {
             "title"         : "tags_for_section",
             "font_largest"  : 36,
             "font_smallest" : 12,
             "line_height"   : 54
         },
-        "not_found"     : {
-            "title"     : "widget-not-found"
+        "not_found": {
+            "title"         : "widget-not-found"
         },
-        "followme"      : {
-            "title"     : "follow-me"
+        "followme": {
+            "title"         : "follow-me"
         },
-        "share"         : {
-            "title"     : "share-this-post"
+        "share": {
+            "title"         : "share-this-post"
         },
-        "serieslist"    : {
-            "title"     : "series-list",
-            "num"       : 10
+        "serieslist": {
+            "title"         : "series-list",
+            "num"           : 10
         },
-        "page"          : {
+        "page": {
             "heading"       : "h3",
             "display_date"  : false,
             "format_date"   : ":date_medium"
         },
-        "meta"          : {
-            "title"     : "post-meta"
+        "meta": {
+            "title"         : "post-meta"
         },
-        "sections"      : {
-            "title"     : "sections-list",
-            "length"    : 100,
-            "summary"   : true
+        "sections": {
+            "title"         : "sections-list",
+            "length"        : 100,
+            "summary"       : true
         },
         "tags_secion": {
             "title"     : "tags-section"
@@ -162,9 +163,6 @@
         },
         "sameserie": {
             "title"     : "same-serie"
-        },
-        "authors": {
-            "title"     : "post-authors"
         }
     }
 }
