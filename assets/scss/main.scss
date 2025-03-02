@@ -721,6 +721,16 @@ li > p {
         }
     }
 
+    .single-headline-wrapper-img,
+    .list-headline-wrapper-img,
+    .contact-headline-wrapper-img,
+    .search-headline-wrapper-img,
+    .sitepage-headline-wrapper-img,
+    .authors-headline-wrapper-img,
+    .author-headline-wrapper-img {
+        background: none!important;
+    }
+
     a:after {
         content: "( "attr(href)" )"
     }
