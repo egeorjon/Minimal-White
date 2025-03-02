@@ -1,11 +1,14 @@
 {{- define "main" -}}
   {{- $current_page  := . -}}
-  {{- $display_image := site.Params.author.headerimage | default site.Data.defaults.author.headerimage -}}
-  {{- $formatdate := site.Params.Shortdate | default site.Data.defaults.Shortdate -}}
+  {{- $display_image := site.Params.author.headerimage | default site.Data.defaults.author.headerimage                 -}}
+  {{- $formatdate    := site.Params.Shortdate          | default site.Data.defaults.Shortdate                          -}}
   {{- partial "partials/headline.html" (dict "current" . "prefix" "author" "display_img" $display_image "meta" (dict)) -}}
   {{- $class := "odd" -}}
   <section class="author-content">
     <div class="container">
+      <div class="row">
+        <div class="col"><h2>{{- i18n "last-author-posts" -}}</h2></div>
+      </div>
       <div class="row row-cols-1 row-cols-md-2">
         {{- $filteredPages := where .Pages "Section" "in" site.Params.mainSections -}}
         {{- $sections      := $filteredPages.GroupBy "Section" -}}
