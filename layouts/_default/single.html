@@ -19,7 +19,7 @@
         {{- .ContentWithoutSummary -}}
         {{/*- replace .Content .Summary "" | replaceRE "<p> </p>" "" | safeHTML -*/}}
         {{- with .Params.references -}}
-          {{- partial "partials/references.html" (dict "context" $current_page "refs" .) -}}
+          {{- partialCached "partials/references.html" (dict "context" $current_page "refs" .) $current_page.Parent -}}
         {{- end -}}
       </article><!-- col -->
     </div><!-- end of row -->
