@@ -1,32 +1,35 @@
 {{- $current     := .current -}}
-{{- $num         := int (.params.num    | default site.Params.widgets.serieslist.num     | default site.Data.defaults.widgets.serieslist.num)   -}}
 {{- $heading_tag := .params.heading     | default site.Params.widgets.serieslist.heading | default site.Data.defaults.widgets.heading           -}}
 {{- $title       := i18n (.params.title | default site.Params.widgets.serieslist.title   | default site.Data.defaults.widgets.serieslist.title) -}}
+{{- $num         := int (.params.num    | default site.Params.widgets.serieslist.num     | default site.Data.defaults.widgets.serieslist.num)   -}}
 {{- with site.Taxonomies.series }}
     {{- $series := slice -}}
     {{- range $name, $taxonomy := . -}}
         {{- $series = $series | append $name -}}
     {{- end -}}
-<aside class="col widget widget-series widget-series-list">
-    <div class="widget-inner">
-        <div class="widget-header">
-            {{- with $title -}}
-                {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
-            {{- end -}}
-        </div>
-        <ul class="widget-content">
-            {{- range $series | shuffle | first $num -}}
-                {{- $serie := index site.Taxonomies.series . -}}
-                {{- with $serie.Page -}}
-                    <li><a href="{{- .RelPermalink -}}" title="{{- .Title | plainify | safeHTMLAttr -}}">{{- .Title -}}</a></li>
+    {{- if eq $num 0 -}}
+        {{- $num = len $series -}}
+    {{- end -}}
+    <aside class="col widget widget-series widget-series-list">
+        <div class="widget-inner">
+            <div class="widget-header">
+                {{- with $title -}}
+                    {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
                 {{- end -}}
-            {{- end -}}
-            {{- if gt (len .) $num -}}
-                {{- with site.Taxonomies.series.Page -}}
-                    <li><a href="{{- .Permalink -}}" title="{{- i18n "see-all-series-alt" -}}">{{- i18n "see-all-series" -}}</a></li>
+            </div>
+            <ul class="widget-content">
+                {{- range $series | shuffle | first $num -}}
+                    {{- $serie := index site.Taxonomies.series . -}}
+                    {{- with $serie.Page -}}
+                        <li><a href="{{- .RelPermalink -}}" title="{{- .Title | plainify | safeHTMLAttr -}}">{{- .Title -}}</a></li>
+                    {{- end -}}
                 {{- end -}}
-            {{- end -}}
-        </ul>
-    </div><!-- end of widget-inner -->
-</aside>
+                {{/*- if gt (len .) $num -*/}}
+                    {{- with site.Taxonomies.series.Page -}}
+                        <li><a href="{{- .Permalink -}}" title="{{- i18n "see-all-series-alt" -}}">{{- i18n "see-all-series" -}}</a></li>
+                    {{- end -}}
+                {{/*- end -*/}}
+            </ul>
+        </div><!-- end of widget-inner -->
+    </aside>
 {{- end -}}
