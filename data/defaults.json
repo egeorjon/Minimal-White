@@ -102,7 +102,7 @@
         },
         "serieslist": {
             "title"         : "series-list",
-            "num"           : 10
+            "num"           : 0
         },
         "page": {
             "heading"       : "h3",
