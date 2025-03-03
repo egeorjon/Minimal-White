@@ -123,6 +123,7 @@ h2 a, h3 a, h4 a, h5 a, h6 a {
 .author-headline-wrapper-img {
     width: 100%;
     position: relative;
+    aspect-ratio: 235 / 100;
     margin-bottom: 3 * $paragraph-margin-bottom;
 }
 
@@ -410,8 +411,9 @@ blockquote {
 .blockquote {
 
     margin-left:    2em;
-    padding:        $paragraph-margin-bottom;
-    // border:         1px solid black;
+    padding-left:   $paragraph-margin-bottom;
+    padding-right:  $paragraph-margin-bottom;
+    // border:      1px solid black;
     border-left:    8px solid black;
     // border-radius:  0.5em;
     // position:       relative;
