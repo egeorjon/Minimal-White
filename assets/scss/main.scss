@@ -115,6 +115,7 @@ h2 a, h3 a, h4 a, h5 a, h6 a {
 
 .single-headline-wrapper-img,
 .list-headline-wrapper-img,
+.list-tags-headline-wrapper-img,
 .contact-headline-wrapper-img,
 .search-headline-wrapper-img,
 .sitepage-headline-wrapper-img,
@@ -127,6 +128,7 @@ h2 a, h3 a, h4 a, h5 a, h6 a {
 
 .single-headline-top-img,
 .list-headline-top-img,
+.list-tags-headline-top-img,
 .contact-headline-top-img,
 .search-headline-top-img,
 .sitepage-headline-top-img,
@@ -140,6 +142,7 @@ h2 a, h3 a, h4 a, h5 a, h6 a {
 
 .single-headline-img,
 .list-headline-img,
+.list-tags-headline-img,
 .contact-headline-img,
 .search-headline-img,
 .sitepage-headline-img,
@@ -158,6 +161,7 @@ h2 a, h3 a, h4 a, h5 a, h6 a {
 
 .single-headline-wrapper,
 .list-headline-wrapper,
+.list-tags-headline-wrapper,
 .contact-headline-wrapper,
 .search-headline-wrapper,
 .sitepage-headline-wrapper,
@@ -171,6 +175,7 @@ h2 a, h3 a, h4 a, h5 a, h6 a {
 
 .single-headline,
 .list-headline,
+.list-tags-headline,
 .contact-headline,
 .search-headline,
 .sitepage-headline,
@@ -406,10 +411,10 @@ blockquote {
 
     margin-left:    2em;
     padding:        $paragraph-margin-bottom;
-    border:         1px solid black;
+    // border:         1px solid black;
     border-left:    8px solid black;
-    border-radius:  0.5em;
-    position:       relative;
+    // border-radius:  0.5em;
+    // position:       relative;
 }
 
 .blockquote-note,
@@ -436,9 +441,9 @@ blockquote {
 }
 
 .alert-heading {
-    position:       absolute;
+    // position:       absolute;
     display:        inline-block;
-    top:            -1.15em * ($line-height-base / 2);
+    // top:            -1.15em * ($line-height-base / 2);
     background-color: $body-bg;
     padding-left:   0.5em;
     padding-right:  0.5em;
