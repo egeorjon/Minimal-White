@@ -264,3 +264,9 @@
 
 [previous-page]
     other = "Previous page"
+
+[see-all-series]
+    other = "See all the files"
+    
+[see-all-series-alt]
+    other = "See all the files details"

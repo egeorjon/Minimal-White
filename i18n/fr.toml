@@ -265,3 +265,9 @@
 
 [previous-page]
     other = "Page précédente"
+
+[see-all-series]
+    other = "Voir tous les dossiers"
+    
+[see-all-series-alt]
+    other = "Voir le détail de tous les dossiers"
