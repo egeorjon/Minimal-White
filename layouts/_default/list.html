@@ -14,18 +14,17 @@
   {{- $partial_path := path.Join "posts-format" (printf "%s%s%s" "posts-list-" $post_format ".html") -}}
   {{- $columns      := (index $def_params "cols") -}}
 
-{{/*- $columns := dict "xs" 1 "sm" 1 "md" 1 "lg" 1 "xl" 1 -*/}}
-
   {{/* ---- Get background image ---- */}}
   {{- partial "partials/headline.html" (dict "current" . "prefix" "list" "display_img" $display_img "meta" (dict)) -}}
   {{- $paginator := .Paginator -}}
+  {{- printf "Layout: %s, Type: %s, Kind: %s)" .Layout .Type .Kind -}}
   <section class="list-main-wrapper">
     <div class="container list-main">
       {{- if eq $paginator.PageNumber 1 -}}
         {{- with $current_page.Content -}}
         <div class="row">
-          <div class="col">
-            {{- replace . $current_page.Summary "" | safeHTML -}}
+          <div class="col list-header">
+            {{- $.ContentWithoutSummary -}}
           </div><!-- col -->
         </div><!-- row -->
         {{- end -}}
@@ -52,7 +51,7 @@
   {{- $chunk        := 3                              -}}
   {{- $mid_chunk    := math.Floor (math.Div $chunk 2) -}}
 
-  {{- if ge $paginator.TotalPages 1 -}}
+  {{- if gt $paginator.TotalPages 1 -}}
 <div class="list-pagination">
   <div class="container">
     <div class="row">
