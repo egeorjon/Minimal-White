@@ -6,7 +6,7 @@
         {{- if eq $meta "date" -}}
             {{- if $current.Date -}}
         <li class="post-date">
-            <i class="bi-calendar3" aria-hidden="true"></i>
+            <i class=" bi bi-calendar3" aria-hidden="true"></i>
             <span class="visually-hidden">{{- i18n "posted-on" -}}</span>
             <time class="entry-date published" datetime="{{- index (split $current.Lastmod " ") 0 -}}">
                 {{- $current.Date | time.Format $formatdate -}}
@@ -15,7 +15,7 @@
             {{- end -}}
         {{- else if eq $meta "fulldate" -}}
         <li class="post-date">
-            <i class="bi-calendar3" aria-hidden="true"></i>
+            <i class=" bi bi-calendar3" aria-hidden="true"></i>
             <span class="visually-hidden">{{- i18n "posted-on" -}}</span>
             <time class="entry-date published" datetime="{{- index (split $current.Date " ") 0 -}}">
                 {{- $current.Date | time.Format $formatdate -}}
@@ -24,7 +24,7 @@
         </li>
         {{- else if eq $meta "reading" -}}
             <li class="post-read">
-                <i class="bi-clock" aria-hidden="true"></i>
+                <i class=" bi bi-clock" aria-hidden="true"></i>
                 <span class="visually-hidden">{{- i18n "reading-label" -}}</span>
                 {{- i18n "reading-time" $current.ReadingTime -}}
             </li>
@@ -37,7 +37,7 @@
             {{- end -}}
             {{- if $sl -}}
             <li class="post-tags">
-                <i class="bi-tags" aria-hidden="true"></i>
+                <i class=" bi bi-tags" aria-hidden="true"></i>
                 <span class="visually-hidden">{{- i18n "tags" (len $sl) }} ({{- len $sl -}}):</span>
                 {{- delimit $sl ", " | safeHTML -}}
             </li>
@@ -52,7 +52,7 @@
                 {{- end -}}
                 {{- if $sl -}}
                 <li class="post-series">
-                    <i class="bi-files" aria-hidden="true"></i>
+                    <i class=" bi bi-files" aria-hidden="true"></i>
                     <span class="visually-hidden">{{- i18n "series" (len $sl) }} {{ (len $sl) -}}:</span>
                     {{- delimit $sl ", " | safeHTML -}}
                 </li>
@@ -62,7 +62,7 @@
             {{- with $current.Parent }}
                 {{/*- if and (ne .Kind "section") (ne .Kind "taxonomy") -*/}}
                     <li class="post-section">
-                        <i class="bi-folder2-open" aria-hidden="true"></i> <span class="visually-hidden">{{- i18n "in" -}}</span>
+                        <i class=" bi bi-folder2-open" aria-hidden="true"></i> <span class="visually-hidden">{{- i18n "in" -}}</span>
                         <span class="in-category"><a href="{{- .Permalink -}}" title="{{- i18n "post-category" . -}}">{{- .Name | safeHTML -}}</a></span>
                     </li><!-- class="visually-hidden" -->
                 {{/*- end -*/}}
@@ -74,7 +74,7 @@
             {{- end -}}
             {{- if gt (len $list) 0 -}}
                 <li class="post-category">
-                    <i class="bi-folder" aria-hidden="true"></i> <span class="visually-hidden" >{{- i18n "in" -}}</span>
+                    <i class=" bi bi-folder" aria-hidden="true"></i> <span class="visually-hidden" >{{- i18n "in" -}}</span>
                     <span class="in-category">{{- delimit $list ", " -}} </span>
                 </li>
             {{- end -}}
@@ -84,8 +84,8 @@
                 {{- if $section }}
                     {{- with site.GetPage $section -}}
                     <li class="post-linked">
-                        <i class="bi-folder-symlink" aria-hidden="true"></i> <span class="visually-hidden">{{- i18n "posts-of" -}}</span>
-                        <span class="linked-to">{{- i18n "posts-of" -}}<a href="{{- .Permalink -}}" title="{{- i18n "posts-of-section" . -}}"> {{ .Title -}}</a></span>
+                        <i class=" bi bi-folder-symlink" aria-hidden="true"></i> <span class="visually-hidden">{{- i18n "linked-section" . -}}</span>
+                        <span class="linked-to"><a href="{{- .Permalink -}}" title="{{- i18n "posts-of-section" . -}}"> {{ .Title -}}</a></span>
                     </li><!-- class="visually-hidden" -->
                     {{- end -}}<!-- with -->
                 {{- end -}}<!-- if section -->
