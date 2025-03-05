@@ -67,6 +67,9 @@
     one   = "Post of the section {{ .Title }}"
     other = "Posts of the section {{ .Title }}"
 
+[linked-section]
+    other = "Section {{ .Title }}"
+
 [on-the-site]
     other = "in the site"
 
