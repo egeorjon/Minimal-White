@@ -1,14 +1,18 @@
 {{- $current := .current -}}
 {{- $context := .context -}}
 {{- $meta    := .meta    -}}
+{{- $class   := "class=\"col-12\""    -}}
+{{- with $meta.top -}}
+  {{- $class = "class=\"col-12 col-md-9 col-xl-10\"" -}}
+{{- end -}}
 <article class="col">
   <div class="row">
-    <div class="col-12 col-md-3 col-xl-2">
     {{- with $meta.top -}}
-      {{- partial "partials/meta.html" (dict "current" $current "context" $context "meta" . "class" "meta-top") -}}
+      <div class="col-12 col-md-3 col-xl-2">
+        {{- partial "partials/meta.html" (dict "current" $current "context" $context "meta" . "class" "meta-top") -}}
+      </div><!-- col -->
     {{- end -}}
-    </div><!-- col -->
-    <div class="col-12 col-md-9 col-xl-10">
+    <div {{ $class | safeHTMLAttr -}}>
       {{- with $meta.middle -}}
         {{- partial "partials/meta.html" (dict "current" $current "context" $context "meta" . "class" "meta-middle") -}}
       {{- end -}}
