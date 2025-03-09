@@ -1,12 +1,13 @@
 {{- $current     := .current -}}
 {{- $heading_tag := .params.heading       | default site.Params.widgets.gallery.heading   | default site.Data.defaults.widgets.gallery.heading | default site.Data.defaults.widgets.heading -}}
-{{- $title       := i18n (.params.title   | default site.Params.widgets.gallery.title     | default site.Data.defaults.widgets.gallery.title)   -}}
-{{- $taxo        := .params.tax           | default site.Params.widgets.gallery.taxonomy  |default site.Data.defaults.widgets.gallery.taxonomy  -}}
-{{- $columns     := int (.params.columns  | default site.Params.widgets.gallery.columns   |default site.Data.defaults.widgets.gallery.columns)  -}}
-{{- $numposts    := int (.params.numposts | default site.Params.widgets.gallery.numposts  |default site.Data.defaults.widgets.gallery.numposts) -}}
-{{- $term        := .params.term          | default site.Params.widgets.gallery.term      |default site.Data.defaults.widgets.gallery.term      -}}
+{{- $title       := i18n (.params.title   | default site.Params.widgets.gallery.title     | default site.Data.defaults.widgets.gallery.title)    -}}
+{{- $columns     := .params.columns       | default site.Params.widgets.gallery.columns   | default site.Data.defaults.widgets.gallery.columns   -}}
+{{- $numposts    := int (.params.numposts | default site.Params.widgets.gallery.numposts  | default site.Data.defaults.widgets.gallery.numposts) -}}
+{{- $term        := .params.term          | default site.Params.widgets.gallery.term      | default site.Data.defaults.widgets.gallery.term      -}}
+{{- $taxo        := .params.taxonomy      | default site.Params.widgets.gallery.taxonomy  | default site.Data.defaults.widgets.gallery.taxonomy  -}}
 {{- $posts       := site.GetPage (path.Join "/" $taxo $term) -}}
 {{- with $posts -}}
+    {{- $class := partialCached "class-columns.html" $columns (delimit $columns "-") -}}
     <aside class="col widget widget-gallery">
         <div class="widget-inner">
             <div class="widget-header">
@@ -14,7 +15,7 @@
                     {{- (printf "<%s>%s</%s>" $heading_tag . $heading_tag) | safeHTML -}}
                 {{- end -}}
             </div>
-            <div class="widget-content {{ printf "row row-cols-%d" $columns -}}">
+            <div class="widget-content {{ $class -}}">
             {{- range first $numposts (shuffle .Pages) -}}
                 <div class="col">
                     {{- if isset .Params "images" -}}
