@@ -17,7 +17,7 @@
   {{/* ---- Get background image ---- */}}
   {{- partial "partials/headline.html" (dict "current" . "prefix" "list" "display_img" $display_img "meta" (dict)) -}}
   {{- $paginator := .Paginator -}}
-  {{- printf "Layout: %s, Type: %s, Kind: %s)" .Layout .Type .Kind -}}
+  {{/*- printf "Layout: %s, Type: %s, Kind: %s)" .Layout .Type .Kind -*/}}
   <section class="list-main-wrapper">
     <div class="container list-main">
       {{- if eq $paginator.PageNumber 1 -}}
