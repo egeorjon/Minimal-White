@@ -21,7 +21,7 @@
                             "widget" : "gallery",
                             "cache"  : false,
                             "weight" : 2,
-                            "params" : { "term": "galerie" }
+                            "params" : { }
                         }
                     ]
                 }
