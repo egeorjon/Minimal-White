@@ -373,7 +373,8 @@ main, .list-header {
     margin-bottom: $paragraph-margin-bottom;
 }
 
-.widget-sections .card {
+.widget-sections .widget-content .col,
+.widget-series-card .widget-content .col {
     margin-bottom: $paragraph-margin-bottom;
 }
 /*
@@ -536,11 +537,16 @@ li > p {
 .figure {
     margin-bottom: 2 * $paragraph-margin-bottom;
 }
-
+/*
 @media (min-width: map-get($grid-breakpoints, "md")) {
     .see-all {
         float: right;
     }
+}
+*/
+
+.see-all {
+    margin-bottom: 2 * $paragraph-margin-bottom;
 }
 
 .round-corner {
