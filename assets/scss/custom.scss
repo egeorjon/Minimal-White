@@ -230,7 +230,7 @@ $table-variants: map-remove($table-variants,
 
 $utilities: map-remove($utilities,
     "align",
-    "float",
+  /*  "float", */
     "object-fit",
     "opacity",
     "overflow",
