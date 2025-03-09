@@ -21,13 +21,13 @@
                     {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
                 {{- end -}}
             </div>
-            <div class="{{- $class -}}">
+            <div class="widget-content {{ $class -}}">
                 {{- range . -}}
                     {{- with site.GetPage . -}} 
                     <div class="col">
                         <aside class="card">
                             <div class="card-header">
-                                {{- (printf "<%s class=\"card-title\"><a href=\"%s\" title=\"%s\">%s</a></%s>" $subheading_tag .RelPermalink (.Title | plainify | htmlUnescape) .Title $subheading_tag) | safeHTML -}}
+                                {{- (printf "<%s class=\"card-title\">%s</%s>" $subheading_tag .Title $subheading_tag) | safeHTML -}}
                             </div>
                             <div class="card-body">
                             {{- if $summary -}}
@@ -38,6 +38,7 @@
                                     {{- end -}}
                                     <p>{{- $string | safeHTML -}}</p>
                                 {{- end -}}
+                                {{- (printf "<a href=\"%s\" title=\"%s\">%s</a>" .RelPermalink (printf (i18n "see-all-posts-section-x") .Title) (i18n "see-all-posts") ) | safeHTML -}}
                             {{- end -}}
                             </div>
                         </aside>

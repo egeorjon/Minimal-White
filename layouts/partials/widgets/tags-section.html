@@ -27,9 +27,12 @@
             <div class="widget-header">
             {{- with $title -}}
                 {{- with site.GetPage "tags" -}}
-                    <span class="d-none d-md-block see-all">{{- printf "<a href=\"%s\">%s</a>" .Permalink (i18n "view-all-tags") | safeHTML -}}</span>
+                    <span class="d-none d-md-inline float-md-end see-all">{{- printf "<a href=\"%s\">%s</a>" .Permalink (i18n "view-all-tags") | safeHTML -}}</span>
                 {{- end -}}
                 {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+                {{- with site.GetPage "tags" -}}
+                    <span class="d-block d-md-none see-all">{{- printf "<a href=\"%s\">%s</a>" .Permalink (i18n "view-all-tags") | safeHTML -}}</span>
+                {{- end -}}
             {{- end -}}
         </div>
         <ul class="widget-content">
