@@ -1,4 +1,9 @@
-{{- $current := . -}}
-{{- with site.Data.footer.rows -}}
+{{- $current   := . -}}
+{{- $footer    := site.Data.footer.rows -}}
+{{- $dedicated := index site.Data (printf "%sfooter" $current.Kind) -}}
+{{- with $dedicated -}}
+    {{- $footer = $dedicated.rows -}}
+{{- end -}}
+{{- with $footer -}}
     {{- partial "widget-area.html" (dict "current" $current "config" .) -}}
 {{- end -}}
