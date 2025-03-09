@@ -239,10 +239,19 @@
     other = "Aucun article ne correspond aux critères."
 
 [published-posts]
-    other = "Articles publiés: "
+    other = "Articles publiés : "
+
+[see-all-posts]
+    other = "Tous les articles"
 
 [see-all-posts-section]
     other = "Tous les articles de la section"
+
+[see-all-posts-section-x]
+    other = "Tous les articles de la section %s"
+
+[num-of-posts]
+    other = "Nombre d'articles : %d"
 
 [post-authors]
     one   = "L'auteur de cet article"

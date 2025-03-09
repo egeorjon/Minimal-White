@@ -240,8 +240,17 @@
 [published-posts]
     other = "Published posts: "
 
+[see-all-posts]
+    other = "All posts"
+
 [see-all-posts-section]
     other = "All posts for the section"
+
+[see-all-posts-section-x]
+    other = "All posts for the section &laquo; %s &raquo;"
+
+[num-of-posts]
+    other = "Number of posts: %d"
 
 [post-authors]
     one   = "The author of the post"
