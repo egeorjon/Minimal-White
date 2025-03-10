@@ -26,9 +26,18 @@
                     {{- partial "inline/menu/walk.html" (dict "page" $current "menuEntries" .) -}}
                     <li class="nav-item">
                         {{- $search_page := site.GetPage "search" -}}
-                        <form class="search-form input-group input-group-sm" action="{{- $search_page.Permalink -}}" method="GET">
-                            <input class="form-control" type="text" name="s" placeholder="{{- i18n "search-please-enter" -}}" />
-                            <span class="input-group-text" id="basic-addon2"><i class="bi-search"> </i></span>
+                        <form class="search-form" action="{{- $search_page.Permalink -}}" method="GET">
+                            <div class="input-group input-group-sm">
+                                <input 
+                                    type="text" 
+                                    name="s" 
+                                    class="form-control" 
+                                    placeholder="{{- i18n "search-please-enter" -}}" 
+                                    aria-label="{{- i18n "search-please-enter" -}}" 
+                                    aria-describedby="search-form-button"
+                                >
+                                <span class="input-group-text" id="search-form-button"><i class="bi bi-search"> </i></span>
+                            </div>
                             <button type="submit" class="visually-hidden">{{- i18n "search" -}}</button>
                         </form>
                     </li>
