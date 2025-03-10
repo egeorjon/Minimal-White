@@ -20,12 +20,12 @@
                 {{- with $title -}}
                     {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
                 {{- end -}}
-            </div>
+            </div><!-- widget-header -->
             <div class="widget-content {{ $class -}}">
                 {{- range . -}}
                     {{- with site.GetPage . -}} 
                     <div class="col">
-                        <aside class="card">
+                        <aside class="card" aria-label="{{- with .Title -}}{{- . | anchorize -}}{{- end -}}">
                             <div class="card-header">
                                 {{- (printf "<%s class=\"card-title\">%s</%s>" $subheading_tag .Title $subheading_tag) | safeHTML -}}
                             </div>
@@ -42,10 +42,10 @@
                             {{- end -}}
                             </div>
                         </aside>
-                    </div>
+                    </div><!-- col -->
                     {{- end -}}
                 {{- end -}}
-            </div><!-- row -->
+            </div><!-- row (widget-content) -->
         </div><!-- widget-inner -->
     </section><!-- col -->
 {{- end -}}

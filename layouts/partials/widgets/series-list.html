@@ -17,7 +17,7 @@
         {{- $num = len $series -}}
     {{- end -}}
     {{- if eq $mode "list" -}}
-        <aside class="col widget widget-series widget-series-list">
+        <aside class="col widget widget-series widget-series-list" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
             <div class="widget-inner">
                 <div class="widget-header">
                     {{- with $title -}}
@@ -40,7 +40,7 @@
     {{- else -}}
         <section class="col widget widget-series widget-series-card">
             <div class="widget-inner">
-                <div class="widget-header">
+                <div class="widget-header clearfix">
                     {{- with $title -}}
                         {{- if $view_all -}}
                             {{- with site.Taxonomies.series.Page -}}
@@ -54,11 +54,11 @@
                             {{- end -}}
                         {{- end -}}
                     {{- end -}}
-                </div>
+                </div><!-- widget-header -->
                 <div class="widget-content {{ $class -}}">
                     {{- range $series | shuffle | first $num -}}
                     <div class="col">
-                        <aside class="card h-100">
+                        <aside class="card h-100" aria-label="{{- . -}}">
                             {{- $serie := index site.Taxonomies.series . -}}
                             {{- $num_posts := 0 -}}
                             {{- with $serie.Pages -}}

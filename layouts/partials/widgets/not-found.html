@@ -2,7 +2,7 @@
 {{- $heading_tag := site.Params.widgets.not_found.heading | default site.Data.defaults.widgets.not_found.heading  | default site.Data.defaults.widgets.heading -}}
 {{- $title       := i18n (site.Params.widgets.not_found.title | default site.Data.defaults.widgets.not_found.title) -}}
 {{/*- $heading_tag := printf "h%d" $heading_lev -*/}}
-<aside class="col widget widget-not-found">
+<aside class="col widget widget-not-found" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
     <div class="widget-inner">
         <div class="widget-header">
             {{- with $title -}}

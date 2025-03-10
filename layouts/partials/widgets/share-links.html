@@ -2,13 +2,13 @@
 {{- $heading_tag := .params.heading     | default site.Params.widgets.share.heading | default site.Data.defaults.widgets.share.heading | default site.Data.defaults.widgets.heading -}}
 {{- $title       := i18n (.params.title | default site.Params.widgets.share.title   | default site.Data.defaults.widgets.share.title) -}}
 {{- with site.Params.sharelinks -}}
-    <aside class="col widget widget-share-links">
+    <aside class="col widget widget-share-links" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
         <div class="widget-inner row row-cols-1 row-cols-lg-2">
             <div class="widget-header col">
                 {{- with $title -}}
                     {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
                 {{- end -}}
-            </div>
+            </div><!-- widget-header -->
             {{- $home  := "/" | absURL -}}
             {{- $url   := $current.Permalink | absURL | safeURL -}}
             {{- $title := $current.Title | safeHTML -}}
@@ -27,7 +27,7 @@
                 {{- $tags = (delimit $current.Params.tags ",") | safeURL -}}
             {{- end -}}
             <div class="widget-content col">
-                <ul><!-- class="inline-list" -->
+                <ul>
                 {{- range sort . "weight" -}}
                     {{- $share_id := .id -}}
                     {{- with (index site.Data.socials .id) }}
@@ -53,8 +53,8 @@
                     {{- end -}}
                 {{- end -}}
                 </ul>
-            </div>
-        </div>
+            </div><!-- widget-content -->
+        </div><!-- widget-inner -->
     </aside>
 {{- end -}}
 {{- define "partials/inline/share_regex" -}}

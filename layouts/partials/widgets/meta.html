@@ -5,7 +5,7 @@
 {{- $list        := index $meta .params.meta -}}
 {{- $class       := printf "meta-%s" .params.meta -}}
 {{- with $list -}}
-    <aside class="col widget widget-meta widget-{{- $class -}}">
+    <aside class="col widget widget-meta widget-{{- $class -}}" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
         <div class="widget-inner">
             <div class="widget-header">
                 {{- with $title -}}

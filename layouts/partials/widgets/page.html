@@ -9,18 +9,18 @@
 {{- if eq $method "field" -}}
     {{- $post = where site.Pages (printf "Params.%s" $value) true -}}
     {{- range first 1 $post -}}
-        <aside class="col widget widget-page">
+        <aside class="col widget widget-page" aria-label="{{- with .Title -}}{{- . | anchorize -}}{{- end -}}">
             <div class="widget-inner">
                 <div class="widget-header">
                     {{- (printf "<%s class=\"widget-title\">%s</%s>" $heading_tag .Title $heading_tag) | safeHTML -}}
-                </div>
+                </div><!-- widget-header -->
                 <div class="widget-content">
                     {{- .Content -}}
                     {{- if $display_date -}}
                         <p>{{- .Date | time.Format $format_date -}}</p>
                     {{- end -}}
-                </div>
-            </div>
+                </div><!-- widget-content -->
+            </div><!-- widget-inner -->
         </aside>
     {{- else -}}
         <div class="col">
@@ -29,19 +29,19 @@
     {{- end -}}
 {{- else -}}
     {{- with site.GetPage $post -}}
-        <aside class="col widget widget-page">
+        <aside class="col widget widget-page" aria-label="{{- with .Title -}}{{- . | anchorize -}}{{- end -}}">
             <div class="widget-inner">
                 <div class="widget-header">
                 {{- with .Title -}}
                     {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
                 {{- end -}}
-                </div>
+                </div><!-- widget-header -->
                 <div class="widget-content">
                     {{- .Content -}}
                     {{- if $display_date -}}
                         <p>{{- .Date | time.Format $format_date -}}</p>
                     {{- end -}}
-                </div>
+                </div><!-- widget-content -->
             </div><!-- end of widget-inner -->
         </aside>
     {{- end -}}

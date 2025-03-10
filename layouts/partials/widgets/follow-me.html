@@ -2,15 +2,15 @@
 {{- $heading_tag := .params.heading     | default site.Params.widgets.followme.heading | default site.Data.defaults.widgets.followme.heading | default site.Data.defaults.widgets.heading -}}
 {{- $title       := i18n (.params.title | default site.Params.widgets.followme.title   | default site.Data.defaults.widgets.followme.title) -}}
 {{- with site.Params.followlinks -}}
-<aside class="col widget widget-followme">
+<aside class="col widget widget-followme" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
     <div class="widget-inner">
         <div class="widget-header">
             {{- with $title -}}
                 {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
             {{- end -}}
-        </div>
+        </div><!-- end of widget-header -->
         <div class="widget-content">
-            <ul><!-- class="inline-list" -->
+            <ul>
                 {{- range sort . "weight" -}}
                     {{- if eq .id "rss" -}}
                         {{- with ((site.GetPage "home").OutputFormats.Get "rss") -}}
@@ -36,7 +36,7 @@
                     {{- end -}}
                 {{- end -}}
             </ul>
-        </div>
+        </div><!-- end of widget-content -->
     </div><!-- end of widget-inner -->
 </aside>
 {{- end -}}

@@ -14,7 +14,7 @@
     </div>
     <div class="row widget-content">
     {{- range $authors -}}
-        <aside class="col">
+        <aside class="col" aria-label="{{- with .Params.Title -}}{{- . | anchorize -}}{{- end -}}">
             {{- printf "<%s><a href=\"%s\" title=\"%s\">%s</a></%s>" $subheading_tag .RelPermalink (i18n "page-of-author") .Params.Title $subheading_tag | safeHTML -}}
             {{- with .Params.Description -}}
                 <p>{{- . | safeHTML -}}</p>

@@ -13,7 +13,7 @@
 {{- $long_string := partial "inline/share_regex" (dict "pattern" "%%END%%"     "param" "%s" "value" $end     "string" $long_string) -}}
 {{- $long_string := partial "inline/share_regex" (dict "pattern" "%%COMPANY%%" "param" "%s" "value" $company "string" $long_string) -}}
 
-<aside class="col widget widget-copyright">
+<aside class="col widget widget-copyright" aria-label="copyright">
     <div class="widget-inner">
         {{- $long_string -}}
     </div>

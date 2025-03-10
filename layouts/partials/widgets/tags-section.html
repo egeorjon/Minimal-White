@@ -22,37 +22,37 @@
             {{- $count_max = . -}}
         {{- end -}}
     {{- end -}}
-    <aside class="col widget widget-tags-section">
+    <aside class="col widget widget-tags-section" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
         <div class="widget-inner">
-            <div class="widget-header">
-            {{- with $title -}}
-                {{- with site.GetPage "tags" -}}
-                    <span class="d-none d-md-inline float-md-end see-all">{{- printf "<a href=\"%s\">%s</a>" .Permalink (i18n "view-all-tags") | safeHTML -}}</span>
-                {{- end -}}
-                {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
-                {{- with site.GetPage "tags" -}}
-                    <span class="d-block d-md-none see-all">{{- printf "<a href=\"%s\">%s</a>" .Permalink (i18n "view-all-tags") | safeHTML -}}</span>
-                {{- end -}}
-            {{- end -}}
-        </div>
-        <ul class="widget-content">
-            {{- $font_gap := math.Sub $font_max $font_min -}}
-            {{- $unique := dict -}}
-            {{- range $current.Pages -}}
-                {{- with .GetTerms "tags" -}}
-                    {{- range . -}}
-                        {{- if not (isset $unique .Title) -}}
-                            {{- $unique     = merge $unique (dict .Title 1) -}}
-                            {{- $count     := index $tagsCount .Title -}}
-                            {{- $font_size := int (math.Add $font_min (math.Mul (math.Div (math.Log $count) (math.Log $count_max)) $font_gap)) -}}
-                            {{- printf "<li><a href=\"%s\" title=\"%s\" style=\"font-size: %d%s; line-height: %d\">%s (%d)</a></li>" .RelPermalink (humanize .LinkTitle) $font_size $font_unit (math.Div $line_height $font_size) (strings.FirstUpper .Title) $count | safeHTML -}}
-                        {{- end -}}
+            <div class="widget-header clearfix">
+                {{- with $title -}}
+                    {{- with site.GetPage "tags" -}}
+                        <span class="d-none d-md-inline float-md-end see-all">{{- printf "<a href=\"%s\">%s</a>" .Permalink (i18n "view-all-tags") | safeHTML -}}</span>
+                    {{- end -}}
+                    {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+                    {{- with site.GetPage "tags" -}}
+                        <span class="d-block d-md-none see-all">{{- printf "<a href=\"%s\">%s</a>" .Permalink (i18n "view-all-tags") | safeHTML -}}</span>
                     {{- end -}}
                 {{- end -}}
-            {{- end -}}
-        </ul>
-        {{- with site.GetPage "tags" -}}
-            <span class="d-block d-md-none see-all">{{- printf "<a href=\"%s\">%s</a>" .Permalink (i18n "view-all-tags") | safeHTML -}}</span>
-        {{- end -}}
+            </div><!-- end of widget-header -->
+            <div class="widget-content">
+                <ul>
+                    {{- $font_gap := math.Sub $font_max $font_min -}}
+                    {{- $unique := dict -}}
+                    {{- range $current.Pages -}}
+                        {{- with .GetTerms "tags" -}}
+                            {{- range . -}}
+                                {{- if not (isset $unique .Title) -}}
+                                    {{- $unique     = merge $unique (dict .Title 1) -}}
+                                    {{- $count     := index $tagsCount .Title -}}
+                                    {{- $font_size := int (math.Add $font_min (math.Mul (math.Div (math.Log $count) (math.Log $count_max)) $font_gap)) -}}
+                                    {{- printf "<li><a href=\"%s\" title=\"%s\" style=\"font-size: %d%s; line-height: %d\">%s (%d)</a></li>" .RelPermalink (humanize .LinkTitle) $font_size $font_unit (math.Div $line_height $font_size) (strings.FirstUpper .Title) $count | safeHTML -}}
+                                {{- end -}}
+                            {{- end -}}
+                        {{- end -}}
+                    {{- end -}}
+                </ul>
+            </div><!-- widget-content -->
+        </div><!-- widget-inner -->
     </aside>
 {{- end -}}

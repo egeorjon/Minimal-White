@@ -8,7 +8,7 @@
 {{- $posts       := site.GetPage (path.Join "/" $taxo $term) -}}
 {{- with $posts -}}
     {{- $class := partialCached "class-columns.html" $columns (delimit $columns "-") -}}
-    <aside class="col widget widget-gallery">
+    <aside class="col widget widget-gallery" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
         <div class="widget-inner">
             <div class="widget-header">
                 {{- with $title -}}
@@ -23,8 +23,8 @@
                     {{- end -}}
                 </div><!-- col -->
             {{- end -}}
-            </div><!-- row -->
             <p><a href="{{- .RelPermalink -}}" title="{{- i18n "see-all-galleries" -}}">{{- i18n "see-all-galleries" -}}</a></p>
+            </div><!-- row (widget-content) -->
         </div><!-- widget-inner -->
     </aside><!-- col -->
 {{- end -}}

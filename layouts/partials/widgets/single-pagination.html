@@ -4,13 +4,13 @@
 {{- $n           := int  (.Params.prev    | default site.Params.widgets.single_pagination.prev    | default site.Data.defaults.widgets.single_pagination.prev)  -}}
 {{- $m           := int  (.Params.next    | default site.Params.widgets.single_pagination.next    | default site.Data.defaults.widgets.single_pagination.next)  -}}
 {{- $formatdate := site.Params.FormatDate -}} 
-<aside class="col widget widget-single-pagination">
+<aside class="col widget widget-single-pagination" aria-label="{{- with $title -}}{{- . | default "previous-next-posts" | anchorize -}}{{- end -}}">
     <div class="widget-inner">
         <div class="widget-header">
             {{- with $title -}}
                 {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
             {{- end -}}
-        </div>
+        </div><!-- widget-header -->
         {{- $list := slice -}}
         {{/* $n := 2 */}}  <!-- Number of previous posts -->
         {{/* $m := 2 */}}  <!-- Number of next posts -->
@@ -39,5 +39,5 @@
         <div class="list-group list-group-flush widget-content">
             {{- delimit $list " " | safeHTML -}}
         </div>
-    </div>
+    </div><!-- widget-inner -->
 </aside>

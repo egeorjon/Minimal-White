@@ -17,7 +17,7 @@
     {{- $posts := . -}}
     <section class="col widget widget-{{- $widget_class -}}">
         <div class="widget-inner">
-            <div class="widget-header">
+            <div class="widget-header clearfix">
             {{- with $title -}}
                 {{- with $view_all -}}
                     <span class="d-none d-md-inline float-md-end see-all"><a href="{{- $view_all | safeURL -}}">{{- i18n "view-all" -}}</a></span>
@@ -27,11 +27,11 @@
                     <span class="d-block d-md-none see-all"><a href="{{- $view_all | safeURL -}}">{{- i18n "view-all" -}}</a></span>
                 {{- end -}}
             {{- end -}}
-            </div>
+            </div><!-- end of widget-header -->
             <div class="widget-content {{ $class -}}">
                 {{- range $posts -}}
                     {{- $post := . -}}
-                    <aside class="col widget-posts">
+                    <aside class="col widget-posts" aria-label="{{- with .Title -}}{{- . | anchorize -}}{{- end -}}">
                         <div class="row">
                             {{- with $meta.top -}}
                                 <div class="col-12 col-md-3">
@@ -61,11 +61,7 @@
                         </div><!-- row -->
                     </aside><!--col -->
                 {{- end -}}
-            </div><!-- end of row -->
-            {{- with $view_all -}}
-                <p class="d-none"><a href="{{- $view_all | safeURL -}}">{{- i18n "view-all" -}}</a></p>
-                <!-- d-md-none see-all -->
-            {{- end -}}
+            </div><!-- end of row (widget-content) -->
         </div><!-- end of widget-inner -->
     </section><!-- end of col -->
 {{- end -}}
