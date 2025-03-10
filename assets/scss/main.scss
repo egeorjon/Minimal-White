@@ -37,12 +37,12 @@ $h6-paragraph-bottom-margin-2:    1.35em;
 .search-form {
     margin-top: ($font-size-base * $line-height-base) / 2;
     // margin-bottom: (2rem - ($font-size-base * $line-height-base)) / 2;
-    width: 150px;
+    width: 180px;
 }
 
 .search-form input {
-    padding-top: 0;
-    padding-bottom: 0;
+    /*padding-top: 0;
+    padding-bottom: 0;*/
 }
 
 .main-menu > .container {
