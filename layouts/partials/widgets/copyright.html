@@ -8,7 +8,7 @@
 {{- else -}}
     {{- $end = "" -}}
 {{- end -}}
-{{- $company := .params.company | default "Company" -}}
+{{- $company := .params.company | default site.Params.author.name | default "" -}}
 {{- $long_string := partial "inline/share_regex" (dict "pattern" "%%START%%"   "param" "%s" "value" $start   "string" $long)        -}}
 {{- $long_string := partial "inline/share_regex" (dict "pattern" "%%END%%"     "param" "%s" "value" $end     "string" $long_string) -}}
 {{- $long_string := partial "inline/share_regex" (dict "pattern" "%%COMPANY%%" "param" "%s" "value" $company "string" $long_string) -}}
