@@ -74,7 +74,7 @@
 
 {{- partialCached "partials/favicons.html" . -}}
 
-{{- $production := or (or (eq (getenv "HUGO_ENV") "production") hugo.IsProduction) (not hugo.IsServer) -}}
+{{- $production := or (or (eq (getenv "HUGO_ENV") "production") hugo.IsProduction) (eq hugo.Environment "production") -}}
 {{- if $production -}}
     <meta name="robots" content="index,follow" />
 {{- else -}}
@@ -129,6 +129,6 @@
     <meta name="msvalidate.01" content="{{- . -}}" />
 {{- end -}}
 
-{{- if or $production (site.Params.debugMode | default false) -}}
+{{- if $production -}}
     {{- partialCached "piwikpro.html" . -}}
 {{- end -}}
