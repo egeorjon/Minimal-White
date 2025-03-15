@@ -13,7 +13,7 @@
         var qPString = qP.length > 0 ? '?' + qP.join('&') : '';
         (tags.async = !0),
           (tags.src =
-            '{{- site.Params.piwikpro.url -}}' + id + '.js' + qPString),
+            '{{- site.Params.piwikpro.url | safeURL -}}' + id + '.js' + qPString),
           scripts.parentNode.insertBefore(tags, scripts)
         !(function (a, n, i) {
           a[n] = a[n] || {}
