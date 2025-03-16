@@ -1,0 +1,36 @@
+{{- $current     := .current -}}
+{{- $heading_tag := .params.heading     | default site.Params.widgets.references.heading | default site.Data.defaults.widgets.references.heading | default site.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.params.title | default site.Params.widgets.references.title   | default site.Data.defaults.widgets.references.title)    -}}
+{{- $ref_list    := $current.Params.references -}}
+{{- with $ref_list -}}
+    <aside class="col widget widget-references" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
+        <div class="widget-inner">
+            <div class="widget-header">
+                {{- with $title -}}
+                    {{- (printf "<%s>%s</%s>" $heading_tag . $heading_tag) | safeHTML -}}
+                {{- end -}}
+            </div>
+            <ul class="widget-content">
+            {{- range . -}}
+                {{- $ref := . -}}
+                <li>
+                {{- if eq .url "" -}}
+                    {{- .title -}}
+                {{- else -}}
+                    <a href="{{- .url -}}" title="{{- (.title | plainify) -}}" target="_blank" rel="noopener noreferrer">{{- .title | markdownify -}}<i class="bi-link-45deg"></i></a>
+                {{- end -}}
+                {{ with .site -}}
+                    {{ i18n "on-the-site" }} <a href="{{- $ref.site_url -}}" title="{{- $ref.site | plainify -}}" target="_blank" rel="noopener noreferrer">{{- $ref.site  | markdownify -}}<i class="bi-link-45deg"></i></a>
+                {{- end -}}
+                {{ with .lic -}}
+                    ,{{ i18n "available-under-lic" }} <a href="{{- $ref.lic_url -}}" title="{{- $ref.lic | plainify -}}" target="_blank" rel="noopener noreferrer">{{- $ref.lic  | markdownify -}}<i class="bi-link-45deg"></i></a>
+                {{- end -}}
+                {{- with .comment -}}
+                    . {{ . | markdownify -}}
+                {{- end -}}
+                </li>
+            {{- end -}}
+            </ul><!-- row (widget-content) -->
+        </div><!-- widget-inner -->
+    </aside><!-- col -->
+{{- end -}}
