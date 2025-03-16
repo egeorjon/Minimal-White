@@ -39,12 +39,12 @@ $h6-paragraph-bottom-margin-2:    1.35em;
     // margin-bottom: (2rem - ($font-size-base * $line-height-base)) / 2;
     width: 180px;
 }
-
+/*
 .search-form input {
-    /*padding-top: 0;
-    padding-bottom: 0;*/
+    padding-top: 0;
+    padding-bottom: 0;
 }
-
+*/
 .main-menu > .container {
     line-height: 2 * $line-height-base;
     vertical-align: middle;
@@ -293,14 +293,14 @@ main, .list-header {
    --------------------------------------------------- */
 
 .widget {
-    margin-bottom: 3 * $paragraph-margin-bottom;
-
+    margin-bottom: 2 * $paragraph-margin-bottom;
+/*
     ul {
         list-style-type: none;
         margin-bottom: 0;
         padding-left: 0;
     }
-
+*/
     li {
         // line-height: 2 * $line-height-base;
 
@@ -326,6 +326,12 @@ main, .list-header {
 
 .widget-page,
 .widget-series-list {
+    ul {
+        list-style-type: none;
+        margin-bottom: 0;
+        padding-left: 0;
+    }
+
     li {
         line-height: 2 * $line-height-base;
     }
