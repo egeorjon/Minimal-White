@@ -1,8 +1,13 @@
 {{- $current := .current -}}
 {{- $long    := .params.long_pattern  | default site.Params.widgets.copyright.long_pattern  | default site.Data.defaults.widgets.copyright.long_pattern  -}}
 {{- $short   := .params.short_pattern | default site.Params.widgets.copyright.short_pattern | default site.Data.defaults.widgets.copyright.short_pattern -}}
-{{- $start   := string (.params.start | default site.Params.widgets.copyright.start         | default (time.Now | time.Format "2006")) -}}
+{{- $start   := string (.params.start | default site.Params.widgets.copyright.start         | default "") -}}
 {{- $end     := time.Now | time.Format "2006" -}}
+{{- if eq $start "" -}}
+    {{- $filteredPages := where site.RegularPages "Section" "in" site.Params.mainsections -}}
+    {{- $oldest := index (sort $filteredPages "Date") 0 -}}
+    {{- $start  = $oldest.Date.Format "2006" -}}
+{{- end -}}
 {{- if ne $start $end -}}
     {{- $end = printf "-%s" $end -}}
 {{- else -}}
