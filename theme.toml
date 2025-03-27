@@ -1,13 +1,13 @@
 name        = 'Minimal-White'
 license     = 'MIT'
 licenselink = 'https://github.com/egeorjon/Minimal-White/LICENSE'
-description = 'Theme description'
+description = 'Clean, configurable and responsive Hugo theme'
 
 # The home page of the theme, where the source can be found
 homepage    = 'https://github.com/egeorjon/Minimal-White'
 
 # If you have a running demo of the theme
-demosite   = 'https://emmanuelgeorjon.com/'
+demosite    = 'https://emmanuelgeorjon.com/'
 
 # Taxonomy terms
 tags = [
@@ -16,6 +16,7 @@ tags = [
   "clean",
   "light",
   "blog",
+  "widget",
   "minimalist"
 ]
 
@@ -26,13 +27,15 @@ features = [
   "opengraph",
   "favicon",
   "share-icons",
+  "gallery",
   "cover",
   "multilingual",
   "social-icons",
   "minified-assets",
   "search"
 ]
-min_version = "0.140.0"
+
+min_version = "0.140.2"
 
 # If the theme has a single author
 [author]
