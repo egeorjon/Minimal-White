@@ -76,6 +76,12 @@
         }
     },
     "widgets": {
+        "copyright": {
+            "start"         : "2000",
+            "company"       : "Emmanuel GEORJON",
+            "long_pattern"  : "Copyright (c) %%START%%%%END%% - %%COMPANY%% - All rights reserved.",
+            "short_pattern" : "(c) %%END%% - %%COMPANY%% - All rights reserved."
+        },
         "authors": {
             "title"         : "post-authors",
             "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 2, "xl": 2 }
