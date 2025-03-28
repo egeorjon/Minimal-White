@@ -1,17 +1,24 @@
 {
-    "shortdate"         : "02-Jan-06",
+    "shortdate"            : "02-Jan-06",
     "contact": {
-        "image": true
+        "image"             : true
     },
     "search": {
-        "headerimage": true
+        "headerimage"       : true
+    },
+    "index": {
+        "tags"              : "noindex",
+        "sections"          : "",
+        "categories"        : "",
+        "linkedsections"    : "noindex",
+        "series"            : ""
     },
     "single": {
         "image": true,
         "meta" : {
-            "top"       : [ "date" ],
-            "middle"    : [ "post-series" ],
-            "bottom"    : [ "tags", "reading" ]
+            "top"           : [ "date" ],
+            "middle"        : [ "post-series" ],
+            "bottom"        : [ "tags", "reading" ]
         }
     },
     "list": {
