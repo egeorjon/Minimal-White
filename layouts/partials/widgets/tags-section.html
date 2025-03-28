@@ -4,8 +4,9 @@
 {{- $font_min    := int  (.Params.font_smallest | default site.Params.widgets.tags_section.font_smallest | default site.Data.defaults.widgets.tags_section.font_smallest)  -}}
 {{- $font_max    := int  (.Params.font_largest  | default site.Params.widgets.tags_section.font_largest  | default site.Data.defaults.widgets.tags_section.font_largest)   -}}
 {{- $line_height := int  (.Params.line_height   | default site.Params.widgets.tags_section.line_height   | default site.Data.defaults.widgets.tags_section.line_height)    -}}
-
-{{- $tagsCount  := dict -}}
+{{- $robots_tags := site.Params.index.tags      | default site.Data.defaults.index.tags | default "" -}}
+{{- $robot := partial "inline/rel" (dict "robots" $robots_tags) -}}
+{{- $tagsCount   := dict -}}
 {{- range $current.Pages -}}
     {{- with .GetTerms "tags" -}}
         {{- range . -}}
@@ -46,7 +47,7 @@
                                     {{- $unique     = merge $unique (dict .Title 1) -}}
                                     {{- $count     := index $tagsCount .Title -}}
                                     {{- $font_size := int (math.Add $font_min (math.Mul (math.Div (math.Log $count) (math.Log $count_max)) $font_gap)) -}}
-                                    {{- printf "<li><a href=\"%s\" title=\"%s\" style=\"font-size: %d%s; line-height: %d\">%s (%d)</a></li>" .RelPermalink (humanize .LinkTitle) $font_size $font_unit (math.Div $line_height $font_size) (strings.FirstUpper .Title) $count | safeHTML -}}
+                                    {{- printf "<li><a href=\"%s\" title=\"%s\" style=\"font-size: %d%s; line-height: %d\" %s>%s (%d)</a></li>" .RelPermalink (humanize .LinkTitle) $font_size $font_unit (math.Div $line_height $font_size) $robot (strings.FirstUpper .Title) $count | safeHTML -}}
                                 {{- end -}}
                             {{- end -}}
                         {{- end -}}
@@ -55,4 +56,13 @@
             </div><!-- widget-content -->
         </div><!-- widget-inner -->
     </aside>
+{{- end -}}
+
+
+{{- define "partials/inline/rel" -}}
+    {{- $index := "" -}}
+    {{- if ne .robots "" -}}
+        {{- $index = printf " rel=\"%s\"" .robots -}}
+    {{- end -}}
+    {{- return $index -}}
 {{- end -}}

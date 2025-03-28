@@ -1,6 +1,12 @@
-{{- $current := .current -}}
-{{- $context := .context -}}
-{{- $formatdate := site.Params.FormatDate -}} {{/* | default site.Data.defaults.params.formatdate */}}
+{{- $current           := .current -}}
+{{- $context           := .context -}}
+{{- $formatdate        := site.Params.FormatDate -}} {{/* | default site.Data.defaults.params.formatdate */}}
+{{- $robots_tags       := site.Params.index.tags                | default site.Data.defaults.index.tags | default "" -}}
+{{- $robots_categories := site.Params.index.categories          | default site.Data.defaults.index.categories | default "" -}}
+{{- $robots_sections   := site.Params.index.sections            | default site.Data.defaults.index.sections | default "" -}}
+{{- $robots_series     := site.Params.index.series              | default site.Data.defaults.index.series | default "" -}}
+{{- $robots_linkedsections := site.Params.index.linkedsections  | default site.Data.defaults.index.linkedsections | default "" -}}
+{{- $robot             := "" -}}
 <ul class="post-meta {{ with .class -}}{{- . | safeHTML -}}{{- end -}}">
     {{- range $order, $meta := .meta -}}
         {{- if eq $meta "date" -}}
@@ -29,10 +35,11 @@
                 {{- i18n "reading-time" $current.ReadingTime -}}
             </li>
         {{- else if eq $meta "tags" -}}
+            {{- $robot = partial "inline/rel" (dict "robots" $robots_tags) -}}
             {{- $sl := slice -}}
             {{- with $current.GetTerms "tags" -}}
                 {{- range . -}}
-                    {{- $sl = $sl | append (printf "<a href=\"%s\">%s</a>" .Permalink (humanize .LinkTitle)) -}}
+                    {{- $sl = $sl | append (printf "<a href=\"%s\" %s>%s</a>" .Permalink $robot (humanize .LinkTitle)) -}}
                 {{- end -}}
             {{- end -}}
             {{- if $sl -}}
@@ -43,11 +50,12 @@
             </li>
             {{- end -}}
         {{- else if eq $meta "series" -}}
+            {{- $robot = partial "inline/rel" (dict "robots" $robots_series) -}}
             {{- if (ne $current.Type "series") -}}
                 {{- $sl := slice -}}
                 {{- with $current.GetTerms "series" -}}
                     {{- range . -}}
-                        {{- $sl = $sl | append (printf "<a href=\"%s\">%s</a>" .Permalink (humanize .LinkTitle)) -}}
+                        {{- $sl = $sl | append (printf "<a href=\"%s\" %s>%s</a>" .Permalink $robot (humanize .LinkTitle)) -}}
                     {{- end -}}
                 {{- end -}}
                 {{- if $sl -}}
@@ -59,18 +67,20 @@
                 {{- end -}}
             {{- end -}}
         {{- else if eq $meta "section" -}}
+            {{- $robot = partial "inline/rel" (dict "robots" $robots_sections) -}}
             {{- with $current.Parent }}
                 {{/*- if and (ne .Kind "section") (ne .Kind "taxonomy") -*/}}
                     <li class="post-section">
                         <i class=" bi bi-folder2-open" aria-hidden="true"></i> <span class="visually-hidden">{{- i18n "in" -}}</span>
-                        <span class="in-category"><a href="{{- .Permalink -}}" title="{{- i18n "post-category" . -}}">{{- .Name | safeHTML -}}</a></span>
+                        <span class="in-category"><a href="{{- .Permalink -}}" title="{{- i18n "post-category" . -}}" {{ $robot -}}>{{- .Name | safeHTML -}}</a></span>
                     </li><!-- class="visually-hidden" -->
                 {{/*- end -*/}}
             {{- end }}
         {{- else if eq $meta "category" -}}
+            {{- $robot = partial "inline/rel" (dict "robots" $robots_categories) -}}
             {{- $list := slice -}}
             {{- range $current.GetTerms "categories" -}}
-                {{- $list = $list | append (printf "<a href=\"%s\">%s</a>" .Permalink (humanize .LinkTitle)) -}}
+                {{- $list = $list | append (printf "<a href=\"%s\" %s>%s</a>" .Permalink $robot (humanize .LinkTitle)) -}}
             {{- end -}}
             {{- if gt (len $list) 0 -}}
                 <li class="post-category">
@@ -79,13 +89,14 @@
                 </li>
             {{- end -}}
         {{- else if eq $meta "linkedsection" -}}
+            {{- $robot = partial "inline/rel" (dict "robots" $robots_linkedsections) -}}
             {{- if and (eq $context.Kind "taxonomy") (eq $context.Type "series") -}}
                 {{- $section := $current.Params.linkedsection | default nil -}}
                 {{- if $section }}
                     {{- with site.GetPage $section -}}
                     <li class="post-linked">
                         <i class=" bi bi-folder-symlink" aria-hidden="true"></i> <span class="visually-hidden">{{- i18n "linked-section" . -}}</span>
-                        <span class="linked-to"><a href="{{- .Permalink -}}" title="{{- i18n "posts-of-section" . -}}"> {{ .Title -}}</a></span>
+                        <span class="linked-to"><a href="{{- .Permalink -}}" title="{{- i18n "posts-of-section" . -}}" {{ $robot -}}> {{ .Title -}}</a></span>
                     </li><!-- class="visually-hidden" -->
                     {{- end -}}<!-- with -->
                 {{- end -}}<!-- if section -->
@@ -93,3 +104,11 @@
         {{- end -}}<!-- if $meta -->
     {{- end -}}<!-- range -->
 </ul>
+
+{{- define "partials/inline/rel" -}}
+    {{- $index := "" -}}
+    {{- if ne .robots "" -}}
+        {{- $index = printf " rel=\"%s\"" .robots -}}
+    {{- end -}}
+    {{- return $index -}}
+{{- end -}}

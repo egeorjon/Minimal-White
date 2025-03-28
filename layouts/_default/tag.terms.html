@@ -2,6 +2,8 @@
   {{- $current_page := . -}}
   {{- $def_params   := index site.Params "list_tags" | default (index site.Data.defaults "list_tags")  | default (index site.Data.defaults "list") -}}
   {{- $display_img  := $def_params.headerimage    -}}
+  {{- $robots_tags := site.Params.index.tags      | default site.Data.defaults.index.tags | default "" -}}
+  {{- $robot := partial "inline/rel" (dict "robots" $robots_tags) -}}
   {{- partial "partials/headline.html" (dict "current" . "prefix" "list-tags" "display_img" $display_img "meta" (dict)) -}}
   <section class="tags-content-wrapper">
     <div class="container">
@@ -18,7 +20,7 @@
                     {{/*- $font_size := math.Add $font_min (math.Mul (math.Div (float .Count) (float $count_max)) $font_gap) -*/}}
                     {{- $font_size := math.Add $font_min (math.Mul (math.Div (math.Log .Count) (math.Log $count_max)) $font_gap) -}}
                     {{/*- $style     := ( printf "font-size:%f%s" $font_size $font_unit) -*/}}
-                    {{- printf "<li><a href=\"%s\" title=\"%s (%d)\" style=\"font-size: %.0f%s\">%s</a></li>" .Page.Permalink .Page.Title .Count (math.Floor $font_size) $font_unit (humanize .Page.Title) | safeHTML -}}
+                    {{- printf "<li><a href=\"%s\" title=\"%s (%d)\" style=\"font-size: %.0f%s\" %s>%s</a></li>" .Page.Permalink .Page.Title .Count (math.Floor $font_size) $font_unit $robot (humanize .Page.Title) | safeHTML -}}
                 {{- end -}}
                 </ul>
             {{- end -}}
@@ -29,4 +31,12 @@
   <!--<footer class="tags-footer">
     
   </footer>  -->
+{{- end -}}
+
+{{- define "partials/inline/rel" -}}
+    {{- $index := "" -}}
+    {{- if ne .robots "" -}}
+        {{- $index = printf " rel=\"%s\"" .robots -}}
+    {{- end -}}
+    {{- return $index -}}
 {{- end -}}
