@@ -2,33 +2,16 @@
     {{- $current_page  := . -}}
 
     {{/* ---- Get page parameters ---- */}}
-    {{- $def_params := index site.Params "serach" | default (index site.Data.defaults "serach") -}}
+    {{- $def_params := site.Params.search | default site.Data.defaults.search -}}
 
     {{- partial "partials/headline.html" (dict "current" $current_page "prefix" "search" "display_img" $def_params.headerimage "meta" (dict)) -}}
     <section class="search-main">
         <div class="container">
             <div class="row">
-                <aside class="search-content col">
-                    {{/*- replace .Content .Summary "" | safeHTML -*/}}
+                <div class="col-12">
                     {{- .ContentWithoutSummary -}}
-                    <h2>{{- i18n "search-form" -}}</h2>
-                    {{- $page := .GetPage "search" -}}
-                    {{- with $page -}}
-                        <form action="{{- .Permalink }}" method="GET" class="row justify-content-center form-search">
-                            <label for="search-query" class="col-form-label col-auto"><span class="visually-hidden">{{- i18n "search-please-enter" -}}</span></label>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" id="search-query" aria-describedby="searchHelp" name="s" placeholder="{{- i18n "search-please-enter" -}}" />
-                               <div id="searchHelp" class="form-text visually-hidden">{{- i18n "search-help" -}}</div>
-                            </div><!-- end of col -->
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-dark">
-                                    <i class="bi-search" aria-hidden="true"></i>
-                                    <span class="visually-hidden">{{- "search" -}}</span>
-                                </button>
-                            </div><!-- end of col -->
-                        </form><!-- end of row -->
-                    {{- end -}}
-                </aside><!-- end of col -->
+                </div>
+                {{- partialCached "partials/widgets/search-form.html" (dict "current" $current_page ) -}}
             </div><!-- end of row -->
         </div><!-- end of container -->
         <div class="container">

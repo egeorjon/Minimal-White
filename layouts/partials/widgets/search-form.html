@@ -1,0 +1,24 @@
+{{- $current := .current -}}
+{{- $def_params := site.Params.search   | default site.Data.defaults.search -}}
+{{- $heading_tag := .params.heading     | default $def_params.heading       -}}
+{{- $title       := i18n (.params.title | default $def_params.title)        -}}
+<aside class="search-content col widget widget-search-form">
+    {{- $current.ContentWithoutSummary -}}
+    {{- printf "<%s>%s</%s>" $heading_tag $title $heading_tag | safeHTML -}}
+    {{- $page := site.GetPage "search" -}}
+    {{- with $page -}}
+        <form action="{{- .Permalink }}" method="GET" class="row justify-content-center form-search">
+            <label for="search-query" class="col-form-label col-auto"><span class="visually-hidden">{{- i18n "search-please-enter" -}}</span></label>
+            <div class="col-auto">
+                <input type="text" class="form-control" id="search-query" aria-describedby="searchHelp" name="s" placeholder="{{- i18n "search-please-enter" -}}" />
+               <div id="searchHelp" class="form-text visually-hidden">{{- i18n "search-help" -}}</div>
+            </div><!-- end of col -->
+            <div class="col-auto">
+                <button type="submit" class="btn btn-dark">
+                    <i class="bi-search" aria-hidden="true"></i>
+                    <span class="visually-hidden">{{- "search" -}}</span>
+                </button>
+            </div><!-- end of col -->
+        </form><!-- end of row -->
+    {{- end -}}
+</aside><!-- end of col -->

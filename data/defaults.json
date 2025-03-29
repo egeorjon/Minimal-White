@@ -4,7 +4,9 @@
         "image"             : true
     },
     "search": {
-        "headerimage"       : true
+        "headerimage"       : true,
+        "title"             : "search-form",
+        "heading"           : "h2"
     },
     "index": {
         "tags"              : "noindex",
