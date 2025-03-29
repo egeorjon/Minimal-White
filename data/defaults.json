@@ -21,6 +21,10 @@
             "bottom"        : [ "tags", "reading" ]
         }
     },
+    "page404": {
+        "headerimage"       : true,
+        "img"               : "/imag/404.jpg"
+    },
     "list": {
         "headerimage"       : true,
         "display_summary"   : true,
@@ -46,8 +50,6 @@
     "list_tags": {
         "headerimage"       : true,
         "display_summary"   : true,
-        "font_largest"      : 32,
-        "font_smallest"     : 12,
         "post_format"       : "two-cols-no-image",
         "cols"              : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
         "meta"              : {
@@ -112,6 +114,11 @@
             "font_smallest" : 12,
             "line_height"   : 54
         },
+        "tagscloud": {
+            "font_largest"  : 36,
+            "font_smallest" : 12,
+            "line_height"   : 54
+        },
         "not_found": {
             "title"         : "widget-not-found"
         },
@@ -140,7 +147,8 @@
         "sections": {
             "title"         : "sections-list",
             "length"        : 100,
-            "summary"       : true
+            "summary"       : true,
+            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 4, "xl": 4 }
         },
         "tags_secion": {
             "title"     : "tags-section"

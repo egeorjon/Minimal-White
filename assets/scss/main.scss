@@ -249,7 +249,8 @@ main, .list-header {
    --- Tags cloud
    --------------------------------------------------- */
 
-.tags-content {
+.widget-tagscloud /*,
+.tags-content */ {
     ul {
         font-family : $font-family-monospace;
         list-style-type: none;
@@ -259,7 +260,7 @@ main, .list-header {
 
     li {
         display: inline-block;
-        line-height: 54 / 32;
+        /*line-height: 54 / 32;*/
         margin-right: 2em;
         &:last-child {
             margin-right: 0;

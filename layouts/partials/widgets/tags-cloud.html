@@ -1,0 +1,41 @@
+{{- $current      := .current -}}
+{{- $def_params   := index site.Params.widgets.tagscloud | default site.Data.defaults.widgets.tagscloud               -}}
+{{- $title        := i18n (.params.title   | default $def_params.title)                                               -}}
+{{- $heading_tag  :=       .params.heading | default $def_params.heading | default site.Data.defaults.widgets.heading -}}
+
+{{- $robots_tags  := site.Params.index.tags      | default site.Data.defaults.index.tags | default "" -}}
+{{- $robot        := partial "inline/rel" (dict "robots" $robots_tags) -}}
+<aside class="col widget widget-tagscloud" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
+    <div class="widget-inner">
+        <div class="widget-header">
+            {{- with $title -}}
+                {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+            {{- end -}}
+        </div>
+        {{- with site.Taxonomies.tags -}}
+            {{- $font_unit   := "px"                                 -}}
+            {{- $font_max    := $def_params.font_largest             -}}
+            {{- $font_min    := $def_params.font_smallest            -}}
+            {{- $line_height := $def_params.line_height              -}}
+            {{- $font_gap    := sub $font_max $font_min              -}}
+            {{- $count_max   := add (len (index .ByCount 0).Pages) 1 -}}
+            <ul class="widget-content">
+            {{- range . -}}
+                {{/*- $font_size := math.Add $font_min (math.Mul (math.Div (float .Count) (float $count_max)) $font_gap) -*/}}
+                {{- $font_size := math.Add $font_min (math.Mul (math.Div (math.Log .Count) (math.Log $count_max)) $font_gap) -}}
+                {{- $lh        := math.Div $line_height $font_size -}}
+                {{/*- $style     := ( printf "font-size:%f%s" $font_size $font_unit) -*/}}
+                {{- printf "<li><a href=\"%s\" title=\"%s (%d)\" style=\"font-size: %.0f%s; line-height: %f\" %s>%s</a></li>" .Page.Permalink .Page.Title .Count (math.Floor $font_size) $font_unit $lh $robot (humanize .Page.Title) | safeHTML -}}
+            {{- end -}}
+            </ul>
+        {{- end -}}
+    </div><!-- widget-inner -->
+</aside><!-- col -->
+
+  {{- define "partials/inline/rel" -}}
+    {{- $index := "" -}}
+    {{- if ne .robots "" -}}
+        {{- $index = printf " rel=\"%s\"" .robots -}}
+    {{- end -}}
+    {{- return $index -}}
+{{- end -}}
