@@ -17,6 +17,9 @@
                 </div><!-- col -->
             </div><!-- row -->
             <div class="row">
+                {{- partialCached "partials/widgets/search-form.html" (dict "current" $current_page  "params" (dict "title" "use-search")) -}}
+            </div><!-- row -->
+            <div class="row">
                 {{- partialCached "partials/widgets/sections-list.html" (dict "context" . "params" (dict "title" "navigate-sections")) -}}
             </div><!-- row -->
             <div class="row">
