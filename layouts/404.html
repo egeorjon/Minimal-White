@@ -1,0 +1,30 @@
+{{- define "main" -}}
+    {{- $current_page := . -}}
+    {{- $def_params   := site.Params.page404 | default site.Data.defaults.page404 -}}
+    {{- $display_img  := $def_params.headerimage -}}
+
+    {{- partial "partials/headline.html" (dict "current" . "prefix" "list" "display_img" $display_img "meta" (dict)) -}}
+    <section class="404-main-wrapper">
+        <div class="container 404-main">
+            <div class="row">
+                <div class="col 404-header">
+                    <p>{{- i18n "content-not-found" -}}</p>
+                </div><!-- col -->
+            </div><!-- row -->
+            <div class="row">
+                <div class="col">
+                    <p>{{- i18n "you-can" -}}</p>
+                </div><!-- col -->
+            </div><!-- row -->
+            <div class="row">
+                {{- partialCached "partials/widgets/sections-list.html" (dict "context" . "params" (dict "title" "navigate-sections")) -}}
+            </div><!-- row -->
+            <div class="row">
+                {{- partial "partials/widgets/tags-cloud.html" (dict "context" . "params" (dict "title" "navigate-tags" )) -}}
+            </div><!-- row -->
+            <div class="row">
+                {{- partialCached "partials/widgets/series-list.html" (dict "current" . "params" (dict "mode" "card" "title" "navigate-series")) -}}
+            </div><!-- row -->
+        </div><!-- container -->
+    </section>
+{{- end -}}

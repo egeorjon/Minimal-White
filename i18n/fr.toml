@@ -283,3 +283,33 @@
 
 [see-all-series-alt]
     other = "Voir le détail de tous les dossiers"
+
+[404-page-not-found]
+    other = "Page non trouvée (erreur 404)"
+
+[404-error-desc]
+    other = "Il s'agit d'une erreur 404. La page que vous recherchez n'existe pas !"
+
+[content-not-found]
+    other = "Malheureusement, nous ne pouvons pas trouver le contenu que vous recherchez."
+
+[you-can]
+    other = "Mais, vous pouvez"
+
+[use-search]
+    other = "Utilisez l'outil de recherche"
+
+[go-search-form]
+    other = "Utilisez le formulaire de bas de page."
+
+[navigate-sections]
+    other = "Naviger à travers les rubriques de ce blog"
+
+[navigate-categories]
+    other = "Naviger à travers les catégories"
+
+[navigate-tags]
+    other = "Utiliser les mots-clés"
+
+[navigate-series]
+    other = "Consulter les dossiers"

@@ -2,11 +2,29 @@
 {{- $prefix      := .prefix      -}}
 {{- $display_img := .display_img -}}
 {{- $meta        := .meta        -}}
+
+{{- $title       := "" -}}
+{{- $description := "" -}}
+{{- $summary     := "" -}}
+{{- $img_path    := "" -}}
+{{- if eq $current.Kind "404" -}}
+  {{- $title       = i18n "404-page-not-found" -}}
+  {{- $description = i18n "404-error-desc" -}}
+  {{- $img_path    = site.Data.defaults.page404.img -}}
+{{- else -}}
+  {{- $title       = $current.Title       | default "" -}}
+  {{- $description = $current.Description | default "" -}}
+  {{- $summary     = $current.Summary     | default "" -}}
+  {{- $img_path    = index $current.Params.images 0    -}}
+{{- end -}}
+
 {{- if isset $current.Params "images" -}}
   {{- $string := "" -}}
-  {{- $image  := $current.Resources.GetMatch (index $current.Params.images 0) -}}
-  {{- with $image -}}
-    {{- $string = printf "style=\"background: url(%s) center center / cover no-repeat;\"" .Permalink -}}
+  {{- if ne $img_path "" -}}
+    {{- $image  := $current.Resources.GetMatch $img_path -}}
+    {{- with $image -}}
+      {{- $string = printf "style=\"background: url(%s) center center / cover no-repeat;\"" .Permalink -}}
+    {{- end -}}
   {{- end -}}
   <header class="{{- $prefix -}}-headline-wrapper-img" {{ $string | safeHTMLAttr -}}>
     <div class="{{- $prefix -}}-headline-top-img"></div>
@@ -19,17 +37,17 @@
                 {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-top") -}}
             </div><!-- meta -->
             {{- end -}}
-            <h1 class="page-title">{{- $current.Title -}}</h1>
+            <h1 class="page-title">{{- $title -}}</h1>
             {{- with $meta.middle -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-middle">
                 {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-middle") -}}
             </div><!-- meta -->
             {{- end -}}
             <p class="page-summary">
-              {{- with $current.Summary -}}
+              {{- with $summary -}}
                   {{- . | safeHTML -}}
               {{- else -}}
-                  {{- with $current.Description -}}
+                  {{- with $description -}}
                       {{- . | safeHTML -}}
                   {{- end -}}
               {{- end -}}
@@ -54,17 +72,17 @@
                 {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-top") -}}
             </div><!-- meta -->
             {{- end -}}
-            <h1 class="page-title">{{- $current.Title -}}</h1>
+            <h1 class="page-title">{{- $title -}}</h1>
             {{- with $meta.middle -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-middle">
                 {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-middle") -}}
             </div><!-- meta -->
             {{- end -}}
             <p class="page-summary">
-              {{- with $current.Summary -}}
+              {{- with $summary -}}
                   {{- . | safeHTML -}}
               {{- else -}}
-                  {{- with $current.Description -}}
+                  {{- with $description -}}
                       {{- . | safeHTML -}}
                   {{- end -}}
               {{- end -}}
