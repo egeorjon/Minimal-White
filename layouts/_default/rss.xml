@@ -3,7 +3,7 @@
 {{- if hugo.IsServer -}}{{- $protocol = "http:" -}}{{- end -}}
 {{- $limit := 20 -}}
 {{- if ge site.Config.Services.RSS.Limit 1 -}}
-    {{- $limit = site.Config.Services.RSS.Limit | default site.Data.default_params.services.rss -}}
+    {{- $limit = site.Config.Services.RSS.Limit | default site.Data.defaults.services.rss -}}
 {{- end -}}
 {{- $pages := .RegularPages | first $limit -}}
 {{- if .IsHome -}}
@@ -16,7 +16,6 @@
     {{- if not .IsHome -}}
         {{- $title = printf "%s on %s" .Title site.Title -}}
     {{- end -}}
-    <title>{{- printf "%d" site.Config.Services.RSS.Limit -}}</title>
     <title>{{- $title | plainify | htmlUnescape -}}</title>
     {{- $current_link := printf "%s%s" $protocol .Permalink -}}
     <link>{{- $current_link -}}</link>
