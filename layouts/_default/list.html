@@ -39,9 +39,18 @@
   </section>
   <footer class="list-footer-wrapper">
     {{- partial "inline/pagination2.html" . -}}
-    {{- with site.Data.list.rows -}}
-       {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
+
+    {{- $footer := site.Data.list -}}
+    {{- with index site.Data (printf "%s" (replace $list_type "_" "-")) -}}
+        {{- $footer = . -}}
     {{- end -}}
+    {{- with $footer.rows -}}
+        {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
+    {{- end -}}
+
+    {{/*- with site.Data.list.rows -}}
+       {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
+    {{- end -*/}}
   </footer>
 {{- end -}}
 
