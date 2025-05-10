@@ -1,11 +1,11 @@
 {{- $current           := .current -}}
 {{- $context           := .context -}}
-{{- $formatdate        := site.Params.FormatDate -}} {{/* | default site.Data.defaults.params.formatdate */}}
-{{- $robots_tags       := site.Params.index.tags                | default site.Data.defaults.index.tags | default "" -}}
-{{- $robots_categories := site.Params.index.categories          | default site.Data.defaults.index.categories | default "" -}}
-{{- $robots_sections   := site.Params.index.sections            | default site.Data.defaults.index.sections | default "" -}}
-{{- $robots_series     := site.Params.index.series              | default site.Data.defaults.index.series | default "" -}}
-{{- $robots_linkedsections := site.Params.index.linkedsections  | default site.Data.defaults.index.linkedsections | default "" -}}
+{{- $formatdate        := site.Params.formatdate                | default site.Data.defaults.formatdate                         -}}
+{{- $robots_tags       := site.Params.index.tags                | default site.Data.defaults.index.tags | default ""            -}}
+{{- $robots_categories := site.Params.index.categories          | default site.Data.defaults.index.categories | default ""      -}}
+{{- $robots_sections   := site.Params.index.sections            | default site.Data.defaults.index.sections | default ""        -}}
+{{- $robots_series     := site.Params.index.series              | default site.Data.defaults.index.series | default ""          -}}
+{{- $robots_linkedsections := site.Params.index.linkedsections  | default site.Data.defaults.index.linkedsections | default ""  -}}
 {{- $robot             := "" -}}
 <ul class="post-meta {{ with .class -}}{{- . | safeHTML -}}{{- end -}}">
     {{- range $order, $meta := .meta -}}

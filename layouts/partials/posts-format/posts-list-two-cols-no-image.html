@@ -1,6 +1,7 @@
 {{- $current := .current -}}
 {{- $context := .context -}}
 {{- $meta    := .meta    -}}
+{{- $formatdate := site.Params.formatdate | default site.Data.defaults.formatdate -}}
 {{- $class   := "class=\"col-12\""    -}}
 {{- with $meta.top -}}
   {{- $class = "class=\"col-12 col-md-9 col-xl-10\"" -}}
@@ -32,7 +33,7 @@
             {{- range $current.Pages.ByPublishDate }}
               <li>
                 <a href="{{- .RelPermalink -}}" rel="bookmark">
-                  {{- .Title }} ({{- .Date | time.Format (site.Params.FormatDate ) -}}) {{/*- | default site.Data.default_params.formatdate)  -*/}}
+                  {{- .Title }} ({{- .Date | time.Format $formatdate -}}) {{/*- | default site.Data.default_params.formatdate)  -*/}}
                 </a>
               </li>
             {{- end }}
