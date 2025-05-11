@@ -2,7 +2,7 @@
 {{- $current_page  := . -}}
 
 {{/* ---- Get page parameters ---- */}}
-{{- $def_params  := index site.Params "single" -}}
+{{- $def_params  := site.Params.single | default site.Data.defaults.single -}}
 {{- $meta        := (index $def_params "meta") -}}
 {{- $display_img := $def_params.image  -}}
 {{- partial "partials/headline.html" (dict "current" $current_page "prefix" "single" "display_img" $display_img "meta" $meta) -}}

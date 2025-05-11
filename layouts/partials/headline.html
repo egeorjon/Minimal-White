@@ -37,7 +37,14 @@
                 {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-top") -}}
             </div><!-- meta -->
             {{- end -}}
-            <h1 class="page-title">{{- $title -}}</h1>
+            <h1 class="page-title">
+              {{- $title -}}
+              {{- if and (eq $current.Kind "section") (ne $current.Type "search") -}}
+                {{- with $current.OutputFormats.Get "rss" -}}
+                    {{- printf `<a rel="%s" href="%s" title="%s" ><i class="bi-rss"></i></a>` .Rel .Permalink "RSS feed" | safeHTML -}}
+                {{- end -}}
+              {{- end -}}
+            </h1>
             {{- with $meta.middle -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-middle">
                 {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-middle") -}}

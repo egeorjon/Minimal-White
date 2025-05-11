@@ -1,0 +1,29 @@
+{{- $current      := .current -}}
+{{- $def_params   := index site.Params.utterances | default site.Data.defaults.utterances                              -}}
+{{- $title        := i18n (.params.title   | default $def_params.title | default site.Data.defaults.utterances.title)  -}}
+{{- $heading_tag  :=       .params.heading | default $def_params.heading | default site.Data.defaults.widgets.heading  -}}
+{{- $term         := site.Params.utterances.term | default site.Data.defaults.utterances.term                          -}}
+{{- $theme        := site.Params.utterances.theme | default site.Data.defaults.utterances.theme                        -}}
+
+
+{{- if site.Params.utterances.repo | default false -}}
+    <aside class="col widget widget-utterances" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
+        <div class="widget-inner">
+            <div class="widget-header">
+                {{- with $title -}}
+                    {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+                {{- end -}}
+            </div>
+            <div class="widget-content">
+                <script src="https://utteranc.es/client.js"
+                    repo        = "{{- site.Params.utterances.repo -}}"
+                    issue-term  = "{{- $term -}}"
+                    theme       = "{{- $theme -}}"
+                    crossorigin = "anonymous"
+                    async>
+                </script>
+            </div>
+        </div><!-- widget-inner -->
+    </aside><!-- col -->
+{{- end -}}
+

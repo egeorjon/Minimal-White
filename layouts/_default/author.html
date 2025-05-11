@@ -1,7 +1,7 @@
 {{- define "main" -}}
   {{- $current_page  := . -}}
   {{- $display_image := site.Params.author.headerimage | default site.Data.defaults.author.headerimage                 -}}
-  {{- $formatdate    := site.Params.Shortdate          | default site.Data.defaults.Shortdate                          -}}
+  {{- $formatdate    := site.Params.shortdate          | default site.Data.defaults.shortdate                          -}}
   {{- partial "partials/headline.html" (dict "current" . "prefix" "author" "display_img" $display_image "meta" (dict)) -}}
   {{- $class := "odd" -}}
   <section class="author-content">

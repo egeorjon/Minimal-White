@@ -49,6 +49,16 @@
       "sharetext": "share-on",
       "target": "_blank"
     },
+    "mastodon": {
+      "follow": "https://mastodon.social/@%s",
+      "followtext": "follow-me-on",
+      "icon": "bi bi-mastodon",
+      "mobile": false,
+      "name": "Mastodon",
+      "share": "",
+      "sharetext": "",
+      "target": ""
+    },
     "pinterest": {
       "follow": "https://www.pinterest.com/%s",
       "followtext": "follow-me-on",

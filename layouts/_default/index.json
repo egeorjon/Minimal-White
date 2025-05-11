@@ -1,3 +1,4 @@
+{{- $formatdate := site.Params.formatdate | default site.Data.defaults.formatdate -}}
 {{- if .IsHome -}}
     {{- $.Scratch.Add "index" slice -}}
     {{- range (where site.RegularPages "Type" "in" site.Params.mainsections) -}}
@@ -10,7 +11,7 @@
                 "contents" (substr (.Plain | htmlUnescape) 0 500) 
                 "permalink" .Permalink 
                 "section" .Parent.Name 
-                "publish" (.Date | time.Format (site.Params.FormatDate | default site.Data.default_params.formatdate))
+                "publish" (.Date | time.Format $formatdate)
             ) 
         -}}
     {{- end -}}
