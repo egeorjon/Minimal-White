@@ -1,5 +1,6 @@
 {
     "shortdate"            : "02-Jan-06",
+    "formatdate"           : ":date_medium",
     "contact": {
         "image"             : true
     },
@@ -14,6 +15,9 @@
         "categories"        : "",
         "linkedsections"    : "noindex",
         "series"            : ""
+    },
+    "rss":  {
+        "imgsize"           : 800 
     },
     "single": {
         "image": true,
