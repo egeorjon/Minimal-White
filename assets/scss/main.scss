@@ -48,7 +48,7 @@ $h6-paragraph-bottom-margin-2:    1.35em;
 .main-menu > .container {
     line-height: 2 * $line-height-base;
     vertical-align: middle;
-    margin-bottom: 3 * $paragraph-margin-bottom;
+    margin-bottom: $paragraph-margin-bottom;
 }
 
 .search-main .container,
