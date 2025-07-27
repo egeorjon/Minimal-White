@@ -12,9 +12,9 @@
   {{- $description = i18n "404-error-desc" -}}
   {{- $img_path    = site.Data.defaults.page404.img -}}
 {{- else -}}
-  {{- $title       = $current.Title       | default "" -}}
-  {{- $description = $current.Description | default "" -}}
-  {{- $summary     = $current.Summary     | default "" -}}
+  {{- $title       = $current.Title        -}}
+  {{- $description = $current.Description  -}}
+  {{- $summary     = $current.Summary      -}}
   {{- $img_path    = index $current.Params.images 0    -}}
 {{- end -}}
 

@@ -67,12 +67,12 @@
                 {{- end -}}
             {{- end -}}
         {{- else if eq $meta "section" -}}
-            {{- $robot = partial "inline/rel" (dict "robots" $robots_sections) -}}
+            {{- $robot = partial "inline/rel" (dict "robots" $robots_sections) | safeURL -}}
             {{- with $current.Parent }}
                 {{/*- if and (ne .Kind "section") (ne .Kind "taxonomy") -*/}}
                     <li class="post-section">
                         <i class=" bi bi-folder2-open" aria-hidden="true"></i> <span class="visually-hidden">{{- i18n "in" -}}</span>
-                        <span class="in-category"><a href="{{- .Permalink -}}" title="{{- i18n "post-category" . -}}" {{ $robot -}}>{{- .Name | safeHTML -}}</a></span>
+                        <span class="in-category">{{- printf "<a href=\"%s\" title=\"%s\" %s>%s</a>" .Permalink (i18n "post-category" .) $robot .Name | safeHTML -}}</span>
                     </li><!-- class="visually-hidden" -->
                 {{/*- end -*/}}
             {{- end }}
