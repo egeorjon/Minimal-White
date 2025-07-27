@@ -8,9 +8,10 @@
 <section class="col widget widget-authors">
     <div class="widget-inner  {{ $class -}}">
         <div class="widget-header col">
-        {{- with $title -}}
-            {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
-        {{- end -}}
+            {{- with $title -}}
+                {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+            {{- end -}}
+        </div>
     </div>
     <div class="widget-content col">
     {{- range $authors -}}
