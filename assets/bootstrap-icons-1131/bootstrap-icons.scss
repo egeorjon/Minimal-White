@@ -1,5 +1,5 @@
 /*!
- * Bootstrap Icons v1.11.3 (https://icons.getbootstrap.com/)
+ * Bootstrap Icons v1.13.1 (https://icons.getbootstrap.com/)
  * Copyright 2019-2024 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/icons/blob/main/LICENSE)
  */
@@ -58,7 +58,7 @@ $bootstrap-icons-map: (
 /*   "arrow-clockwise": "\f116", */
 /*   "arrow-counterclockwise": "\f117", */
 /*   "arrow-down-circle-fill": "\f118", */
-   "arrow-down-circle": "\f119",
+   "arrow-down-circle": "\f119", 
 /*   "arrow-down-left-circle-fill": "\f11a", */
 /*   "arrow-down-left-circle": "\f11b", */
 /*   "arrow-down-left-square-fill": "\f11c", */
@@ -436,7 +436,7 @@ $bootstrap-icons-map: (
 /*   "clipboard": "\f290", */
 /*   "clock-fill": "\f291", */
 /*   "clock-history": "\f292", */
-   "clock": "\f293",
+  "clock": "\f293",
 /*   "cloud-arrow-down-fill": "\f294", */
 /*   "cloud-arrow-down": "\f295", */
 /*   "cloud-arrow-up-fill": "\f296", */
@@ -642,7 +642,7 @@ $bootstrap-icons-map: (
 /*   "file-earmark-check-fill": "\f35f", */
 /*   "file-earmark-check": "\f360", */
 /*   "file-earmark-code-fill": "\f361", */
-   "file-earmark-code": "\f362",
+  "file-earmark-code": "\f362",
 /*   "file-earmark-diff-fill": "\f363", */
 /*   "file-earmark-diff": "\f364", */
 /*   "file-earmark-easel-fill": "\f365", */
@@ -673,7 +673,7 @@ $bootstrap-icons-map: (
 /*   "file-earmark-post-fill": "\f37e", */
 /*   "file-earmark-post": "\f37f", */
 /*   "file-earmark-ppt-fill": "\f380", */
-   "file-earmark-ppt": "\f381",
+  "file-earmark-ppt": "\f381",
 /*   "file-earmark-richtext-fill": "\f382", */
    "file-earmark-richtext": "\f383",
 /*   "file-earmark-ruled-fill": "\f384", */
@@ -681,7 +681,7 @@ $bootstrap-icons-map: (
 /*   "file-earmark-slides-fill": "\f386", */
 /*   "file-earmark-slides": "\f387", */
 /*   "file-earmark-spreadsheet-fill": "\f388", */
-  "file-earmark-spreadsheet": "\f389",
+   "file-earmark-spreadsheet": "\f389",
 /*   "file-earmark-text-fill": "\f38a", */
    "file-earmark-text": "\f38b",
 /*   "file-earmark-word-fill": "\f38c", */
@@ -690,7 +690,7 @@ $bootstrap-icons-map: (
 /*   "file-earmark-x": "\f38f", */
 /*   "file-earmark-zip-fill": "\f390", */
    "file-earmark-zip": "\f391",
-   "file-earmark": "\f392",
+  "file-earmark": "\f392",
 /*   "file-easel-fill": "\f393", */
 /*   "file-easel": "\f394", */
 /*   "file-excel-fill": "\f395", */
@@ -781,7 +781,7 @@ $bootstrap-icons-map: (
 /*   "geo": "\f3ea", */
 /*   "gift-fill": "\f3eb", */
 /*   "gift": "\f3ec", */
-   "github": "\f3ed",
+  "github": "\f3ed",
 /*   "globe": "\f3ee", */
 /*   "globe2": "\f3ef", */
 /*   "google": "\f3f0", */
@@ -1090,7 +1090,7 @@ $bootstrap-icons-map: (
 /*   "reply-fill": "\f51f", */
 /*   "reply": "\f520", */
 /*   "rss-fill": "\f521", */
-  "rss": "\f522",
+   "rss": "\f522",
 /*   "rulers": "\f523", */
 /*   "save-fill": "\f524", */
 /*   "save": "\f525", */
@@ -2083,6 +2083,34 @@ $bootstrap-icons-map: (
 /*   "suitcase2-fill": "\f901", */
 /*   "suitcase2": "\f902", */
 /*   "vignette": "\f903", */
+/*   "bluesky": "\f7f9", */
+/*   "tux": "\f904", */
+/*   "beaker-fill": "\f905", */
+/*   "beaker": "\f906", */
+/*   "flask-fill": "\f907", */
+/*   "flask-florence-fill": "\f908", */
+/*   "flask-florence": "\f909", */
+/*   "flask": "\f90a", */
+/*   "leaf-fill": "\f90b", */
+/*   "leaf": "\f90c", */
+/*   "measuring-cup-fill": "\f90d", */
+/*   "measuring-cup": "\f90e", */
+/*   "unlock2-fill": "\f90f", */
+/*   "unlock2": "\f910", */
+/*   "battery-low": "\f911", */
+/*   "anthropic": "\f912", */
+/*   "apple-music": "\f913", */
+/*   "claude": "\f914", */
+/*   "openai": "\f915", */
+/*   "perplexity": "\f916", */
+/*   "css": "\f917", */
+/*   "javascript": "\f918", */
+/*   "typescript": "\f919", */
+/*   "fork-knife": "\f91a", */
+/*   "globe-americas-fill": "\f91b", */
+/*   "globe-asia-australia-fill": "\f91c", */
+/*   "globe-central-south-asia-fill": "\f91d", */
+/*   "globe-europe-africa-fill": "\f91e", */
 );
 
 @each $icon, $codepoint in $bootstrap-icons-map {
