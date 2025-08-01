@@ -22,7 +22,10 @@
                         {{- end -}}
                         {{- range .Params.references -}}
                             {{- $ref := . -}}
-                            {{- $string := printf "<a href=\"%s\" title=\"%s\" >%s</a>" .url (.title | plainify) .title -}}
+                            {{- $string := printf "<a title=\"%s\" >%s</a>" (.title | plainify) .title -}}
+                            {{- with .url -}}
+                                {{- $string = printf "<a href=\"%s\" title=\"%s\" >%s</a>" . ($ref.title | plainify) $ref.title -}}
+                            {{- end -}}
                             {{- with .site -}}
                                 {{- $string = printf "%s %s <a href=\"%s\" title=\"%s\">%s</a>" $string (i18n "on-the-site") $ref.site_url (. | plainify) . -}}
                             {{- end -}}
