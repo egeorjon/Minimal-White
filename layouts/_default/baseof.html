@@ -6,8 +6,12 @@
 </head>
 <body>
   <header>
-    {{- partial "header.html" . -}}
-    {{/*- printf "===Kind:%s===Type:%s===Layout:%s===Section:%s===" .Kind .Type .Layout .Section -*/}}
+    {{- $header_variant := "null" -}}
+    {{- with .Section -}}
+      {{- $header_variant = . -}}
+    {{- end -}}
+{{/*- printf "===Kind:%s===Type:%s===Layout:%s===Section:%s===variant: %s" .Kind .Type .Layout .Section $header_variant -*/}}
+    {{- partialCached "header.html" . $header_variant -}}
   </header>
   <main>
     {{- block "main" . -}}{{- end -}}
