@@ -4,6 +4,11 @@
     "contact": {
         "image"             : true
     },
+    "head": {
+        "twittercards"      : "internal",
+        "opengraph"         : "internal",
+        "schema"            : "theme"
+    },
     "search": {
         "headerimage"       : true,
         "title"             : "search-form",

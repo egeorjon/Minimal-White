@@ -61,15 +61,22 @@
 {{- end -}}
 
 {{- if ne .Kind "404" -}}
-    {{- $schema := site.Params.schema -}} {{/*-| default site.Data.defaults.head.schema -*/}}
-    {{- if eq $schema "internal" -}}
+    {{- if eq (site.Params.schema | default site.Data.defaults.head.schema) "internal" -}}
         {{- template "_internal/schema.html" . -}}
     {{- else -}}
         {{- $param := anchorize (print "%s-%s" .Kind .Title) -}}
-        {{- partial "partials/schema.html" . $param -}}
+        {{- partial "schema.html" . $param -}}
     {{- end -}}
-    {{- template "_internal/opengraph.html" . -}}
-    {{- template "_internal/twitter_cards.html" . -}}
+    {{- if eq (site.Params.opengraph | default site.Data.defaults.head.opengraph) "internal" -}}
+        {{- template "_internal/opengraph.html" . -}}
+    {{- else -}}
+        {{- partial "opengraph.html" . -}}
+    {{- end -}}
+    {{- if eq (site.Params.twittercard | default site.Data.defaults.head.twittercard) "internal" -}}
+        {{- template "_internal/twitter_cards.html" . -}}
+    {{- else -}}
+        {{- partial "twitter_cards.html" . -}}
+    {{- end -}}
 {{- end -}}
 
 {{- partialCached "partials/favicons.html" . -}}
