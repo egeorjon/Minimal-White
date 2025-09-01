@@ -1,0 +1,33 @@
+{{- define "main" -}}
+{{- $current_page  := . -}}
+
+{{/* ---- Get page parameters ---- */}}
+{{- $def_params  := site.Params.single | default site.Data.defaults.single -}}
+{{- $meta        := (index $def_params "meta") -}}
+{{- $display_img := $def_params.image  -}}
+{{- partial "headline.html" (dict "current" $current_page "prefix" "single" "display_img" $display_img "meta" $meta) -}}
+<section class="single-main">
+  <div class="container">
+    <div class="row">
+      <article class="single-content col">
+        {{- if .Params.toc | default site.Params.Single.toc | default $def_params.single.toc -}}
+          <div class="table-of-content">
+            <h3>{{- i18n "table-of-content" -}}</h3>
+           {{- .TableOfContents -}}
+          </div>
+        {{- end -}}
+        {{- .ContentWithoutSummary | safeHTML -}}
+        {{/*- replace .Content .Summary "" | replaceRE "<p> </p>" "" | safeHTML -*/}}
+        {{/*- with .Params.references -}}
+          {{- partialCached "references.html" (dict "context" $current_page "refs" .) $current_page.Parent -}}
+        {{- end -*/}}
+      </article><!-- col -->
+    </div><!-- end of row -->
+  </div><!-- end of container -->
+</section>
+<footer class="single-footer">
+  {{- with site.Data.single.rows -}}
+    {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
+  {{- end -}}
+</footer>
+{{- end -}}

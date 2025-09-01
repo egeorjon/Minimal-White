@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{- site.Language.LanguageCode -}}" dir="{{- or site.Language.LanguageDirection `ltr` -}}">
+<head>
+  {{- partial "cache.html" . -}}{{/*- partial "cache.html" . -*/}}
+  {{- partial "head.html" .  -}}
+</head>
+<body>
+  <header>
+    {{- $header_variant := "null" -}}
+    {{- with .Section -}}
+      {{- $header_variant = . -}}
+    {{- end -}}
+{{/*- printf "===Kind:%s===Type:%s===Layout:%s===Section:%s===variant: %s" .Kind .Type .Layout .Section $header_variant -*/}}
+    {{- partialCached "header.html" . $header_variant -}}
+  </header>
+  <main>
+    {{- block "main" . -}}{{- end -}}
+  </main>
+  <footer>
+    {{- partial "footer.html" . .Kind -}}
+  </footer>
+</body>
+</html>
+{{- define "_partials/cache.html" -}}
+  {{- $cache := false -}}
+  {{- if eq .Kind "home" -}}
+    {{- $cache = "home" -}}
+  {{- else if eq .Kind "page" -}}
+    {{- $cache = .Title | anchorize -}}
+  {{- else if eq .Kind "section" -}}
+    {{- $cache = printf "section-%s" (.Title | anchorize) -}}
+  {{- else if or (eq .Kind "taxonomy") (eq .Kind "term") -}}
+    {{- $cache = printf "%s-%s-%s" .Kind .Type (.Title | anchorize) -}}
+  {{- end -}}
+  {{- .Scratch.Set "page-cache" $cache -}}
+{{- end -}}

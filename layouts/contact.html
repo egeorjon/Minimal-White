@@ -1,0 +1,59 @@
+{{- define "main" -}}
+    {{- $current_page  := . -}}
+
+    {{/* ---- Get page parameters ---- */}}
+    {{- $def_params := index site.Params "contact" | default (index site.Data.defaults "contact") -}}
+
+    {{- partial "headline.html" (dict "current" $current_page "prefix" "contact" "display_img" $def_params.image "meta" (dict)) -}}
+    <section class="search-main">
+        <div class="container">
+            <div class="row">
+                <article class="contact-content col">
+                    <div id="form-alert" class="alert alert-success d-none" role="alert">
+                        {{- i18n "message-recorded" -}}<br />
+                    </div>
+                    {{/*- replace .Content .Summary "" | safeHTML -*/}}
+                    {{- .ContentWithoutSummary -}}
+                    <form id="contact-form" name="contact" method="POST" data-netlify-recaptcha="true" data-netlify="true">
+                        <div class="form-group">
+                            <label for="form-your-name">{{- i18n "your-name" -}}</label>
+                            <div class="input-group">
+                                <span class="input-group-text">{{- i18n "fist-last-name" -}}</span>
+                                <input type="text" class="form-control" aria-label="{{- i18n "placeholder-name" -}}" aria-describedby="nameHelp" id="form-your-name" name="form-your-name" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-your-email">{{- i18n "email-address" -}}</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control"  id="form-your-email" name="form-your-email" placeholder="{{- i18n "email-username" -}}" aria-label="Username" aria-describedby="emailHelp">
+                                <span class="input-group-text">@</span>
+                                <input type="text" class="form-control"  id="form-your-email" name="form-your-email" placeholder="{{- i18n "email-suffix" -}}" aria-label="Server" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-subject">{{- i18n "the-subject" -}}</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">{{- i18n "subject" -}}</span>
+                                <input type="text" class="form-control" id="form-subject" name="form-subject" aria-describedby="subjectHelp" placeholder="{{- i18n "placeholder-subject" -}}" aria-label="toto">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-msg">{{- i18n "your-message" -}}</label>
+                            <div class="input-group">
+                                <span class="input-group-text">{{- i18n "text" -}}</span>
+                                <textarea class="form-control" aria-label="{{- i18n "placeholder-message" -}}" id="form-msg" name="form-msg" rows="5" placeholder="{{- i18n "placeholder-message" -}}"></textarea>
+                              </div>
+                        </div>
+                        <div data-netlify-recaptcha="true"></div>
+                        <button type="submit" class="btn btn-primary contact-button" value="submit">{{- i18n "submit" -}}</button>
+                    </form>
+                </article><!-- end of col -->
+            </div><!-- end of row -->
+        </div><!-- end of container -->
+   </section>
+    {{- with site.Data.contact.rows -}}
+    <footer class="search-footer">
+        {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
+    </footer>
+    {{- end -}}
+{{- end -}}

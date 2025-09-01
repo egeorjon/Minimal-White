@@ -1,0 +1,51 @@
+{{- define "main" -}}
+  {{- $current_page  := . -}}
+  {{- $def_params    := index site.Params "list_authors" | default (index site.Data.defaults "list_authors") -}}
+  {{- $display_image := $def_params.headerimage | default false -}}
+
+  {{- partial "headline.html" (dict "current" . "prefix" "authors" "display_img" $display_image "meta" (dict)) -}}
+  
+  {{- $class := "odd" -}}
+  <section class="authors-content">
+    <div class="container">
+        {{- $class := "odd" -}}
+        {{- $authors := site.Taxonomies.authors -}}
+        {{- range $author_name, $list := $authors -}}
+            {{- with site.GetPage $author_name -}}
+              <div class="row" class="{{- printf "author-%s" $class -}}">
+                <div class="col-3">
+                  {{- $image := .Resources.GetMatch .Params.Avatar -}}
+                  {{- with $image -}}
+                    <div class="widget-title author-avatar"><!-- style="width: {{- .Width -}}px; height:{{- .Height -}}px" -->
+                        <img class="img-fluid" src="{{- .RelPermalink -}}" width="{{- .Width -}}" height="{{- .Height -}}" alt="{{- .Params.Title -}}" />
+                    </div>
+                  {{- end -}}
+                </div><!-- end of col -->
+                <div class="col-9">
+                  {{- with .Title -}}
+                    {{- printf "<h2 class=\"author-name\">%s</h2>" . | safeHTML -}}
+                  {{- end -}}
+                  {{- with .Params.description -}}
+                      {{- printf "<p>%s. %s %d</p>" . (i18n "published-posts") (len $list) | safeHTML -}}
+                  {{- end -}}
+                  {{- printf "<p><a href=\"%s\" title=\"%s\">%s</a></p>" .Permalink "Voir tous les détails" "Voir le profil détaillé" | safeHTML -}}
+                  {{- with .Params.Socials -}}
+                    <ul class="author-socials"><!-- class="inline-list" -->
+                        {{- range . -}}
+                            {{- $account := .account -}}
+                            {{- with (index site.Data.socials .id) -}}
+                                {{- $title := printf "%s %s" (i18n .followtext) .name -}}
+                                {{- $url   := printf .follow $account -}}
+                                {{- printf "<li><a href=\"%s\" title=\"%s\" target=\"%s\" rel=\"noopener noreferrer\"><i class=\"%s\"></i><span class=\"visually-hidden\">%s</span></a></li>" $url $title .target .icon .name | safeHTML -}}
+                            {{- end -}}
+                        {{- end -}}
+                    </ul>
+                  {{- end -}}
+                </div><!-- end of col -->
+              </div><!-- end of row -->
+              {{- if eq $class "odd" -}}{{- $class = "even" -}}{{- else -}}{{- $class = "oddd" -}}{{- end -}}
+            {{- end -}}
+        {{- end -}}<!-- range -->
+    </div><!-- end of container -->
+  </section>
+{{- end -}}

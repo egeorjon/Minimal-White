@@ -54,8 +54,8 @@ $blockquote-font-size:        $font-size-base; //  * 1.25 !default;
 // $font-family-monospace:  "Courier New", monospace !default;
 
 // 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
-@import "../bootstrap-533/scss/variables";
-// @import "../bootstrap-533/scss/variables-dark";
+@import "../bootstrap-537/scss/variables";
+// @import "../bootstrap-537/scss/variables-dark";
 
 // 4. Include any default map overrides here
 
@@ -221,12 +221,12 @@ $table-variants: map-remove($table-variants,
 );
 
 // 5. Include remainder of required parts
-@import "../bootstrap-533/scss/maps";
-@import "../bootstrap-533/scss/mixins";
-@import "../bootstrap-533/scss/root";
+@import "../bootstrap-537/scss/maps";
+@import "../bootstrap-537/scss/mixins";
+@import "../bootstrap-537/scss/root";
 
 // 6. Optionally include any other parts as needed
-@import "../bootstrap-533/scss/utilities";
+@import "../bootstrap-537/scss/utilities";
 
 $utilities: map-remove($utilities,
     "align",
@@ -329,62 +329,62 @@ $utilities: map-remove($utilities,
 );
 
 
-// @import "../bootstrap-533/scss/accordion";
-// @import "../bootstrap-533/scss/alert";
-// @import "../bootstrap-533/scss/badge";
-@import "../bootstrap-533/scss/breadcrumb";
-// @import "../bootstrap-533/scss/button-group";
-@import "../bootstrap-533/scss/buttons";
-@import "../bootstrap-533/scss/card";
-// @import "../bootstrap-533/scss/carousel";
-@import "../bootstrap-533/scss/close";
-@import "../bootstrap-533/scss/containers";
-// @import "../bootstrap-533/scss/dropdown";
-// @import "../bootstrap-533/scss/forms";
-  @import "../bootstrap-533/scss/forms/labels";
-  @import "../bootstrap-533/scss/forms/form-text";
-  @import "../bootstrap-533/scss/forms/form-control";
-    // @import "../bootstrap-533/scss/forms/form-select";
-    // @import "../bootstrap-533/scss/forms/form-check";
-    // @import "../bootstrap-533/scss/forms/form-range";
-    // @import "../bootstrap-533/scss/forms/floating-labels";
-  @import "../bootstrap-533/scss/forms/input-group";
-    // @import "../bootstrap-533/scss/forms/validation";
-@import "../bootstrap-533/scss/grid";
-// @import "../bootstrap-533/scss/helpers";
-  @import "../bootstrap-533/scss/helpers/clearfix";
-    // @import "../bootstrap-533/scss/helpers/color-bg";
-    // @import "../bootstrap-533/scss/helpers/colored-links";
-    // @import "../bootstrap-533/scss/helpers/focus-ring";
-    // @import "../bootstrap-533/scss/helpers/icon-link";
-    // @import "../bootstrap-533/scss/helpers/ratio";
-    // @import "../bootstrap-533/scss/helpers/position";
-    // @import "../bootstrap-533/scss/helpers/stacks";
-    @import "../bootstrap-533/scss/helpers/visually-hidden";
+// @import "../bootstrap-537/scss/accordion";
+// @import "../bootstrap-537/scss/alert";
+// @import "../bootstrap-537/scss/badge";
+@import "../bootstrap-537/scss/breadcrumb";
+// @import "../bootstrap-537/scss/button-group";
+@import "../bootstrap-537/scss/buttons";
+@import "../bootstrap-537/scss/card";
+// @import "../bootstrap-537/scss/carousel";
+@import "../bootstrap-537/scss/close";
+@import "../bootstrap-537/scss/containers";
+// @import "../bootstrap-537/scss/dropdown";
+// @import "../bootstrap-537/scss/forms";
+  @import "../bootstrap-537/scss/forms/labels";
+  @import "../bootstrap-537/scss/forms/form-text";
+  @import "../bootstrap-537/scss/forms/form-control";
+    // @import "../bootstrap-537/scss/forms/form-select";
+    // @import "../bootstrap-537/scss/forms/form-check";
+    // @import "../bootstrap-537/scss/forms/form-range";
+    // @import "../bootstrap-537/scss/forms/floating-labels";
+  @import "../bootstrap-537/scss/forms/input-group";
+    // @import "../bootstrap-537/scss/forms/validation";
+@import "../bootstrap-537/scss/grid";
+// @import "../bootstrap-537/scss/helpers";
+  @import "../bootstrap-537/scss/helpers/clearfix";
+    // @import "../bootstrap-537/scss/helpers/color-bg";
+    // @import "../bootstrap-537/scss/helpers/colored-links";
+    // @import "../bootstrap-537/scss/helpers/focus-ring";
+    // @import "../bootstrap-537/scss/helpers/icon-link";
+    // @import "../bootstrap-537/scss/helpers/ratio";
+    // @import "../bootstrap-537/scss/helpers/position";
+    // @import "../bootstrap-537/scss/helpers/stacks";
+    @import "../bootstrap-537/scss/helpers/visually-hidden";
     // @import "helpers/stretched-link";
     // @import "helpers/text-truncation";
     // @import "helpers/vr";
-@import "../bootstrap-533/scss/images";
-@import "../bootstrap-533/scss/list-group";
-// @import "../bootstrap-533/scss/modal";
-// @import "../bootstrap-533/scss/nav";
+@import "../bootstrap-537/scss/images";
+@import "../bootstrap-537/scss/list-group";
+// @import "../bootstrap-537/scss/modal";
+// @import "../bootstrap-537/scss/nav";
 // For display the menu icons
-@import "../bootstrap-533/scss/navbar";
-@import "../bootstrap-533/scss/offcanvas";
-@import "../bootstrap-533/scss/pagination";
-// @import "../bootstrap-533/scss/placeholders";
-// @import "../bootstrap-533/scss/popover";
-// @import "../bootstrap-533/scss/progress";
-@import "../bootstrap-533/scss/reboot";
-// @import "../bootstrap-533/scss/spinners";
-@import "../bootstrap-533/scss/tables";
-// @import "../bootstrap-533/scss/toasts";
-// @import "../bootstrap-533/scss/tooltip";
+@import "../bootstrap-537/scss/navbar";
+@import "../bootstrap-537/scss/offcanvas";
+@import "../bootstrap-537/scss/pagination";
+// @import "../bootstrap-537/scss/placeholders";
+// @import "../bootstrap-537/scss/popover";
+// @import "../bootstrap-537/scss/progress";
+@import "../bootstrap-537/scss/reboot";
+// @import "../bootstrap-537/scss/spinners";
+@import "../bootstrap-537/scss/tables";
+// @import "../bootstrap-537/scss/toasts";
+// @import "../bootstrap-537/scss/tooltip";
 // For enabling the hide/show navbar
-@import "../bootstrap-533/scss/transitions";
-@import "../bootstrap-533/scss/type";
+@import "../bootstrap-537/scss/transitions";
+@import "../bootstrap-537/scss/type";
 
 // 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
-@import "../bootstrap-533/scss/utilities/api";
+@import "../bootstrap-537/scss/utilities/api";
 
 // 8. Add additional custom code here

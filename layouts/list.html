@@ -1,0 +1,188 @@
+{{- define "main" -}}
+  {{- $current_page := . -}}
+  {{/* ---- Define and get parameters ---- */}}
+  {{- $list_type := "list" -}}
+  {{- if or (eq .Kind "taxonomy") (eq .Kind "term") -}}
+    {{- $list_type = printf "list_%s" .Type -}}
+  {{- end -}}
+  {{- $def_params := index site.Params $list_type | default (index site.Data.defaults $list_type)  | default (index site.Data.defaults "list") -}}
+
+  {{/* ---- Get page parameters ---- */}}
+  {{- $meta         := $def_params.meta -}} {{/* (index $def_params "meta") */}}
+  {{- $display_img  := $def_params.headerimage    -}}
+  {{- $post_format  := $def_params.post_format    -}}
+  {{- $partial_path := path.Join "posts-format" (printf "%s%s%s" "posts-list-" $post_format ".html") -}}
+  {{- $columns      := (index $def_params "cols") | default (dict "xs" 1 "sm" 1 "md" 1 "lg" 1 "xl" 1) -}}
+
+  {{/*- warnf "DEBUG: list-type %+v, title: %s" $list_type $current_page.Title -*/}}
+
+  {{/* ---- Get background image ---- */}}
+  {{- partial "headline.html" (dict "current" . "prefix" "list" "display_img" $display_img "meta" (dict)) -}}
+  {{- $paginator := .Paginator -}}
+  {{/*- printf "Layout: %s, Type: %s, Kind: %s)" .Layout .Type .Kind -*/}}
+  <section class="list-main-wrapper">
+    <div class="container list-main">
+      {{- if eq $paginator.PageNumber 1 -}}
+        {{- with $current_page.Content -}}
+        <div class="row">
+          <div class="col list-header">
+            {{- $.ContentWithoutSummary -}}
+          </div><!-- col -->
+        </div><!-- row -->
+        {{- end -}}
+      {{- end -}}
+      {{- $class := partialCached "class-columns.html" $columns (delimit $columns "-") -}}
+      <div class="{{- $class -}}">
+        {{- range $paginator.Pages -}}
+          {{- partial $partial_path (dict "current" . "context" $current_page "meta" $meta) -}}
+        {{- end -}}
+      </div><!-- row -->
+    </div><!-- container -->
+  </section>
+  <footer class="list-footer-wrapper">
+    {{- partial "pagination2.html" . -}}
+
+    {{- $footer := site.Data.list -}}
+    {{- with index site.Data (printf "%s" (replace $list_type "_" "-")) -}}
+        {{- $footer = . -}}
+    {{- end -}}
+    {{- with $footer.rows -}}
+        {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
+    {{- end -}}
+
+    {{/*- with site.Data.list.rows -}}
+       {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
+    {{- end -*/}}
+  </footer>
+{{- end -}}
+
+{{- define "_partials/pagination2.html" -}}
+  {{- $paginator    := .Paginator                     -}}
+  {{- $current_page := $paginator.PageNumber          -}}
+  {{- $chunk        := 3                              -}}
+  {{- $mid_chunk    := math.Floor (math.Div $chunk 2) -}}
+
+  {{- if gt $paginator.TotalPages 1 -}}
+<div class="list-pagination">
+  <div class="container">
+    <div class="row">
+      <nav class="col" aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+        {{/* --- First page --- */}}
+        {{- if gt $paginator.TotalPages 2 -}}
+          {{- if eq $current_page 1 -}}
+            <li class="page-item disabled">
+              <a aria-label="{{- i18n "first-page" -}}" title="{{- i18n "first-page" -}}" class="page-link" role="button">
+                <span aria-hidden="true"><i class="bi-chevron-bar-left"></i></span>
+              </a>
+            </li>
+          {{- else -}}
+            <li class="page-item">
+              <a href="{{- $paginator.First.URL -}}" aria-label="{{- i18n "first-page" -}}" title="{{- i18n "first-page" -}}" class="page-link" role="button">
+                <span aria-hidden="true"><i class="bi-chevron-bar-left"></i></span>
+              </a>
+            </li>
+          {{- end -}}
+        {{- end -}}
+
+        {{/* --- Previous page --- */}}
+        {{- if eq $current_page 1 -}}
+          <li class="page-item">
+            <a aria-label="{{- i18n "previous-page" -}}" title="{{- i18n "previous-page" -}}" class="page-link" role="button">
+              <span aria-hidden="true"><i class="bi-chevron-left"></i></span>
+            </a>
+          </li>
+        {{- else -}}
+          <li class="page-item">
+            <a href="{{- $paginator.Prev.URL -}}" aria-label="{{- i18n "previous-page" -}}" title="{{- i18n "previous-page" -}}" class="page-link" role="button">
+              <span aria-hidden="true"><i class="bi-chevron-left"></i></span>
+            </a>
+          </li>
+        {{- end -}}
+        {{/* ---  --- */}}
+        {{- if eq $current_page $paginator.TotalPages -}}
+          <li class="page-item disabled">
+            <a aria-label="{{- i18n "next-page" -}}" title="{{- i18n "next-page" -}}" class="page-link" role="button">
+              <span aria-hidden="true"><i class="bi-chevron-right"></i></span>
+            </a>
+          </li>
+        {{- else -}}
+          <li class="page-item">
+            <a href="{{- $paginator.Next.URL -}}" aria-label="{{- i18n "next-page" -}}" title="{{- i18n "next-page" -}}" class="page-link" role="button">
+              <span aria-hidden="true"><i class="bi-chevron-right"></i></span>
+            </a>
+          </li>
+        {{- end -}}
+
+        {{/* ---  --- */}}
+        {{- if gt $paginator.TotalPages 2 -}}
+          {{- if eq $current_page $paginator.TotalPages -}}
+            <li class="page-item disabled">
+              <a aria-label="{{- i18n "last-page" -}}" title="{{- i18n "last-page" -}}" class="page-link" role="button">
+                <span aria-hidden="true"><i class="bi-chevron-bar-right"></i></span>
+              </a>
+            </li>
+          {{- else -}}
+            <li class="page-item">
+              <a href="{{- $paginator.Last.URL -}}" aria-label="{{- i18n "last-page" -}}" title="{{- i18n "last-page" -}}" class="page-link" role="button">
+                <span aria-hidden="true"><i class="bi-chevron-bar-right"></i></span>
+              </a>
+            </li>
+          {{- end -}}
+        {{- end -}}
+        </ul>
+
+        <ul class="pagination justify-content-center">
+        {{/* --- Page 1 --- */}}
+        {{- if eq $current_page 1 -}}
+          <li class="page-item active">
+            <a aria-label="{{- i18n "first-page" -}}" title="{{- i18n "first-page" -}}" class="page-link" role="button">1</a>
+          </li>
+        {{- else -}}
+          <li class="page-item">
+            <a href="{{- $paginator.First.URL -}}" aria-label="{{- i18n "first-page" -}}" title="{{- i18n "first-page" -}}" class="page-link" role="button">1</a>
+          </li>
+        {{- end -}}
+
+        {{- $start := math.Max 2 (math.Sub $current_page $mid_chunk) -}}
+        {{- $end   := math.Min (math.Sub $paginator.TotalPages 1) (math.Max (math.Add $chunk 0) (math.Add $current_page $mid_chunk)) -}}
+
+        {{- if gt $start 2 -}}
+          <li class="page-item disabled">
+            <a aria-label="dot" class="page-link" role="button">...</a>
+          </li>
+        {{- end -}}
+
+        {{- range $paginator.Pagers -}}
+          {{- if and (ge .PageNumber $start) (le .PageNumber $end) -}}
+            <li class="page-item {{ if eq $current_page .PageNumber -}}active{{- end -}}">
+              <a href="{{- .URL -}}" aria-label="Page" class="page-link" role="button">{{- .PageNumber -}}</a>
+            </li>
+          {{- end -}}
+        {{- end -}}
+
+        {{- if lt $end (math.Sub $paginator.TotalPages 1) -}}
+          <li class="page-item disabled">
+            <a aria-label="dot" class="page-link" role="button">...</a>
+          </li>
+        {{- end -}}
+
+        {{/* ---  --- */}}
+        {{- if eq $current_page $paginator.TotalPages -}}
+          <li class="page-item active">
+            <a aria-label="{{- i18n "last-page" -}}" title="{{- i18n "last-page" -}}" class="page-link" role="button">{{- $paginator.TotalPages -}}</a>
+          </li>
+        {{- else -}}
+          <li class="page-item">
+            <a href="{{- $paginator.Last.URL -}}" aria-label="{{- i18n "last-page" -}}" title="{{- i18n "last-page" -}}" class="page-link" role="button">{{- $paginator.TotalPages -}}</a>
+          </li>
+        {{- end -}}
+        </ul>
+      </nav><!-- col -->
+    </div><!-- row -->
+  </div><!-- container -->
+</div><!-- list-pagination -->
+  {{- end -}}
+{{- end -}}
+
+

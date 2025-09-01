@@ -1,0 +1,68 @@
+{{- $current     := .current -}}
+{{- $heading_tag :=       .Params.heading  | default site.Params.widgets.tags_section.heading  | default site.Data.defaults.widgets.tags_section.heading  | default site.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.Params.title    | default site.Params.widgets.tags_section.title    | default site.Data.defaults.widgets.tags_section.title) -}}
+{{- $font_min    := int  (.Params.font_smallest | default site.Params.widgets.tags_section.font_smallest | default site.Data.defaults.widgets.tags_section.font_smallest)  -}}
+{{- $font_max    := int  (.Params.font_largest  | default site.Params.widgets.tags_section.font_largest  | default site.Data.defaults.widgets.tags_section.font_largest)   -}}
+{{- $line_height := int  (.Params.line_height   | default site.Params.widgets.tags_section.line_height   | default site.Data.defaults.widgets.tags_section.line_height)    -}}
+{{- $robots_tags := site.Params.index.tags      | default site.Data.defaults.index.tags | default "" -}}
+{{- $robot := partial "rel" (dict "robots" $robots_tags) -}}
+{{- $tagsCount   := dict -}}
+{{- range $current.Pages -}}
+    {{- with .GetTerms "tags" -}}
+        {{- range . -}}
+            {{- $count    := index $tagsCount .Title | default 0 -}}
+            {{- $tagsCount = merge $tagsCount (dict .Title (add $count 1)) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- with $tagsCount -}}
+    {{- $font_unit := "px" -}}
+    {{- $count_max := 2    -}}
+    {{- range $tagsCount   -}}
+        {{- if (gt . $count_max) -}}
+            {{- $count_max = . -}}
+        {{- end -}}
+    {{- end -}}
+    <aside class="col widget widget-tags-section" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
+        <div class="widget-inner">
+            <div class="widget-header clearfix">
+                {{- with $title -}}
+                    {{- with site.GetPage "tags" -}}
+                        <span class="d-none d-md-inline float-md-end see-all">{{- printf "<a href=\"%s\">%s</a>" .Permalink (i18n "view-all-tags") | safeHTML -}}</span>
+                    {{- end -}}
+                    {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+                    {{- with site.GetPage "tags" -}}
+                        <span class="d-block d-md-none see-all">{{- printf "<a href=\"%s\">%s</a>" .Permalink (i18n "view-all-tags") | safeHTML -}}</span>
+                    {{- end -}}
+                {{- end -}}
+            </div><!-- end of widget-header -->
+            <div class="widget-content">
+                <ul>
+                    {{- $font_gap := math.Sub $font_max $font_min -}}
+                    {{- $unique := dict -}}
+                    {{- range $current.Pages -}}
+                        {{- with .GetTerms "tags" -}}
+                            {{- range . -}}
+                                {{- if not (isset $unique .Title) -}}
+                                    {{- $unique     = merge $unique (dict .Title 1) -}}
+                                    {{- $count     := index $tagsCount .Title -}}
+                                    {{- $font_size := int (math.Add $font_min (math.Mul (math.Div (math.Log $count) (math.Log $count_max)) $font_gap)) -}}
+                                    {{- printf "<li><a href=\"%s\" title=\"%s\" style=\"font-size: %d%s; line-height: %d\" %s>%s (%d)</a></li>" .RelPermalink (humanize .LinkTitle) $font_size $font_unit (math.Div $line_height $font_size) $robot (strings.FirstUpper .Title) $count | safeHTML -}}
+                                {{- end -}}
+                            {{- end -}}
+                        {{- end -}}
+                    {{- end -}}
+                </ul>
+            </div><!-- widget-content -->
+        </div><!-- widget-inner -->
+    </aside>
+{{- end -}}
+
+
+{{- define "rel" -}}
+    {{- $index := "" -}}
+    {{- if ne .robots "" -}}
+        {{- $index = printf " rel=\"%s\"" .robots -}}
+    {{- end -}}
+    {{- return $index -}}
+{{- end -}}

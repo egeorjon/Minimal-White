@@ -1,0 +1,38 @@
+{{- $current        := .current -}}
+{{- $authors        := $current.GetTerms "authors" -}}
+{{- $heading_tag    :=       .Params.heading | default site.Params.widgets.authors.heading    | default site.Data.defaults.widgets.authors.heading    | default site.Data.defaults.widgets.heading -}}
+{{- $subheading_tag :=    .Params.subheading | default site.Params.widgets.authors.subheading | default site.Data.defaults.widgets.authors.subheading | default site.Data.defaults.widgets.subheading -}}
+{{- $title          := i18n (.Params.title   | default site.Params.widgets.authors.title      | default site.Data.defaults.widgets.authors.title) ($authors | len) -}}
+{{- $columns        :=       .params.columns | default site.Params.widgets.authors.columns   | default site.Data.defaults.widgets.authors.columns -}}
+{{- $class          := partialCached "class-columns.html" $columns (delimit $columns "-") -}}
+<section class="col widget widget-authors">
+    <div class="widget-inner  {{ $class -}}">
+        <div class="widget-header col">
+            {{- with $title -}}
+                {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+            {{- end -}}
+        </div>
+    </div>
+    <div class="widget-content col">
+    {{- range $authors -}}
+        <aside class="col" aria-label="{{- with .Params.Title -}}{{- . | anchorize -}}{{- end -}}">
+            {{- printf "<%s><a href=\"%s\" title=\"%s\">%s</a></%s>" $subheading_tag .RelPermalink (i18n "page-of-author") .Params.Title $subheading_tag | safeHTML -}}
+            {{- with .Params.Description -}}
+                <p>{{- . | safeHTML -}}</p>
+            {{- end -}}
+            {{- with .Params.Socials -}}
+                <ul class="author-socials"><!-- class="inline-list" -->
+                    {{- range . -}}
+                        {{- $account := .account -}}
+                        {{- with (index site.Data.socials .id) -}}
+                            {{- $title := printf "%s %s" (i18n .followtext) .name -}}
+                            {{- $url   := printf .follow $account -}}
+                            {{- printf "<li><a href=\"%s\" title=\"%s\" target=\"%s\" rel=\"noopener noreferrer\"><i class=\"%s\"></i><span class=\"visually-hidden\">%s</span></a></li>" $url $title .target .icon .name | safeHTML -}}
+                        {{- end -}}
+                    {{- end -}}
+                </ul>
+            {{- end -}}
+        </aside>
+    {{- end -}}
+    </div>
+</section>

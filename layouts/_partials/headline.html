@@ -1,0 +1,106 @@
+{{- $current     := .current     -}}
+{{- $prefix      := .prefix      -}}
+{{- $display_img := .display_img -}}
+{{- $meta        := .meta        -}}
+
+{{- $title       := "" -}}
+{{- $description := "" -}}
+{{- $summary     := "" -}}
+{{- $img_path    := "" -}}
+{{- if eq $current.Kind "404" -}}
+  {{- $title       = i18n "404-page-not-found" -}}
+  {{- $description = i18n "404-error-desc" -}}
+  {{- $img_path    = site.Data.defaults.page404.img -}}
+{{- else -}}
+  {{- $title       = $current.Title        -}}
+  {{- $description = $current.Description  -}}
+  {{- $summary     = $current.Summary      -}}
+  {{- $img_path    = index $current.Params.images 0    -}}
+{{- end -}}
+{{- $path_meta := path.Join "widgets" "meta.html" -}}
+{{- if isset $current.Params "images" -}}
+  {{- $string := "" -}}
+  {{- if ne $img_path "" -}}
+    {{- $image  := $current.Resources.GetMatch $img_path -}}
+    {{- with $image -}}
+      {{- $string = printf "style=\"background: url(%s) center center / cover no-repeat;\"" .Permalink -}}
+    {{- end -}}
+  {{- end -}}
+  <header class="{{- $prefix -}}-headline-wrapper-img" {{ $string | safeHTMLAttr -}}>
+    <div class="{{- $prefix -}}-headline-top-img"></div>
+    <div class="container {{ $prefix -}}-headline-img">
+      {{- partial "breadcrumb.html" $current -}}
+      <div class="row">
+        <div class="col">
+            {{- with $meta.top -}}
+            <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-top">
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-top") -}}
+            </div><!-- meta -->
+            {{- end -}}
+            <h1 class="page-title">
+              {{- $title -}}
+              {{- if and (eq $current.Kind "section") (ne $current.Type "search") -}}
+                {{- with $current.OutputFormats.Get "rss" -}}
+                    {{- printf `<a rel="%s" href="%s" title="%s" ><i class="bi-rss"></i></a>` .Rel .Permalink "RSS feed" | safeHTML -}}
+                {{- end -}}
+              {{- end -}}
+            </h1>
+            {{- with $meta.middle -}}
+            <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-middle">
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-middle") -}}
+            </div><!-- meta -->
+            {{- end -}}
+            <p class="page-summary">
+              {{- with $summary -}}
+                  {{- . | safeHTML -}}
+              {{- else -}}
+                  {{- with $description -}}
+                      {{- . | safeHTML -}}
+                  {{- end -}}
+              {{- end -}}
+            </p>
+            {{- with $meta.bottom -}}
+            <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-bottom">
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-bottom") -}}
+            </div><!-- meta -->
+            {{- end -}}
+        </div><!-- col -->
+      </div><!-- row -->
+    </div><!-- container -->
+  </header>
+{{- else -}}
+  <header class="{{- $prefix -}}-headline-wrapper" >
+    <div class="container {{ $prefix -}}-headline">
+      {{- partial "breadcrumb.html" $current -}}
+      <div class="row">
+        <div class="col">
+            {{- with $meta.top -}}
+            <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-top">
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-top") -}}
+            </div><!-- meta -->
+            {{- end -}}
+            <h1 class="page-title">{{- $title -}}</h1>
+            {{- with $meta.middle -}}
+            <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-middle">
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-middle") -}}
+            </div><!-- meta -->
+            {{- end -}}
+            <p class="page-summary">
+              {{- with $summary -}}
+                  {{- . | safeHTML -}}
+              {{- else -}}
+                  {{- with $description -}}
+                      {{- . | safeHTML -}}
+                  {{- end -}}
+              {{- end -}}
+            </p>
+            {{- with $meta.bottom -}}
+            <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-bottom">
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-bottom") -}}
+            </div><!-- meta -->
+            {{- end -}}
+        </div><!-- col -->
+      </div><!-- row -->
+    </div><!-- container -->
+  </header>
+{{- end -}}

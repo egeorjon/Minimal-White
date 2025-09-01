@@ -1,3 +1,6 @@
+[fr]
+    other = "fr"
+    
 [copy-link]
     other = "Copy the paragraph's link: {{ .text }}"
 
@@ -80,7 +83,7 @@
     other = "Error: Widget not found"
 
 [widget-x-not-found]
-    other = "Widget <b>%s</b> not found"
+    other = "Widget <b>%s</b> (%s) not found"
 
 [tags_for_section]
     other = "Tags available in this section"

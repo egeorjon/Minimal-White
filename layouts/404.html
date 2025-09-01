@@ -3,7 +3,7 @@
     {{- $def_params   := site.Params.page404 | default site.Data.defaults.page404 -}}
     {{- $display_img  := $def_params.headerimage -}}
 
-    {{- partial "partials/headline.html" (dict "current" . "prefix" "list" "display_img" $display_img "meta" (dict)) -}}
+    {{- partial "headline.html" (dict "current" . "prefix" "list" "display_img" $display_img "meta" (dict)) -}}
     <section class="404-main-wrapper">
         <div class="container 404-main">
             <div class="row">
@@ -17,16 +17,16 @@
                 </div><!-- col -->
             </div><!-- row -->
             <div class="row">
-                {{- partialCached "partials/widgets/search-form.html" (dict "current" $current_page  "params" (dict "title" "use-search")) -}}
+                {{/*- partialCached -*/}} {{- partial (path.Join "widgets" "search-form.html") (dict "current" $current_page  "params" (dict "title" "use-search")) -}}{{/* "widgets" */}}
             </div><!-- row -->
             <div class="row">
-                {{- partialCached "partials/widgets/sections-list.html" (dict "context" . "params" (dict "title" "navigate-sections")) -}}
+                {{/*- partialCached -*/}} {{- partial (path.Join "widgets" "sections-list.html") (dict "context" . "params" (dict "title" "navigate-sections")) -}}{{/* "widgets" */}}
             </div><!-- row -->
             <div class="row">
-                {{- partial "partials/widgets/tags-cloud.html" (dict "context" . "params" (dict "title" "navigate-tags" )) -}}
+                {{/*- partialCached -*/}} {{- partial (path.Join "widgets" "tags-cloud.html") (dict "context" . "params" (dict "title" "navigate-tags" )) -}}{{/* "widgets" */}}
             </div><!-- row -->
             <div class="row">
-                {{- partialCached "partials/widgets/series-list.html" (dict "current" . "params" (dict "mode" "card" "title" "navigate-series")) -}}
+                {{/*- partialCached -*/}} {{- partial (path.Join "widgets" "series-list.html") (dict "current" . "params" (dict "mode" "card" "title" "navigate-series")) -}}{{/* "widgets" */}}
             </div><!-- row -->
         </div><!-- container -->
     </section>

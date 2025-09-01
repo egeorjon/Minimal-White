@@ -1,0 +1,114 @@
+{{- $current           := .current -}}
+{{- $context           := .context -}}
+{{- $formatdate        := site.Params.formatdate                | default site.Data.defaults.formatdate                         -}}
+{{- $robots_tags       := site.Params.index.tags                | default site.Data.defaults.index.tags | default ""            -}}
+{{- $robots_categories := site.Params.index.categories          | default site.Data.defaults.index.categories | default ""      -}}
+{{- $robots_sections   := site.Params.index.sections            | default site.Data.defaults.index.sections | default ""        -}}
+{{- $robots_series     := site.Params.index.series              | default site.Data.defaults.index.series | default ""          -}}
+{{- $robots_linkedsections := site.Params.index.linkedsections  | default site.Data.defaults.index.linkedsections | default ""  -}}
+{{- $robot             := "" -}}
+<ul class="post-meta {{ with .class -}}{{- . | safeHTML -}}{{- end -}}">
+    {{- range $order, $meta := .meta -}}
+        {{- if eq $meta "date" -}}
+            {{- if $current.Date -}}
+        <li class="post-date">
+            <i class=" bi bi-calendar3" aria-hidden="true"></i>
+            <span class="visually-hidden">{{- i18n "posted-on" -}}</span>
+            <time class="entry-date published" datetime="{{- index (split $current.Lastmod " ") 0 -}}">
+                {{- $current.Date | time.Format $formatdate -}}
+            </time>
+        </li>
+            {{- end -}}
+        {{- else if eq $meta "fulldate" -}}
+        <li class="post-date">
+            <i class=" bi bi-calendar3" aria-hidden="true"></i>
+            <span class="visually-hidden">{{- i18n "posted-on" -}}</span>
+            <time class="entry-date published" datetime="{{- index (split $current.Date " ") 0 -}}">
+                {{- $current.Date | time.Format $formatdate -}}
+                {{- if ne $current.Date $current.Date }} (updated on {{ $current.Date | time.Format $formatdate -}}){{- end -}}
+            </time>
+        </li>
+        {{- else if eq $meta "reading" -}}
+            <li class="post-read">
+                <i class=" bi bi-clock" aria-hidden="true"></i>
+                <span class="visually-hidden">{{- i18n "reading-label" -}}</span>
+                {{- i18n "reading-time" $current.ReadingTime -}}
+            </li>
+        {{- else if eq $meta "tags" -}}
+            {{- $robot = partial "rel" (dict "robots" $robots_tags) -}}
+            {{- $sl := slice -}}
+            {{- with $current.GetTerms "tags" -}}
+                {{- range . -}}
+                    {{- $sl = $sl | append (printf "<a href=\"%s\" %s>%s</a>" .Permalink $robot (humanize .LinkTitle)) -}}
+                {{- end -}}
+            {{- end -}}
+            {{- if $sl -}}
+            <li class="post-tags">
+                <i class=" bi bi-tags" aria-hidden="true"></i>
+                <span class="visually-hidden">{{- i18n "tags" (len $sl) }} ({{- len $sl -}}):</span>
+                {{- delimit $sl ", " | safeHTML -}}
+            </li>
+            {{- end -}}
+        {{- else if eq $meta "series" -}}
+            {{- $robot = partial "rel" (dict "robots" $robots_series) -}}
+            {{- if (ne $current.Type "series") -}}
+                {{- $sl := slice -}}
+                {{- with $current.GetTerms "series" -}}
+                    {{- range . -}}
+                        {{- $sl = $sl | append (printf "<a href=\"%s\" %s>%s</a>" .Permalink $robot (humanize .LinkTitle)) -}}
+                    {{- end -}}
+                {{- end -}}
+                {{- if $sl -}}
+                <li class="post-series">
+                    <i class=" bi bi-files" aria-hidden="true"></i>
+                    <span class="visually-hidden">{{- i18n "series" (len $sl) }} {{ (len $sl) -}}:</span>
+                    {{- delimit $sl ", " | safeHTML -}}
+                </li>
+                {{- end -}}
+            {{- end -}}
+        {{- else if eq $meta "section" -}}
+            {{- $robot = partial "rel" (dict "robots" $robots_sections) | safeURL -}}
+            {{- with $current.Parent }}
+                {{/*- if and (ne .Kind "section") (ne .Kind "taxonomy") -*/}}
+                    <li class="post-section">
+                        <i class=" bi bi-folder2-open" aria-hidden="true"></i> <span class="visually-hidden">{{- i18n "in" -}}</span>
+                        <span class="in-category">{{- printf "<a href=\"%s\" title=\"%s\" %s>%s</a>" .Permalink (i18n "post-category" .) $robot .Name | safeHTML -}}</span>
+                    </li><!-- class="visually-hidden" -->
+                {{/*- end -*/}}
+            {{- end }}
+        {{- else if eq $meta "category" -}}
+            {{- $robot = partial "rel" (dict "robots" $robots_categories) -}}
+            {{- $list := slice -}}
+            {{- range $current.GetTerms "categories" -}}
+                {{- $list = $list | append (printf "<a href=\"%s\" %s>%s</a>" .Permalink $robot (humanize .LinkTitle)) -}}
+            {{- end -}}
+            {{- if gt (len $list) 0 -}}
+                <li class="post-category">
+                    <i class=" bi bi-folder" aria-hidden="true"></i> <span class="visually-hidden" >{{- i18n "in" -}}</span>
+                    <span class="in-category">{{- delimit $list ", " -}} </span>
+                </li>
+            {{- end -}}
+        {{- else if eq $meta "linkedsection" -}}
+            {{- $robot = partial "rel" (dict "robots" $robots_linkedsections) -}}
+            {{- if and (eq $context.Kind "taxonomy") (eq $context.Type "series") -}}
+                {{- $section := $current.Params.linkedsection | default nil -}}
+                {{- if $section }}
+                    {{- with site.GetPage $section -}}
+                    <li class="post-linked">
+                        <i class=" bi bi-folder-symlink" aria-hidden="true"></i> <span class="visually-hidden">{{- i18n "linked-section" . -}}</span>
+                        <span class="linked-to"><a href="{{- .Permalink -}}" title="{{- i18n "posts-of-section" . -}}" {{ $robot -}}> {{ .Title -}}</a></span>
+                    </li><!-- class="visually-hidden" -->
+                    {{- end -}}<!-- with -->
+                {{- end -}}<!-- if section -->
+            {{- end }}<!-- if series -->
+        {{- end -}}<!-- if $meta -->
+    {{- end -}}<!-- range -->
+</ul>
+
+{{- define "_partials/rel" -}}
+    {{- $index := "" -}}
+    {{- if ne .robots "" -}}
+        {{- $index = printf " rel=\"%s\"" .robots -}}
+    {{- end -}}
+    {{- return $index -}}
+{{- end -}}

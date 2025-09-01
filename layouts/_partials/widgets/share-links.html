@@ -1,0 +1,68 @@
+{{- $current     := .current -}}
+{{- $heading_tag :=      .params.heading | default site.Params.widgets.share.heading | default site.Data.defaults.widgets.share.heading | default site.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.params.title  | default site.Params.widgets.share.title   | default site.Data.defaults.widgets.share.title) -}}
+{{- with site.Params.sharelinks -}}
+    <aside class="col widget widget-share-links" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
+        <div class="widget-inner">
+            <div class="widget-header">
+                {{- with $title -}}
+                    {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag . $heading_tag | safeHTML -}}
+                {{- end -}}
+            </div><!-- widget-header -->
+            {{- $home  := "/" | absURL -}}
+            {{- $url   := $current.Permalink | absURL | safeURL -}}
+            {{- $title := $current.Title | safeHTML -}}
+            {{- $description := "" -}}
+            {{- with $current.Params.Description -}}
+                {{- $description = . | safeHTML -}}
+            {{- else -}}
+                {{- $description = ( $current.Summary | truncate 200 ) -}}
+            {{- end -}}
+            {{- $image := "" -}}
+            {{- if isset $current.Params "images" -}}
+                {{- $image = index $current.Params.images 0 | absURL -}}
+            {{- end -}}
+            {{- $tags := "" -}}
+            {{- if isset $current.Params "tags" -}}
+                {{- $tags = (delimit $current.Params.tags ",") | safeURL -}}
+            {{- end -}}
+            <div class="widget-content">
+                <ul>
+                {{- range sort . "weight" -}}
+                    {{- $share_id := .id -}}
+                    {{- with (index site.Data.socials .id) }}
+                        {{- if .share -}}
+                            {{- $share_url := partial "share_regex" (dict "pattern" "%%URL%%"      "param" "%s"              "value" $url          "string" .share)     -}}
+                            {{- $share_url  = partial "share_regex" (dict "pattern" "%%HOME%%"     "param" "%s"              "value" $home         "string" $share_url) -}}
+                            {{- $share_url  = partial "share_regex" (dict "pattern" "%%TITLE%%"    "param" "%s"              "value" $title        "string" $share_url) -}}
+                            {{- $share_url  = partial "share_regex" (dict "pattern" "%%DESC%%"     "param" "%s"              "value" $description  "string" $share_url) -}}
+                            {{- $share_url  = partial "share_regex" (dict "pattern" "%%HASHTAGS%%" "param" "&hashtags=%s"    "value" $tags         "string" $share_url) -}}
+                            {{- $share_url  = partial "share_regex" (dict "pattern" "%%MEDIA%%"    "param" "&media=%s"       "value" $image        "string" $share_url) -}}
+                            {{- $share_url  = partial "share_regex" (dict "pattern" "%%PICTURE%%"  "param" "&picture=%s"     "value" $image        "string" $share_url) -}}
+                            {{- $share_url  = partial "share_regex" (dict "pattern" "%%BODY%%"     "param" "%s"              "value" $url          "string" $share_url) -}}
+                            {{- $share_url  = partial "share_regex" (dict "pattern" "%%SITE%%"     "param" "%s"              "value" site.Title    "string" $share_url) -}}
+                            {{- with .account -}}
+                                {{- $share_url  = partial "share_regex" (dict "pattern" "%%VIA%%"      "param" "&via=%s"         "value" .         "string" $share_url) -}}
+                            {{- end -}}
+                            {{- $text   := printf (i18n .sharetext) .name -}}
+                            {{- $target := printf "target=\"%s\"" (.target | default "_blank") | safeHTMLAttr -}}
+                            <li>
+                                <a href="{{- $share_url -}}" class="share-link share-{{- $share_id -}}" title="{{- $text -}}" aria-label="{{- $text -}}" rel="noopener noreferrer" {{ $target -}}><i class="{{- .icon -}}"></i><span class="visually-hidden" aria-hidden="true">{{- .name -}}</span></a>
+                            </li>
+                        {{- end -}}
+                    {{- end -}}
+                {{- end -}}
+                </ul>
+            </div><!-- widget-content -->
+        </div><!-- widget-inner -->
+    </aside>
+{{- end -}}
+{{- define "_partials/share_regex" -}}
+    {{- $new_value := "" -}}
+    {{- if eq .value "" -}}
+        {{- $new_value = (replaceRE .pattern "" .string ) -}}
+    {{- else -}}
+        {{- $new_value = (replaceRE .pattern (printf .param .value) .string ) -}}
+    {{- end -}}
+    {{- return $new_value -}}
+{{- end -}}
