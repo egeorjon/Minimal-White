@@ -1,3 +1,6 @@
+[fr]
+    other = "fr"
+
 [copy-link]
     other = "Copier le lien de ce chapitre : {{ .text }}"
 
@@ -80,7 +83,7 @@
     other = "Widget non trouvé"
 
 [widget-x-not-found]
-    other = "Widget <b>%s</b> non trouvé"
+    other = "Widget <b>%s</b> (%s) non trouvé"
 
 [tags_for_section]
     other = "Mots-clés disponibles dans cette rubrique"
