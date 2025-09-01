@@ -12,10 +12,12 @@
   {{- $display_img  := $def_params.headerimage    -}}
   {{- $post_format  := $def_params.post_format    -}}
   {{- $partial_path := path.Join "posts-format" (printf "%s%s%s" "posts-list-" $post_format ".html") -}}
-  {{- $columns      := (index $def_params "cols") -}}
+  {{- $columns      := (index $def_params "cols") | default (dict "xs" 1 "sm" 1 "md" 1 "lg" 1 "xl" 1) -}}
+
+  {{/*- warnf "DEBUG: list-type %+v, title: %s" $list_type $current_page.Title -*/}}
 
   {{/* ---- Get background image ---- */}}
-  {{- partial "partials/headline.html" (dict "current" . "prefix" "list" "display_img" $display_img "meta" (dict)) -}}
+  {{- partial "headline.html" (dict "current" . "prefix" "list" "display_img" $display_img "meta" (dict)) -}}
   {{- $paginator := .Paginator -}}
   {{/*- printf "Layout: %s, Type: %s, Kind: %s)" .Layout .Type .Kind -*/}}
   <section class="list-main-wrapper">
@@ -29,7 +31,7 @@
         </div><!-- row -->
         {{- end -}}
       {{- end -}}
-      {{- $class := partialCached "partials/class-columns.html" $columns (delimit $columns "-") -}}
+      {{- $class := partialCached "class-columns.html" $columns (delimit $columns "-") -}}
       <div class="{{- $class -}}">
         {{- range $paginator.Pages -}}
           {{- partial $partial_path (dict "current" . "context" $current_page "meta" $meta) -}}
@@ -38,7 +40,7 @@
     </div><!-- container -->
   </section>
   <footer class="list-footer-wrapper">
-    {{- partial "inline/pagination2.html" . -}}
+    {{- partial "pagination2.html" . -}}
 
     {{- $footer := site.Data.list -}}
     {{- with index site.Data (printf "%s" (replace $list_type "_" "-")) -}}
@@ -54,7 +56,7 @@
   </footer>
 {{- end -}}
 
-{{- define "partials/inline/pagination2.html" -}}
+{{- define "_partials/pagination2.html" -}}
   {{- $paginator    := .Paginator                     -}}
   {{- $current_page := $paginator.PageNumber          -}}
   {{- $chunk        := 3                              -}}

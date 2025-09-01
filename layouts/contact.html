@@ -4,7 +4,7 @@
     {{/* ---- Get page parameters ---- */}}
     {{- $def_params := index site.Params "contact" | default (index site.Data.defaults "contact") -}}
 
-    {{- partial "partials/headline.html" (dict "current" $current_page "prefix" "contact" "display_img" $def_params.image "meta" (dict)) -}}
+    {{- partial "headline.html" (dict "current" $current_page "prefix" "contact" "display_img" $def_params.image "meta" (dict)) -}}
     <section class="search-main">
         <div class="container">
             <div class="row">

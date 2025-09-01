@@ -1,4 +1,5 @@
-{{- $widget      := . -}}
+{{- $widget    := .widget -}}
+{{- $path      := .path   -}}
 {{- $heading_tag := site.Params.widgets.not_found.heading | default site.Data.defaults.widgets.not_found.heading  | default site.Data.defaults.widgets.heading -}}
 {{- $title       := i18n (site.Params.widgets.not_found.title | default site.Data.defaults.widgets.not_found.title) -}}
 {{/*- $heading_tag := printf "h%d" $heading_lev -*/}}
@@ -10,7 +11,7 @@
             {{- end -}}
         </div>
         <div class="widget-content">
-            <p>{{- printf (i18n "widget-x-not-found") $widget | safeHTML -}}</p>
+            <p>{{- printf (i18n "widget-x-not-found") $widget $path | safeHTML -}}</p>
         </div>
     </div><!-- end of widget-inner -->
 </aside><!-- end of col -->

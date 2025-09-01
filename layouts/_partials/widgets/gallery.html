@@ -19,7 +19,7 @@
             {{- range first $numposts (shuffle .Pages) -}}
                 <div class="col">
                     {{- if isset .Params "images" -}}
-                        {{- partial "partials/image.html" (dict "current" . "Destination" .Params.images "Title" .Title "Text" .Title "Link" .RelPermalink "colnum" "multi") -}}
+                        {{- partial "image.html" (dict "current" . "Destination" .Params.images "Title" .Title "Text" .Title "Link" .RelPermalink "colnum" "multi") -}}
                     {{- end -}}
                 </div><!-- col -->
             {{- end -}}

@@ -4,7 +4,7 @@
 {{- $subheading_tag :=    .Params.subheading | default site.Params.widgets.authors.subheading | default site.Data.defaults.widgets.authors.subheading | default site.Data.defaults.widgets.subheading -}}
 {{- $title          := i18n (.Params.title   | default site.Params.widgets.authors.title      | default site.Data.defaults.widgets.authors.title) ($authors | len) -}}
 {{- $columns        :=       .params.columns | default site.Params.widgets.authors.columns   | default site.Data.defaults.widgets.authors.columns -}}
-{{- $class          := partialCached "partials/class-columns.html" $columns (delimit $columns "-") -}}
+{{- $class          := partialCached "class-columns.html" $columns (delimit $columns "-") -}}
 <section class="col widget widget-authors">
     <div class="widget-inner  {{ $class -}}">
         <div class="widget-header col">

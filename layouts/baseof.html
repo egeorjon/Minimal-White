@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{- site.Language.LanguageCode -}}" dir="{{- or site.Language.LanguageDirection `ltr` -}}">
 <head>
-  {{- partial "inline/cache.html" . -}}
-  {{- partial "head.html" .         -}}
+  {{- partial "cache.html" . -}}{{/*- partial "cache.html" . -*/}}
+  {{- partial "head.html" .  -}}
 </head>
 <body>
   <header>
@@ -21,7 +21,7 @@
   </footer>
 </body>
 </html>
-{{- define "partials/inline/cache.html" -}}
+{{- define "_partials/cache.html" -}}
   {{- $cache := false -}}
   {{- if eq .Kind "home" -}}
     {{- $cache = "home" -}}

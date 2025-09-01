@@ -35,7 +35,7 @@
                 {{- i18n "reading-time" $current.ReadingTime -}}
             </li>
         {{- else if eq $meta "tags" -}}
-            {{- $robot = partial "inline/rel" (dict "robots" $robots_tags) -}}
+            {{- $robot = partial "rel" (dict "robots" $robots_tags) -}}
             {{- $sl := slice -}}
             {{- with $current.GetTerms "tags" -}}
                 {{- range . -}}
@@ -50,7 +50,7 @@
             </li>
             {{- end -}}
         {{- else if eq $meta "series" -}}
-            {{- $robot = partial "inline/rel" (dict "robots" $robots_series) -}}
+            {{- $robot = partial "rel" (dict "robots" $robots_series) -}}
             {{- if (ne $current.Type "series") -}}
                 {{- $sl := slice -}}
                 {{- with $current.GetTerms "series" -}}
@@ -67,7 +67,7 @@
                 {{- end -}}
             {{- end -}}
         {{- else if eq $meta "section" -}}
-            {{- $robot = partial "inline/rel" (dict "robots" $robots_sections) | safeURL -}}
+            {{- $robot = partial "rel" (dict "robots" $robots_sections) | safeURL -}}
             {{- with $current.Parent }}
                 {{/*- if and (ne .Kind "section") (ne .Kind "taxonomy") -*/}}
                     <li class="post-section">
@@ -77,7 +77,7 @@
                 {{/*- end -*/}}
             {{- end }}
         {{- else if eq $meta "category" -}}
-            {{- $robot = partial "inline/rel" (dict "robots" $robots_categories) -}}
+            {{- $robot = partial "rel" (dict "robots" $robots_categories) -}}
             {{- $list := slice -}}
             {{- range $current.GetTerms "categories" -}}
                 {{- $list = $list | append (printf "<a href=\"%s\" %s>%s</a>" .Permalink $robot (humanize .LinkTitle)) -}}
@@ -89,7 +89,7 @@
                 </li>
             {{- end -}}
         {{- else if eq $meta "linkedsection" -}}
-            {{- $robot = partial "inline/rel" (dict "robots" $robots_linkedsections) -}}
+            {{- $robot = partial "rel" (dict "robots" $robots_linkedsections) -}}
             {{- if and (eq $context.Kind "taxonomy") (eq $context.Type "series") -}}
                 {{- $section := $current.Params.linkedsection | default nil -}}
                 {{- if $section }}
@@ -105,7 +105,7 @@
     {{- end -}}<!-- range -->
 </ul>
 
-{{- define "partials/inline/rel" -}}
+{{- define "_partials/rel" -}}
     {{- $index := "" -}}
     {{- if ne .robots "" -}}
         {{- $index = printf " rel=\"%s\"" .robots -}}

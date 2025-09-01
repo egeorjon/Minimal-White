@@ -4,14 +4,14 @@
     {{/* ---- Get page parameters ---- */}}
     {{- $def_params := site.Params.search | default site.Data.defaults.search -}}
 
-    {{- partial "partials/headline.html" (dict "current" $current_page "prefix" "search" "display_img" $def_params.headerimage "meta" (dict)) -}}
+    {{- partial "headline.html" (dict "current" $current_page "prefix" "search" "display_img" $def_params.headerimage "meta" (dict)) -}}
     <section class="search-main">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     {{- .ContentWithoutSummary -}}
                 </div>
-                {{- partialCached "partials/widgets/search-form.html" (dict "current" $current_page ) -}}
+                {{/*- partialCached -*/}} {{- partial (path.Join "widgets" "search-form.html") (dict "current" $current_page ) -}}
             </div><!-- end of row -->
         </div><!-- end of container -->
         <div class="container">

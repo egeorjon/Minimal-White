@@ -17,7 +17,7 @@
   {{- $summary     = $current.Summary      -}}
   {{- $img_path    = index $current.Params.images 0    -}}
 {{- end -}}
-
+{{- $path_meta := path.Join "widgets" "meta.html" -}}
 {{- if isset $current.Params "images" -}}
   {{- $string := "" -}}
   {{- if ne $img_path "" -}}
@@ -29,12 +29,12 @@
   <header class="{{- $prefix -}}-headline-wrapper-img" {{ $string | safeHTMLAttr -}}>
     <div class="{{- $prefix -}}-headline-top-img"></div>
     <div class="container {{ $prefix -}}-headline-img">
-      {{- partial "partials/breadcrumb.html" $current -}}
+      {{- partial "breadcrumb.html" $current -}}
       <div class="row">
         <div class="col">
             {{- with $meta.top -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-top">
-                {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-top") -}}
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-top") -}}
             </div><!-- meta -->
             {{- end -}}
             <h1 class="page-title">
@@ -47,7 +47,7 @@
             </h1>
             {{- with $meta.middle -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-middle">
-                {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-middle") -}}
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-middle") -}}
             </div><!-- meta -->
             {{- end -}}
             <p class="page-summary">
@@ -61,7 +61,7 @@
             </p>
             {{- with $meta.bottom -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-bottom">
-                {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-bottom") -}}
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-bottom") -}}
             </div><!-- meta -->
             {{- end -}}
         </div><!-- col -->
@@ -71,18 +71,18 @@
 {{- else -}}
   <header class="{{- $prefix -}}-headline-wrapper" >
     <div class="container {{ $prefix -}}-headline">
-      {{- partial "partials/breadcrumb.html" $current -}}
+      {{- partial "breadcrumb.html" $current -}}
       <div class="row">
         <div class="col">
             {{- with $meta.top -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-top">
-                {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-top") -}}
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-top") -}}
             </div><!-- meta -->
             {{- end -}}
             <h1 class="page-title">{{- $title -}}</h1>
             {{- with $meta.middle -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-middle">
-                {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-middle") -}}
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-middle") -}}
             </div><!-- meta -->
             {{- end -}}
             <p class="page-summary">
@@ -96,7 +96,7 @@
             </p>
             {{- with $meta.bottom -}}
             <div class="{{- $prefix -}}-post-meta {{ $prefix -}}-post-meta-bottom">
-                {{- partial "meta.html" (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-bottom") -}}
+                {{- partial $path_meta (dict "current" $current "context" $current.Parent "meta" . "class" "post-meta-bottom") -}}
             </div><!-- meta -->
             {{- end -}}
         </div><!-- col -->

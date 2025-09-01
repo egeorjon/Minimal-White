@@ -23,7 +23,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    {{- partial "inline/menu/walk.html" (dict "page" $current "menuEntries" .) -}}
+                    {{- partial "menu/walk.html" (dict "page" $current "menuEntries" .) -}}
                     <li class="nav-item">
                         {{- $search_page := site.GetPage "search" -}}
                         <form class="search-form" action="{{- $search_page.Permalink -}}" method="GET">
@@ -53,7 +53,7 @@
         {{- end -}}
     </div><!-- container -->
 </nav>
-{{- define "partials/inline/menu/walk.html" -}}
+{{- define "_partials/menu/walk.html" -}}
     {{- $page := .page -}}
     {{- range .menuEntries -}}
         {{- $name := .Name -}}
@@ -78,7 +78,7 @@
             {{- end -}}>{{- $name -}}</a>
             {{- with .Children -}}
             <ul>
-                {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) -}}
+                {{- partial "menu/walk.html" (dict "page" $page "menuEntries" .) -}}
             </ul>
             {{- end -}}
         </li>

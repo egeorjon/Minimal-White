@@ -10,12 +10,12 @@
   <div class="row">
     {{- with $meta.top -}}
       <div class="col-12 col-md-3 col-xl-2">
-        {{- partial "partials/meta.html" (dict "current" $current "context" $context "meta" . "class" "meta-top") -}}
+        {{- partial (path.Join "widgets" "meta.html") (dict "current" $current "context" $context "meta" . "class" "meta-top") -}}
       </div><!-- col -->
     {{- end -}}
     <div {{ $class | safeHTMLAttr -}}>
       {{- with $meta.middle -}}
-        {{- partial "partials/meta.html" (dict "current" $current "context" $context "meta" . "class" "meta-middle") -}}
+        {{- partial (path.Join "widgets" "meta.html") (dict "current" $current "context" $context "meta" . "class" "meta-middle") -}}
       {{- end -}}
       <h2><a href="{{- $current.RelPermalink -}}" title="{{- $current.Title | safeHTMLAttr -}}">{{- $current.LinkTitle -}}</a></h2>
       {{/*- if eq $display_sum true -*/}}
@@ -24,7 +24,7 @@
       </div>
       {{/*- end -*/}}
       {{- with $meta.bottom -}}
-        {{- partial "partials/meta.html" (dict "current" $current "context" $context "meta" . "class" "meta-bottom") -}}
+        {{- partial (path.Join "widgets" "meta.html") (dict "current" $current "context" $context "meta" . "class" "meta-bottom") -}}
       {{- end -}}
       {{- if and (eq $context.Kind "taxonomy") (eq $context.Type "series") -}}
         {{- if $current.Pages }}

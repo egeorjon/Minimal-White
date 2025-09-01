@@ -7,7 +7,7 @@
 {{- $columns        :=      .params.columns | default site.Params.widgets.serieslist.columns    | default site.Data.defaults.widgets.serieslist.columns  -}}
 {{- $mode           :=      .params.mode    | default site.Params.widgets.serieslist.mode       | default site.Data.defaults.widgets.serieslist.mode     -}}
 {{- $view_all       := .params.view_all     | default site.Params.widgets.serieslist.view_all   | default site.Data.defaults.widgets.serieslist.view_all -}}
-{{- $class          := partialCached "partials/class-columns.html" $columns (delimit $columns "-") -}}
+{{- $class          := partialCached "class-columns.html" $columns (delimit $columns "-") -}}
 {{- with site.Taxonomies.series -}}
     {{- $series := slice -}}
     {{- range $name, $taxonomy := . -}}

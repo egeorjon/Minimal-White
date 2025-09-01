@@ -62,24 +62,24 @@
 
 {{- if ne .Kind "404" -}}
     {{- if eq (site.Params.schema | default site.Data.defaults.head.schema) "internal" -}}
-        {{- template "_internal/schema.html" . -}}
+        {{- partial "schema.html" . -}}
     {{- else -}}
         {{- $param := anchorize (print "%s-%s" .Kind .Title) -}}
-        {{- partial "schema.html" . $param -}}
+        {{- partial "schema-theme.html" . $param -}}
     {{- end -}}
     {{- if eq (site.Params.opengraph | default site.Data.defaults.head.opengraph) "internal" -}}
-        {{- template "_internal/opengraph.html" . -}}
-    {{- else -}}
         {{- partial "opengraph.html" . -}}
+    {{- else -}}
+        {{- partial "opengraph-theme.html" . -}}
     {{- end -}}
     {{- if eq (site.Params.twittercard | default site.Data.defaults.head.twittercard) "internal" -}}
-        {{- template "_internal/twitter_cards.html" . -}}
-    {{- else -}}
         {{- partial "twitter_cards.html" . -}}
+    {{- else -}}
+        {{- partial "twitter_cards-theme.html" . -}}
     {{- end -}}
 {{- end -}}
 
-{{- partialCached "partials/favicons.html" . -}}
+{{- partialCached "favicons.html" . -}}
 
 {{- $production := or (or (eq (getenv "HUGO_ENV") "production") hugo.IsProduction) (eq hugo.Environment "production") -}}
 {{- if $production -}}

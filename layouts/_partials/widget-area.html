@@ -1,19 +1,24 @@
-{{- $current   := .current -}}
-{{- $rows      := dict     -}}
-{{- $rowid     := 1        -}}
-{{- range sort .config "weight" -}}
-  {{- $row     := dict    -}}
-  {{- $groupid := 1       -}}
-  {{- range sort .groups "weight" -}}
-    {{- $group    := dict -}}
-    {{- $widgetid := 1    -}}
-    {{- range sort .widgets "weight" -}}
+{{- $current      := .current         -}}
+{{- $rows         := dict             -}}
+{{- $rowid        := 1                -}}
+{{- range sort .config "weight"       -}}
+  {{- $row        := dict             -}}
+  {{- $groupid    := 1                -}}
+  {{- range sort .groups "weight"     -}}
+    {{- $group    := dict             -}}
+    {{- $widgetid := 1                -}}
+    {{- range sort .widgets "weight"  -}}
       {{- if not (in .kexclude $current.Kind) -}}
         {{- $widget := "" -}}
-        {{- $path := path.Join "partials/widgets" (printf "%s%s" .widget ".html") -}}
-        {{- if not (templates.Exists $path) -}}
-          {{- $path := "partials/widgets/not-found.html" -}}
-          {{- $widget = partial $path .widget -}}
+        {{- $path   := path.Join "widgets" (printf "%s%s" .widget ".html") -}}
+        {{/*- warnf "Page: %s, widget: %s, path: %s, exists: %v" $current.Title .widget $path (templates.Exists $path) -*/}}
+        {{- if templates.Exists (path.Join "_partials" "widgets" (printf "%s%s" .widget ".html")) | not -}}
+          {{- $widget  = partial (path.Join "widgets" "not-found.html") (dict "widget" .widget "path" $path) -}}
+        {{- else -}}
+          {{- $widget = partial $path (dict "current" $current "params" .params) -}}
+        {{- end -}}
+        {{/*- if templates.Exists $path | not -}}
+          {{- $widget  = partial "widgets/not-found.html" (dict "widget" .widget "path" $path) -}}
         {{- else -}}
           {{- if .cache -}}
             {{- if eq (.cache | default "contextual") "contextual" -}}
@@ -24,7 +29,7 @@
           {{- else -}}
             {{- $widget = partial $path (dict "current" $current "params" .params) -}}
           {{- end -}}
-        {{- end -}}
+        {{/*- end -*/}}
         {{- if ne "" $widget -}}
           {{- $group = merge $group (dict (printf "w%d" $widgetid) (dict "name" .widget "content" $widget)) -}}
           {{- $widgetid = math.Add $widgetid 1 -}}

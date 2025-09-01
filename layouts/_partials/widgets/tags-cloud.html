@@ -4,7 +4,7 @@
 {{- $heading_tag  :=       .params.heading | default $def_params.heading | default site.Data.defaults.widgets.heading -}}
 
 {{- $robots_tags  := site.Params.index.tags      | default site.Data.defaults.index.tags | default "" -}}
-{{- $robot        := partial "inline/rel" (dict "robots" $robots_tags) -}}
+{{- $robot        := partial "rel" (dict "robots" $robots_tags) -}}
 <aside class="col widget widget-tagscloud" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
     <div class="widget-inner">
         <div class="widget-header">
@@ -32,7 +32,7 @@
     </div><!-- widget-inner -->
 </aside><!-- col -->
 
-  {{- define "partials/inline/rel" -}}
+  {{- define "rel" -}}
     {{- $index := "" -}}
     {{- if ne .robots "" -}}
         {{- $index = printf " rel=\"%s\"" .robots -}}

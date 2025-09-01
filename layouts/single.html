@@ -5,7 +5,7 @@
 {{- $def_params  := site.Params.single | default site.Data.defaults.single -}}
 {{- $meta        := (index $def_params "meta") -}}
 {{- $display_img := $def_params.image  -}}
-{{- partial "partials/headline.html" (dict "current" $current_page "prefix" "single" "display_img" $display_img "meta" $meta) -}}
+{{- partial "headline.html" (dict "current" $current_page "prefix" "single" "display_img" $display_img "meta" $meta) -}}
 <section class="single-main">
   <div class="container">
     <div class="row">
@@ -19,7 +19,7 @@
         {{- .ContentWithoutSummary | safeHTML -}}
         {{/*- replace .Content .Summary "" | replaceRE "<p> </p>" "" | safeHTML -*/}}
         {{/*- with .Params.references -}}
-          {{- partialCached "partials/references.html" (dict "context" $current_page "refs" .) $current_page.Parent -}}
+          {{- partialCached "references.html" (dict "context" $current_page "refs" .) $current_page.Parent -}}
         {{- end -*/}}
       </article><!-- col -->
     </div><!-- end of row -->

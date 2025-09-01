@@ -3,7 +3,7 @@
   {{- $def_params    := index site.Params "list_authors" | default (index site.Data.defaults "list_authors") -}}
   {{- $display_image := $def_params.headerimage | default false -}}
 
-  {{- partial "partials/headline.html" (dict "current" . "prefix" "authors" "display_img" $display_image "meta" (dict)) -}}
+  {{- partial "headline.html" (dict "current" . "prefix" "authors" "display_img" $display_image "meta" (dict)) -}}
   
   {{- $class := "odd" -}}
   <section class="authors-content">
