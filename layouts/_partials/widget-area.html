@@ -11,25 +11,16 @@
       {{- if not (in .kexclude $current.Kind) -}}
         {{- $widget := "" -}}
         {{- $path   := path.Join "widgets" (printf "%s%s" .widget ".html") -}}
-        {{/*- warnf "Page: %s, widget: %s, path: %s, exists: %v" $current.Title .widget $path (templates.Exists $path) -*/}}
-        {{- if templates.Exists (path.Join "_partials" "widgets" (printf "%s%s" .widget ".html")) | not -}}
-          {{- $widget  = partial (path.Join "widgets" "not-found.html") (dict "widget" .widget "path" $path) -}}
-        {{- else -}}
-          {{- $widget = partial $path (dict "current" $current "params" .params) -}}
-        {{- end -}}
-        {{/*- if templates.Exists $path | not -}}
-          {{- $widget  = partial "widgets/not-found.html" (dict "widget" .widget "path" $path) -}}
-        {{- else -}}
+        {{- if templates.Exists (path.Join "_partials" $path) -}}
           {{- if .cache -}}
-            {{- if eq (.cache | default "contextual") "contextual" -}}
-              {{- $widget = partialCached $path (dict "current" $current "params" .params) ($current.Scratch.Get "page-cache") -}}
-            {{- else -}}
-              {{- $widget = partialCached $path (dict "current" $current "params" .params) "Permanent" -}}
-            {{- end -}}
+            {{- $cache_value := partial "widget-cache.html" (dict "context" . "widget" .widget) -}}
+            {{- $widget = partialCached $path (dict "current" $current "params" .params) .cache -}}
           {{- else -}}
             {{- $widget = partial $path (dict "current" $current "params" .params) -}}
           {{- end -}}
-        {{/*- end -*/}}
+        {{- else -}}
+          {{- $widget  = partial (path.Join "widgets" "not-found.html") (dict "widget" .widget "path" $path) -}}
+        {{- end -}}
         {{- if ne "" $widget -}}
           {{- $group = merge $group (dict (printf "w%d" $widgetid) (dict "name" .widget "content" $widget)) -}}
           {{- $widgetid = math.Add $widgetid 1 -}}
@@ -73,3 +64,14 @@
     </div><!-- container -->
   </div><!-- id -->
 {{- end -}}
+{{/*- define "_partials/widget-cache.html" -}}
+  {{- $value := false -}}
+  {{- if (eq .context.cache "section") -}}
+    {{- $value = printf "section-%s" (.Title | anchorize) -}} 
+  {{- else if (eq .context.cache "all") -}}
+    {{- $value = "all" -}}
+  {{- else if (eq .context.cache "widget") -}}
+    {{- $value = .widget -}}  
+  {{- end -}}
+  {{- return $value -}}
+{{- end -*/}}
