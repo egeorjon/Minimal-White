@@ -13,7 +13,7 @@
         {{- $path   := path.Join "widgets" (printf "%s%s" .widget ".html") -}}
         {{- if templates.Exists (path.Join "_partials" $path) -}}
           {{- if .cache -}}
-            {{- $cache_value := partial "widget-cache.html" (dict "context" . "widget" .widget) -}}
+            {{/*- $cache_value := partial "widget-cache.html" (dict "context" . "widget" .widget) -*/}}
             {{- $widget = partialCached $path (dict "current" $current "params" .params) .cache -}}
           {{- else -}}
             {{- $widget = partial $path (dict "current" $current "params" .params) -}}
