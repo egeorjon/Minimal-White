@@ -1,6 +1,5 @@
 {{- if and (site.Params.cloudflare.token | default false) (site.Params.cloudflare.url | default false) -}}
 <!-- Cloudflare Web Analytics -->
-<script defer src='{{- Params.cloudflare.url- }}' data-cf-beacon='{"token": "{{- site.Params.cloudflare.token -}}"}'>
-</script>
+<script defer src='{{- Params.cloudflare.url- }}' data-cf-beacon='{"token": "{{- site.Params.cloudflare.token -}}"}'> </script>
 <!-- End Cloudflare Web Analytics -->
 {{- end -}}
