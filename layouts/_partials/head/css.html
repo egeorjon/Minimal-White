@@ -1,5 +1,11 @@
 {{- with resources.Get "scss/main.scss" -}}
-  {{- $opts := dict "outputStyle" "enableSourceMap" "transpiler" "libsass" "targetPath" "css/style.css" -}}
+  {{- $opts := dict
+    "enableSourceMap" hugo.IsDevelopment
+    "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
+    "targetPath" "css/main.css"
+    "transpiler" "dartsass"
+  -}}
+  {{/*- $opts := dict "outputStyle" "enableSourceMap" "transpiler" "dartsass" "targetPath" "css/style.css" -*/}}
   {{- with . | toCSS $opts -}}
     {{- if hugo.IsDevelopment -}}
       <link rel="stylesheet" href="{{- .RelPermalink -}}">

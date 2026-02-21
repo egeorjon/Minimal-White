@@ -46,15 +46,28 @@
                 {{- $title = path.Base .Name | safeHTML -}}
             {{- end -}}
             {{- if $exif -}}
-                {{- with .Exif -}}
-                    {{- $string := printf "ISO%d, f/%.1f, %s sec. (%.0fmm)" .Tags.ISOSpeedRatings .Tags.FNumber (string .Tags.ExposureTime) .Tags.FocalLength -}}
-                    {{- $title = delimit (slice $title $string) " - " -}}
+                {{- $exif_list := slice -}}
+                {{- $exif_values := "" -}}
+                {{- if isset . "Meta" -}}
+                    {{- $exif_values = .Meta.Exif -}}
+                {{- else -}}
+                    {{- $exif_values = .Exif.Tags -}}
+                {{- end -}}
+                {{- with $exif_values -}}
+                    {{- with .ISO -}}          {{- $exif_list = $exif_list | append (printf "ISO %d" .) -}} {{- end -}}
+                    {{- with .ApertureValue -}}{{- $exif_list = $exif_list | append (printf "f/%.1f" .) -}} {{- end -}}
+                    {{- with .ExposureTime  -}}{{- $exif_list = $exif_list | append (printf "%s sec." .) -}}{{- end -}}
+                    {{- with .FocalLength   -}}{{- $exif_list = $exif_list | append (printf "%dmm" .) -}}   {{- end -}}
+                {{- end -}}
+                {{- with $exif_list -}}
+                    {{- $exif_string := delimit $exif_list ", " -}}
+                    {{- $title = delimit (slice $title $exif_string) " - " -}}
                 {{- end -}}
             {{ end }}
             <a href="{{- .RelPermalink -}}" {{ with .Title -}}title="{{- . | plainify  }}"{{- end -}}>
                 <img src="{{- $thumb.RelPermalink}}"
                     class="gallery-image" 
-                    {{ with $title -}}alt="{{- . | plainify -}}"{{- end }}
+                    {{ with $title -}}alt="{{- .   | plainify -}}"{{- end }}
                     {{ with $title -}}title="{{- . | plainify -}}"{{- end }} />
             {{- if $caption -}}
                 <figcaption class="{{- $overlay -}}">
@@ -70,7 +83,7 @@
         {{- if and $lic site.Params.licenceImagesText -}}
             {{- $galcaptionStr = printf "%s - %s" $galcaptionStr site.Params.licenceImagesText -}}
         {{- end -}}
-        <div class="gallery-caption">{{- $galcaptionStr | safeHTML -}}</div>
+        <div class="gallery-caption">{{- $galcaptionStr | markdownify -}}</div>
     {{- end -}}
 </div><!-- gallery-wrapper -->
 {{- end -}}
