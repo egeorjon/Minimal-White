@@ -60,22 +60,21 @@
             {{- with $caption_string -}}<figcaption class="figure-caption">{{- . | safeHTML -}}</figcaption>{{- end -}}
         </figure>
     {{- else -}} {{/* manageable images*/}}
-        {{- with $image.Params.exif -}}
-            {{- $exif_list := slice -}}
-            {{- range $index, $value := $image.Exif.Tags -}}
-                {{- if eq $index "ISO" -}}
-                    {{- $exif_list = $exif_list | append (printf "ISO%d" $value) -}}
-                {{- else if eq $index "ApertureValue" -}}
-                    {{- $exif_list = $exif_list | append (printf "f/%.1f" $value) -}}
-                {{- else if eq $index "ExposureTime" -}}
-                    {{- $exif_list = $exif_list | append (printf "%s sec." (string $value)) -}}
-                {{- else if eq $index "FocalLength" -}}
-                    {{- $exif_list = $exif_list | append (printf "%dmm" $value) -}}
-                {{- end -}}
-            {{- end -}}
-            {{- with $exif_list -}}
-                {{- $caption_list = $caption_list | append (delimit $exif_list ", ") -}}
-            {{- end -}}
+        {{- $exif_list := slice -}}
+        {{- $exif_values := "" -}}
+        {{- if isset $image "Meta" -}}
+            {{- $exif_values = $image.Meta.Exif -}}
+        {{- else if isset $image "Exif" -}}
+            {{- $exif_values = $image.Exif.Tags -}}
+        {{- end -}}
+        {{- with $exif_values -}}
+            {{- with .ISO -}}          {{- $exif_list = $exif_list | append (printf "ISO %d" .) -}} {{- end -}}
+            {{- with .ApertureValue -}}{{- $exif_list = $exif_list | append (printf "f/%.1f" .) -}} {{- end -}}
+            {{- with .ExposureTime  -}}{{- $exif_list = $exif_list | append (printf "%s sec." .) -}}{{- end -}}
+            {{- with .FocalLength   -}}{{- $exif_list = $exif_list | append (printf "%dmm" .) -}}   {{- end -}}
+        {{- end -}}
+        {{- with $exif_list -}}
+            {{- $caption_list = $caption_list | append (delimit $exif_list ", ") -}}
         {{- end -}}
         {{- $caption_string := delimit $caption_list " - " -}}
         {{- $width      := int $image.Width                -}}
