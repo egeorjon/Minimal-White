@@ -5,7 +5,7 @@
     "targetPath" "css/main.css"
     "transpiler" "dartsass"
   -}}
-  {{/*- $opts := dict "outputStyle" "enableSourceMap" "transpiler" "dartsass" "targetPath" "css/style.css" -*/}}
+  {{/*- $opts := dict "outputStyle" "enableSourceMap" "transpiler" "libsass" "targetPath" "css/style.css" -*/}}
   {{- with . | toCSS $opts -}}
     {{- if hugo.IsDevelopment -}}
       <link rel="stylesheet" href="{{- .RelPermalink -}}">
