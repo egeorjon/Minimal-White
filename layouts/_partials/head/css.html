@@ -3,7 +3,7 @@
     "enableSourceMap" hugo.IsDevelopment
     "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
     "targetPath" "css/main.css"
-    "transpiler" "dartsass"
+    "transpiler" "libsass"
   -}}
   {{/*- $opts := dict "outputStyle" "enableSourceMap" "transpiler" "libsass" "targetPath" "css/style.css" -*/}}
   {{- with . | toCSS $opts -}}
