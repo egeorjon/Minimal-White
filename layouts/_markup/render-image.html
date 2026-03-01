@@ -60,19 +60,7 @@
             {{- with $caption_string -}}<figcaption class="figure-caption">{{- . | safeHTML -}}</figcaption>{{- end -}}
         </figure>
     {{- else -}} {{/* manageable images*/}}
-        {{- $exif_list := slice -}}
-        {{- $exif_values := "" -}}
-        {{- if isset $image "Meta" -}}
-            {{- $exif_values = $image.Meta.Exif -}}
-        {{- else if isset $image "Exif" -}}
-            {{- $exif_values = $image.Exif.Tags -}}
-        {{- end -}}
-        {{- with $exif_values -}}
-            {{- with .ISO -}}          {{- $exif_list = $exif_list | append (printf "ISO %d" .) -}} {{- end -}}
-            {{- with .ApertureValue -}}{{- $exif_list = $exif_list | append (printf "f/%.1f" .) -}} {{- end -}}
-            {{- with .ExposureTime  -}}{{- $exif_list = $exif_list | append (printf "%s sec." .) -}}{{- end -}}
-            {{- with .FocalLength   -}}{{- $exif_list = $exif_list | append (printf "%dmm" .) -}}   {{- end -}}
-        {{- end -}}
+        {{- $exif_list := partial "exif.html" $image -}}
         {{- with $exif_list -}}
             {{- $caption_list = $caption_list | append (delimit $exif_list ", ") -}}
         {{- end -}}

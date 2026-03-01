@@ -1,0 +1,35 @@
+{{- $exif_list := slice -}}
+{{- $exif_values := "" -}}
+{{- with . -}}
+    {{ if lt hugo.Version "0.155" }}
+        {{- if .Exif -}}
+            {{ with .Exif.Tags }}
+                {{- $exif_values = . -}}
+            {{- end -}}
+        {{- end -}}
+    {{- else -}}
+        {{- with .Meta -}}
+            {{- $exif_values = .Exif -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- with $exif_values -}}
+    {{- with .ISOSpeedRatings       -}}{{- $exif_list = $exif_list | append (printf "ISO %d" .) -}} {{- end -}}
+    {{- with .ISO                   -}}{{- $exif_list = $exif_list | append (printf "ISO %d" .) -}} {{- end -}}
+    {{- with .ApertureValue         -}}{{- $exif_list = $exif_list | append (printf "f/%.1f" .) -}} {{- end -}}
+    {{- with .ExposureTime          -}}{{- $exif_list = $exif_list | append (printf "%s sec." .) -}}{{- end -}}
+    {{- with .ExposureCompensation -}}
+        {{- $value := float . -}}
+        {{- $sign := "" -}}
+        {{- if gt (math.Abs $value) 0.0 -}}
+            {{- if gt $value 0.0 -}}{{- $sign = "+" -}}{{- end -}}
+            {{- if eq $value (math.Round $value) -}}
+                {{- $exif_list = $exif_list | append (printf "%s%.0f EV" $sign $value) -}}
+            {{- else -}}
+                {{- $exif_list = $exif_list | append (printf "%s%.2f EV" $sign $value) -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    {{- with .FocalLength -}}{{- $exif_list = $exif_list | append (printf "%dmm" .) -}}{{- end -}}
+{{- end -}}
+{{- return $exif_list -}}
