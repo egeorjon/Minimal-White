@@ -574,6 +574,26 @@ li > p {
     line-height: ( 1em * $line-height-base) / $small-font-size;
 }
 
+/*
+.gallery-thumb figcaption,*/
+figcaption.bottom span,
+.figure-caption span {
+    display: block;
+    &:after {
+        content: " - ";
+    }
+    &:last-child:after {
+        content: "";
+    }
+}
+
+@media (min-width: map-get($grid-breakpoints, "md")) {
+    figcaption.bottom span,
+    .figure-caption span {
+        display: inline-block;
+    }
+}
+
 .figure-center {
     display: block!important;
     text-align: center;
