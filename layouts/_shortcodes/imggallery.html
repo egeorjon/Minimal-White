@@ -49,7 +49,7 @@
                 {{- $exif_list := partial "exif.html" . -}}
                 {{- with $exif_list -}}
                     {{- $exif_string := delimit $exif_list ", " -}}
-                    {{- $title = delimit (slice $title $exif_string) " - " -}}
+                    {{- $title = printf "%s%s%s" "<span>" (delimit (slice $title $exif_string) " -</span> <span>") "</span>" | safeHTML }}
                 {{- end -}}
             {{- end }}
             <a href="{{- .RelPermalink -}}" {{ with .Title -}}title="{{- . | plainify  }}"{{- end -}}>
@@ -59,7 +59,7 @@
                     {{ with $title -}}title="{{- . | plainify -}}"{{- end }} />
             {{- if $caption -}}
                 <figcaption class="{{- $overlay -}}">
-                    {{- $title | plainify -}}
+                    {{- $title -}}
                 </figcaption>
             {{- end }}
             </a>
