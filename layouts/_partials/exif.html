@@ -1,9 +1,9 @@
 {{- $exif_list := slice -}}
 {{- $exif_values := "" -}}
 {{- with . -}}
-    {{ if lt hugo.Version "0.155" }}
+    {{- if lt hugo.Version "0.155" -}}
         {{- if .Exif -}}
-            {{ with .Exif.Tags }}
+            {{- with .Exif.Tags -}}
                 {{- $exif_values = . -}}
             {{- end -}}
         {{- end -}}
@@ -14,20 +14,34 @@
     {{- end -}}
 {{- end -}}
 {{- with $exif_values -}}
-    {{- with .ISOSpeedRatings       -}}{{- $exif_list = $exif_list | append (printf "ISO %d" .) -}} {{- end -}}
-    {{- with .ISO                   -}}{{- $exif_list = $exif_list | append (printf "ISO %d" .) -}} {{- end -}}
-    {{- with .ApertureValue         -}}{{- $exif_list = $exif_list | append (printf "f/%.1f" .) -}} {{- end -}}
-    {{- with .ExposureTime          -}}{{- $exif_list = $exif_list | append (printf "%s sec." .) -}}{{- end -}}
+    {{- with .ISOSpeedRatings -}}   {{- $exif_list = $exif_list | append (printf "ISO %d" .) -}}{{- end -}}
+    {{- with .ISO -}}               {{- $exif_list = $exif_list | append (printf "ISO %d" .) -}}{{- end -}}
+    {{- with .ApertureValue -}}
+        {{- $value := float (printf "%.1f" .) -}}
+        {{- if gt (sub $value (math.Floor $value)) 0 -}}
+            {{- $exif_list = $exif_list | append (printf "f/%.1f" . ) -}}
+        {{- else -}}
+            {{- $exif_list = $exif_list | append (printf "f/%.0f" . ) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- with .ExposureTime -}}      {{- $exif_list = $exif_list | append (printf "%s sec." .) -}}{{- end -}}
     {{- with .ExposureCompensation -}}
         {{- $value := float . -}}
-        {{- $sign := "" -}}
-        {{- if gt (math.Abs $value) 0.0 -}}
-            {{- if gt $value 0.0 -}}{{- $sign = "+" -}}{{- end -}}
-            {{- if eq $value (math.Round $value) -}}
-                {{- $exif_list = $exif_list | append (printf "%s%.0f EV" $sign $value) -}}
-            {{- else -}}
-                {{- $exif_list = $exif_list | append (printf "%s%.2f EV" $sign $value) -}}
+        {{- if ne (math.Abs $value) 0.0 -}}
+            {{- $sign    := cond (gt $value 0.0) "+" "" -}}
+            {{- $abs     := math.Abs $value             -}}
+            {{- $entier  := math.Floor $abs             -}}
+            {{- $entStr  := cond (gt $entier 0) (printf "%.0f" $entier) "" -}}
+            {{- $decimal := sub $abs $entier            -}}
+            {{- $decStr  := printf "%.2f" $decimal      -}}
+            {{- $fraction := "" -}}
+            {{- if eq $decStr "0.25" -}}{{- $fraction = "1/4" -}}
+            {{- else if eq $decStr "0.33" -}}{{- $fraction = "1/3" -}}
+            {{- else if eq $decStr "0.50" -}}{{- $fraction = "1/2" -}}
+            {{- else if eq $decStr "0.67" -}}{{- $fraction = "2/3" -}}
+            {{- else if eq $decStr "0.75" -}}{{- $fraction = "3/4" -}}
             {{- end -}}
+            {{- $exif_list = $exif_list | append (printf "%s%s %s EV" $sign $entStr $fraction) -}}
         {{- end -}}
     {{- end -}}
     {{- with .FocalLength -}}{{- $exif_list = $exif_list | append (printf "%dmm" .) -}}{{- end -}}

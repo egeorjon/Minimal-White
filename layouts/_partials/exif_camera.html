@@ -1,0 +1,24 @@
+{{- $exif_list := slice -}}
+{{- $exif_values := "" -}}
+{{- with . -}}
+    {{- if lt hugo.Version "0.155" -}}
+        {{- if .Exif -}}
+            {{- with .Exif.Tags -}}
+                {{- $exif_values = . -}}
+            {{- end -}}
+        {{- end -}}
+    {{- else -}}
+        {{- with .Meta -}}
+            {{- $exif_values = .Exif -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- with $exif_values -}}
+    {{- with .Model -}}{{- $exif_list = $exif_list | append (printf "%s" .) -}}{{- end -}}
+    {{- with .LensModel -}}
+        {{- with $exif_values.Make -}}
+            {{- $exif_list = $exif_list | append (printf "%s %s" . $exif_values.LensModel) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- return $exif_list -}}
