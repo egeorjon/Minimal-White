@@ -575,7 +575,7 @@ li > p {
 }
 
 /*
-.gallery-thumb figcaption,*/
+.gallery-thumb figcaption,
 figcaption.bottom span,
 .figure-caption span {
     display: block;
@@ -586,6 +586,7 @@ figcaption.bottom span,
         content: "";
     }
 }
+*/
 
 @media (min-width: map-get($grid-breakpoints, "md")) {
     figcaption.bottom span,
