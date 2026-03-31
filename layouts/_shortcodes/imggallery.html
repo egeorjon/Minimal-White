@@ -45,23 +45,24 @@
             {{- if eq $title .Name -}}
                 {{- $title = path.Base .Name | safeHTML -}}
             {{- end -}}
+            {{- $title_with_exif := $title -}}
             {{- if $exif -}}
                 {{- $exif_list := partial "exif.html" . -}}
                 {{- with $exif_list -}}
                     {{- $exif_string := delimit $exif_list ", " -}}
-                    {{- $title = printf "%s%s%s" "<span>" (delimit (slice $title $exif_string) " -</span> <span>") "</span>" | safeHTML }}
+                    {{- $title_with_exif = printf "%s%s%s" "<span>" (delimit (slice $title $exif_string) " -</span> <span>") "</span>" | safeHTML -}}
                 {{- end -}}
             {{- end }}
             <a href="{{- .RelPermalink -}}" {{ with .Title -}}title="{{- . | plainify  }}"{{- end -}}>
-                <img src="{{- $thumb.RelPermalink}}"
+                <img src="{{- $thumb.RelPermalink }}"
                     class="gallery-image" 
-                    {{ with $title -}}alt="{{- .   | plainify -}}"{{- end }}
-                    {{ with $title -}}title="{{- . | plainify -}}"{{- end }} />
-            {{- if $caption -}}
-                <figcaption class="{{- $overlay -}}">
-                    {{- $title -}}
-                </figcaption>
-            {{- end }}
+                    {{ with $title -}}alt="{{- . | plainify -}}"{{- end }} 
+                    {{ with $title_with_exif -}}title="{{- . -}}"{{- end }} />
+                {{- if $caption -}}
+                    <figcaption class="{{- $overlay -}}">
+                        {{- $title_with_exif -}}
+                    </figcaption>
+                {{- end -}}
             </a>
         </figure>
         {{- end }}
