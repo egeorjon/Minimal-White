@@ -87,7 +87,7 @@
             {{- $caption_list = $caption_list | append (delimit $exif_camera ", ") -}}
         {{- end -}}
     {{- end -}}
-    {{- $caption_string := (printf "%s%s%s" "<span>" (delimit $caption_list "</span> <span>") "</span>") | safeHTML -}}
+    {{- $caption_string := (printf "%s%s%s" "<span>" (delimit $caption_list " -</span> <span>") "</span>") | safeHTML -}}
     {{- $width      := int $image.Width  -}}
     {{- $height     := int $image.Height -}}
     {{- $link       := .Destination      -}}
