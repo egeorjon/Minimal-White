@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{- site.Language.LanguageCode -}}" dir="{{- or site.Language.LanguageDirection `ltr` -}}">
+{{- $lang := .Site.Language.Code | default hugo.Language.Code      -}}
+{{- $dir  := .Language.Direction | default .Site.Language.Direction -}}
+<html lang="{{- $lang -}}" dir="{{- or $dir `ltr` -}}">
 <head>
   {{/*- partial "cache.html" . -*/}}
   {{- partial "head.html" .  -}}
