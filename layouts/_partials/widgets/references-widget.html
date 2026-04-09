@@ -1,6 +1,6 @@
 {{- $current     := .current -}}
-{{- $heading_tag := .params.heading     | default site.Params.widgets.references.heading | default site.Data.defaults.widgets.references.heading | default site.Data.defaults.widgets.heading -}}
-{{- $title       := i18n (.params.title | default site.Params.widgets.references.title   | default site.Data.defaults.widgets.references.title)    -}}
+{{- $heading_tag := .params.heading     | default site.Params.widgets.references.heading | default hugo.Data.defaults.widgets.references.heading | default hugo.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.params.title | default site.Params.widgets.references.title   | default hugo.Data.defaults.widgets.references.title)    -}}
 {{- $ref_list    := $current.Params.references -}}
 {{- with $ref_list -}}
     <aside class="col widget widget-references" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">

@@ -1,6 +1,6 @@
 {{- $current     := .current -}}
-{{- $heading_tag :=      .params.heading | default site.Params.widgets.share.heading | default site.Data.defaults.widgets.share.heading | default site.Data.defaults.widgets.heading -}}
-{{- $title       := i18n (.params.title  | default site.Params.widgets.share.title   | default site.Data.defaults.widgets.share.title) -}}
+{{- $heading_tag :=      .params.heading | default site.Params.widgets.share.heading | default hugo.Data.defaults.widgets.share.heading | default hugo.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.params.title  | default site.Params.widgets.share.title   | default hugo.Data.defaults.widgets.share.title) -}}
 {{- with site.Params.sharelinks -}}
     <aside class="col widget widget-share-links" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
         <div class="widget-inner">
@@ -30,7 +30,7 @@
                 <ul>
                 {{- range sort . "weight" -}}
                     {{- $share_id := .id -}}
-                    {{- with (index site.Data.socials .id) }}
+                    {{- with (index hugo.Data.socials .id) }}
                         {{- if .share -}}
                             {{- $share_url := partial "share_regex" (dict "pattern" "%%URL%%"      "param" "%s"              "value" $url          "string" .share)     -}}
                             {{- $share_url  = partial "share_regex" (dict "pattern" "%%HOME%%"     "param" "%s"              "value" $home         "string" $share_url) -}}

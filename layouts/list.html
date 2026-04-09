@@ -5,7 +5,7 @@
   {{- if or (eq .Kind "taxonomy") (eq .Kind "term") -}}
     {{- $list_type = printf "list_%s" .Type -}}
   {{- end -}}
-  {{- $def_params := index site.Params $list_type | default (index site.Data.defaults $list_type)  | default (index site.Data.defaults "list") -}}
+  {{- $def_params := index site.Params $list_type | default (index hugo.Data.defaults $list_type)  | default (index hugo.Data.defaults "list") -}}
 
   {{/* ---- Get page parameters ---- */}}
   {{- $meta         := $def_params.meta -}} {{/* (index $def_params "meta") */}}
@@ -42,7 +42,7 @@
   <footer class="list-footer-wrapper">
     {{- partial "pagination2.html" . -}}
 
-    {{- $footer := site.Data.list -}}
+    {{- $footer := hugo.Data.list -}}
     {{- with index site.Data (printf "%s" (replace $list_type "_" "-")) -}}
         {{- $footer = . -}}
     {{- end -}}
@@ -50,7 +50,7 @@
         {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
     {{- end -}}
 
-    {{/*- with site.Data.list.rows -}}
+    {{/*- with hugo.Data.list.rows -}}
        {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
     {{- end -*/}}
   </footer>

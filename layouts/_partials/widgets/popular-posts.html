@@ -1,7 +1,7 @@
 {{- $current  := . -}}
-{{- $numposts := .params.numposts | default site.Params.widgets.popular.numposts | default site.Data.defaults.widgets.popular.numposts -}}
-{{- $title    := .params.title    | default site.Params.widgets.popular.title    | default site.Data.defaults.widgets.popular.title    -}}
-{{- with site.Data.popularposts -}}
+{{- $numposts := .params.numposts | default site.Params.widgets.popular.numposts | default hugo.Data.defaults.widgets.popular.numposts -}}
+{{- $title    := .params.title    | default site.Params.widgets.popular.title    | default hugo.Data.defaults.widgets.popular.title    -}}
+{{- with hugo.Data.popularposts -}}
     {{- $posts := slice -}}
     {{- range first $numposts (sort .posts "visit" "desc") -}}
         {{- $p := site.GetPage .post -}}

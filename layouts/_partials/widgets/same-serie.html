@@ -1,8 +1,8 @@
 {{- $current     := .current -}}
-{{- $heading_tag := .params.heading     | default site.Params.widgets.sameserie.heading | default site.Data.defaults.widgets.heading          -}}
-{{- $title       := i18n (.params.title | default site.Params.widgets.sameserie.title   | default site.Data.defaults.widgets.sameserie.title) -}}
+{{- $heading_tag := .params.heading     | default site.Params.widgets.sameserie.heading | default hugo.Data.defaults.widgets.heading          -}}
+{{- $title       := i18n (.params.title | default site.Params.widgets.sameserie.title   | default hugo.Data.defaults.widgets.sameserie.title) -}}
 {{- $serie       := first 1 ($current.GetTerms "series") -}}
-{{- $formatdate  := site.Params.formatdate | default site.Data.defaults.formatdate -}}
+{{- $formatdate  := site.Params.formatdate | default hugo.Data.defaults.formatdate -}}
 {{- with $serie -}}
     <aside class="col widget widget-same-serie" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
         {{- range $serie -}}

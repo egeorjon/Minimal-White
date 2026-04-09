@@ -1,9 +1,9 @@
 {{- $current      := .current -}}
-{{- $def_params   := index site.Params.widgets.tagscloud | default site.Data.defaults.widgets.tagscloud               -}}
+{{- $def_params   := index site.Params.widgets.tagscloud | default hugo.Data.defaults.widgets.tagscloud               -}}
 {{- $title        := i18n (.params.title   | default $def_params.title)                                               -}}
-{{- $heading_tag  :=       .params.heading | default $def_params.heading | default site.Data.defaults.widgets.heading -}}
+{{- $heading_tag  :=       .params.heading | default $def_params.heading | default hugo.Data.defaults.widgets.heading -}}
 
-{{- $robots_tags  := site.Params.index.tags      | default site.Data.defaults.index.tags | default "" -}}
+{{- $robots_tags  := site.Params.index.tags      | default hugo.Data.defaults.index.tags | default "" -}}
 {{- $robot        := partial "rel" (dict "robots" $robots_tags) -}}
 <aside class="col widget widget-tagscloud" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
     <div class="widget-inner">

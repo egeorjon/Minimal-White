@@ -1,9 +1,9 @@
 {{- $current     := .current -}}
-{{- $heading_tag :=       .Params.heading | default site.Params.widgets.single_pagination.heading | default site.Data.defaults.widgets.single_pagination.heading  | default site.Data.defaults.widgets.heading -}}
-{{- $title       := i18n (.Params.title   | default site.Params.widgets.single_pagination.title   | default site.Data.defaults.widgets.single_pagination.title) -}}
-{{- $n           := int  (.Params.prev    | default site.Params.widgets.single_pagination.prev    | default site.Data.defaults.widgets.single_pagination.prev)  -}}
-{{- $m           := int  (.Params.next    | default site.Params.widgets.single_pagination.next    | default site.Data.defaults.widgets.single_pagination.next)  -}}
-{{- $formatdate  := site.Params.formatdate | default site.Data.defaults.formatdate                         -}}
+{{- $heading_tag :=       .Params.heading | default site.Params.widgets.single_pagination.heading | default hugo.Data.defaults.widgets.single_pagination.heading  | default hugo.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.Params.title   | default site.Params.widgets.single_pagination.title   | default hugo.Data.defaults.widgets.single_pagination.title) -}}
+{{- $n           := int  (.Params.prev    | default site.Params.widgets.single_pagination.prev    | default hugo.Data.defaults.widgets.single_pagination.prev)  -}}
+{{- $m           := int  (.Params.next    | default site.Params.widgets.single_pagination.next    | default hugo.Data.defaults.widgets.single_pagination.next)  -}}
+{{- $formatdate  := site.Params.formatdate | default hugo.Data.defaults.formatdate                         -}}
 <aside class="col widget widget-single-pagination" aria-label="{{- with $title -}}{{- . | default "previous-next-posts" | anchorize -}}{{- end -}}">
     <div class="widget-inner">
         <div class="widget-header">

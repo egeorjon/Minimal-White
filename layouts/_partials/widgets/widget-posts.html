@@ -1,10 +1,10 @@
 {{- $current := .current -}}
 
-{{- $widget_def  := index site.Data.defaults.widgets .config -}}
+{{- $widget_def  := index hugo.Data.defaults.widgets .config -}}
 {{- $widget_conf := index site.Params.widgets .config        -}}
 
-{{- $heading_tag    := .params.heading    | default $widget_conf.heading    | default $widget_def.heading    | default site.Data.defaults.widgets.heading    -}}
-{{- $subheading_tag := .params.subheading | default $widget_conf.subheading | default $widget_def.subheading | default site.Data.defaults.widgets.subheading -}}
+{{- $heading_tag    := .params.heading    | default $widget_conf.heading    | default $widget_def.heading    | default hugo.Data.defaults.widgets.heading    -}}
+{{- $subheading_tag := .params.subheading | default $widget_conf.subheading | default $widget_def.subheading | default hugo.Data.defaults.widgets.subheading -}}
 {{- $summary        := .params.summary    | default $widget_conf.summary    | default $widget_def.summary                                                    -}}
 {{- $columns        := .params.columns    | default $widget_conf.columns    | default $widget_def.columns                                                    -}}
 {{- $meta           := .params.meta       | default $widget_conf.meta       | default $widget_def.meta                                                       -}}

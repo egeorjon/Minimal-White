@@ -91,9 +91,9 @@
     {{- $width      := int $image.Width  -}}
     {{- $height     := int $image.Height -}}
     {{- $link       := .Destination      -}}
-    {{- $max_width  := int (site.Params.Lightbox.Max_width)  -}} {{/* | default site.Data.defaults.lightbox.max_width)  */}}
-    {{- $max_height := int (site.Params.Lightbox.Max_height) -}} {{/* | default site.Data.defaults.lightbox.max_height)  */}}
-    {{- $lightbox   := and (or (gt $width $max_width) (gt $height $max_height)) (site.Params.Lightbox.Enable) -}} {{/* | default site.Data.defaults.lightbox.enable)  */}}
+    {{- $max_width  := int (site.Params.Lightbox.Max_width)  -}} {{/* | default hugo.Data.defaults.lightbox.max_width)  */}}
+    {{- $max_height := int (site.Params.Lightbox.Max_height) -}} {{/* | default hugo.Data.defaults.lightbox.max_height)  */}}
+    {{- $lightbox   := and (or (gt $width $max_width) (gt $height $max_height)) (site.Params.Lightbox.Enable) -}} {{/* | default hugo.Data.defaults.lightbox.enable)  */}}
     {{/*- $lightbox   = 0 -*/}}
     {{- $imgsizes := slice
         (dict "bp"  576 "w" 540)

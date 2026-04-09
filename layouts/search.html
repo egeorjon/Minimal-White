@@ -2,7 +2,7 @@
     {{- $current_page  := . -}}
 
     {{/* ---- Get page parameters ---- */}}
-    {{- $def_params := site.Params.search | default site.Data.defaults.search -}}
+    {{- $def_params := site.Params.search | default hugo.Data.defaults.search -}}
 
     {{- partial "headline.html" (dict "current" $current_page "prefix" "search" "display_img" $def_params.headerimage "meta" (dict)) -}}
     <section class="search-main">
@@ -25,7 +25,7 @@
             </div><!-- end of row -->
         </div><!-- end of container -->
     </section>
-    {{- with site.Data.search.rows -}}
+    {{- with hugo.Data.search.rows -}}
     <footer class="search-footer">
         {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
     </footer>

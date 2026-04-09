@@ -1,6 +1,6 @@
 {{- $current  := . -}}
-{{- $title    := .params.title    | default site.Params.widgets.lastposts.title    | default site.Data.defaults.widgets.title.numposts     -}}
-{{- $numposts := .params.numposts | default site.Params.widgets.lastposts.numposts | default site.Data.defaults.widgets.lastposts.numposts -}}
+{{- $title    := .params.title    | default site.Params.widgets.lastposts.title    | default hugo.Data.defaults.widgets.title.numposts     -}}
+{{- $numposts := .params.numposts | default site.Params.widgets.lastposts.numposts | default hugo.Data.defaults.widgets.lastposts.numposts -}}
 {{- $section  := .params.section  | default site.Params.widgets.lastposts.section  | default ""                                            -}}
 {{- $posts    := slice   -}}
 {{- $params   := .params -}}

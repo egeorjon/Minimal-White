@@ -18,9 +18,7 @@
   <script defer src="{{- .RelPermalink -}}" integrity="{{- .Data.Integrity -}}" crossorigin="anonymous"></script>
 {{- end -}}
 {{- if eq "search" (.Layout | default "standard") -}}
-  {{- with resources.Get "fuse-7.0.0/fuse.min.js" -}}
-    <script defer src="{{- .RelPermalink -}}" integrity="{{- .Data.Integrity -}}" crossorigin="anonymous"></script>
-  {{- end -}}
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.2.0"></script>
   {{- with resources.Get "js/search.js" -}}
     {{- with . | js.Build (dict "minify" true) -}}
       <script defer src="{{- .RelPermalink -}}" integrity="{{- .Data.Integrity -}}" crossorigin="anonymous"></script>

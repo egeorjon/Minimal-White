@@ -51,7 +51,7 @@
     </div><!-- end of container -->
     </section>
     <footer class="single-footer">
-    {{- with site.Data.single.rows -}}
+    {{- with hugo.Data.single.rows -}}
         {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
     {{- end -}}
     </footer>

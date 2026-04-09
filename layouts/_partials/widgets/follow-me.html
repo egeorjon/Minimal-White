@@ -1,6 +1,6 @@
 {{- $current     := .current -}}
-{{- $heading_tag := .params.heading     | default site.Params.widgets.followme.heading | default site.Data.defaults.widgets.followme.heading | default site.Data.defaults.widgets.heading -}}
-{{- $title       := i18n (.params.title | default site.Params.widgets.followme.title   | default site.Data.defaults.widgets.followme.title) -}}
+{{- $heading_tag := .params.heading     | default site.Params.widgets.followme.heading | default hugo.Data.defaults.widgets.followme.heading | default hugo.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.params.title | default site.Params.widgets.followme.title   | default hugo.Data.defaults.widgets.followme.title) -}}
 {{- with site.Params.followlinks -}}
 <aside class="col widget widget-followme" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
     <div class="widget-inner">
@@ -21,8 +21,8 @@
                     {{- else -}}
                         {{- if .account -}}
                             {{- $media := . -}}
-                            {{- if and (ne site.Data.socials nil) (ne .id nil) -}}
-                                {{- with (index site.Data.socials .id) }}
+                            {{- if and (ne hugo.Data.socials nil) (ne .id nil) -}}
+                                {{- with (index hugo.Data.socials .id) }}
                                     {{- $target := "" -}}
                                     {{- with .target -}}
                                         {{- $target = printf "target=\"%s\"" . -}}

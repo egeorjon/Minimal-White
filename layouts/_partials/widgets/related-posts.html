@@ -1,6 +1,6 @@
 {{- $current  := .current -}}
-{{- $numposts := int (.params.numposts | default site.Params.widgets.related.numposts | default site.Data.defaults.widgets.related.numposts) -}}
-{{- $title    :=      .params.title    | default site.Params.widgets.related.title    | default site.Data.defaults.widgets.related.title     -}}
+{{- $numposts := int (.params.numposts | default site.Params.widgets.related.numposts | default hugo.Data.defaults.widgets.related.numposts) -}}
+{{- $title    :=      .params.title    | default site.Params.widgets.related.title    | default hugo.Data.defaults.widgets.related.title     -}}
 {{- $posts    := site.RegularPages.Related $current | first $numposts -}}
 {{- $params   := merge .params (dict "title" (i18n $title)) -}}
 {{- with $posts -}}

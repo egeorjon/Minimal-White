@@ -1,5 +1,5 @@
 {{- $current := .current -}}
-{{- $def_params := site.Params.search   | default site.Data.defaults.search -}}
+{{- $def_params := site.Params.search   | default hugo.Data.defaults.search -}}
 {{- $heading_tag := .params.heading     | default $def_params.heading       -}}
 {{- $title       := i18n (.params.title | default $def_params.title)        -}}
 <aside class="search-content col widget widget-search-form">

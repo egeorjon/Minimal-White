@@ -1,7 +1,7 @@
 {{- $current     := .current -}}
-{{- $heading_tag := .params.heading         | default site.Params.widgets.meta.heading | default site.Data.defaults.widgets.meta.heading | default site.Data.defaults.widgets.heading -}}
-{{- $title       := i18n (.params.title     | default site.Params.widgets.meta.title   | default site.Data.defaults.widgets.meta.title) -}}
-{{- $meta        := site.Params.single.meta | default site.Data.defaults.single.meta -}}
+{{- $heading_tag := .params.heading         | default site.Params.widgets.meta.heading | default hugo.Data.defaults.widgets.meta.heading | default hugo.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.params.title     | default site.Params.widgets.meta.title   | default hugo.Data.defaults.widgets.meta.title) -}}
+{{- $meta        := site.Params.single.meta | default hugo.Data.defaults.single.meta -}}
 {{- $list        := index $meta .params.meta -}}
 {{- $class       := printf "meta-%s" .params.meta -}}
 {{- with $list -}}

@@ -1,10 +1,10 @@
 {{- $current     := .current -}}
-{{- $heading_tag :=       .Params.heading  | default site.Params.widgets.tags_section.heading  | default site.Data.defaults.widgets.tags_section.heading  | default site.Data.defaults.widgets.heading -}}
-{{- $title       := i18n (.Params.title    | default site.Params.widgets.tags_section.title    | default site.Data.defaults.widgets.tags_section.title) -}}
-{{- $font_min    := int  (.Params.font_smallest | default site.Params.widgets.tags_section.font_smallest | default site.Data.defaults.widgets.tags_section.font_smallest)  -}}
-{{- $font_max    := int  (.Params.font_largest  | default site.Params.widgets.tags_section.font_largest  | default site.Data.defaults.widgets.tags_section.font_largest)   -}}
-{{- $line_height := int  (.Params.line_height   | default site.Params.widgets.tags_section.line_height   | default site.Data.defaults.widgets.tags_section.line_height)    -}}
-{{- $robots_tags := site.Params.index.tags      | default site.Data.defaults.index.tags | default "" -}}
+{{- $heading_tag :=       .Params.heading  | default site.Params.widgets.tags_section.heading  | default hugo.Data.defaults.widgets.tags_section.heading  | default hugo.Data.defaults.widgets.heading -}}
+{{- $title       := i18n (.Params.title    | default site.Params.widgets.tags_section.title    | default hugo.Data.defaults.widgets.tags_section.title) -}}
+{{- $font_min    := int  (.Params.font_smallest | default site.Params.widgets.tags_section.font_smallest | default hugo.Data.defaults.widgets.tags_section.font_smallest)  -}}
+{{- $font_max    := int  (.Params.font_largest  | default site.Params.widgets.tags_section.font_largest  | default hugo.Data.defaults.widgets.tags_section.font_largest)   -}}
+{{- $line_height := int  (.Params.line_height   | default site.Params.widgets.tags_section.line_height   | default hugo.Data.defaults.widgets.tags_section.line_height)    -}}
+{{- $robots_tags := site.Params.index.tags      | default hugo.Data.defaults.index.tags | default "" -}}
 {{- $robot := partial "rel" (dict "robots" $robots_tags) -}}
 {{- $tagsCount   := dict -}}
 {{- range $current.Pages -}}

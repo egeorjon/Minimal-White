@@ -1,6 +1,6 @@
 {{- define "main" -}}
   {{- $current_page := . -}}
-  {{- $def_params   := index site.Params "list_tags" | default (index site.Data.defaults "list_tags")  | default (index site.Data.defaults "list") -}}
+  {{- $def_params   := index site.Params "list_tags" | default (index hugo.Data.defaults "list_tags")  | default (index hugo.Data.defaults "list") -}}
   {{- $display_img  := $def_params.headerimage    -}}
 
   {{- partial "headline.html" (dict "current" . "prefix" "list-tags" "display_img" $display_img "meta" (dict)) -}}

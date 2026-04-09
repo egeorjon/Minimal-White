@@ -1,6 +1,6 @@
 {{- define "main" -}}
   {{- $current_page  := . -}}
-  {{- $def_params    := index site.Params "list_authors" | default (index site.Data.defaults "list_authors") -}}
+  {{- $def_params    := index site.Params "list_authors" | default (index hugo.Data.defaults "list_authors") -}}
   {{- $display_image := $def_params.headerimage | default false -}}
 
   {{- partial "headline.html" (dict "current" . "prefix" "authors" "display_img" $display_image "meta" (dict)) -}}
@@ -33,7 +33,7 @@
                     <ul class="author-socials"><!-- class="inline-list" -->
                         {{- range . -}}
                             {{- $account := .account -}}
-                            {{- with (index site.Data.socials .id) -}}
+                            {{- with (index hugo.Data.socials .id) -}}
                                 {{- $title := printf "%s %s" (i18n .followtext) .name -}}
                                 {{- $url   := printf .follow $account -}}
                                 {{- printf "<li><a href=\"%s\" title=\"%s\" target=\"%s\" rel=\"noopener noreferrer\"><i class=\"%s\"></i><span class=\"visually-hidden\">%s</span></a></li>" $url $title .target .icon .name | safeHTML -}}

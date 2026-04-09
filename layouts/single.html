@@ -2,7 +2,7 @@
 {{- $current_page  := . -}}
 
 {{/* ---- Get page parameters ---- */}}
-{{- $def_params  := site.Params.single | default site.Data.defaults.single -}}
+{{- $def_params  := site.Params.single | default hugo.Data.defaults.single -}}
 {{- $meta        := (index $def_params "meta") -}}
 {{- $display_img := $def_params.image  -}}
 {{- partial "headline.html" (dict "current" $current_page "prefix" "single" "display_img" $display_img "meta" $meta) -}}
@@ -26,7 +26,7 @@
   </div><!-- end of container -->
 </section>
 <footer class="single-footer">
-  {{- with site.Data.single.rows -}}
+  {{- with hugo.Data.single.rows -}}
     {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
   {{- end -}}
 </footer>

@@ -1,9 +1,9 @@
 {{- $current      := .current -}}
-{{- $def_params   := index site.Params.utterances | default site.Data.defaults.utterances                              -}}
-{{- $title        := i18n (.params.title   | default $def_params.title | default site.Data.defaults.utterances.title)  -}}
-{{- $heading_tag  :=       .params.heading | default $def_params.heading | default site.Data.defaults.widgets.heading  -}}
-{{- $term         := site.Params.utterances.term | default site.Data.defaults.utterances.term                          -}}
-{{- $theme        := site.Params.utterances.theme | default site.Data.defaults.utterances.theme                        -}}
+{{- $def_params   := index site.Params.utterances | default hugo.Data.defaults.utterances                              -}}
+{{- $title        := i18n (.params.title   | default $def_params.title | default hugo.Data.defaults.utterances.title)  -}}
+{{- $heading_tag  :=       .params.heading | default $def_params.heading | default hugo.Data.defaults.widgets.heading  -}}
+{{- $term         := site.Params.utterances.term | default hugo.Data.defaults.utterances.term                          -}}
+{{- $theme        := site.Params.utterances.theme | default hugo.Data.defaults.utterances.theme                        -}}
 
 
 {{- if site.Params.utterances.repo | default false -}}

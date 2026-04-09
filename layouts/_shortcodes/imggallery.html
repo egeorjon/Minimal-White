@@ -4,14 +4,14 @@
 {{/*   size          int     size of the thumbnails */}}
 {{/*   caption       int     display caption below the thumbnails */}}
 {{/*   overlay       string  top, bottom, or center */}}
-{{- $files      := .Get "files"      | default site.Params.shortcodes.gallery.files      | default site.Data.defaults.shortcodes.gallery.files      -}}
-{{- $size       := int (.Get "size"  | default site.Params.shortcodes.gallery.size       | default site.Data.defaults.shortcodes.gallery.size)      -}}
-{{- $ratio      := .Get "ratio"      | default site.Params.shortcodes.gallery.ratio      | default site.Data.defaults.shortcodes.gallery.ratio      -}}
-{{- $caption    := .Get "caption"    | default site.Params.shortcodes.gallery.caption    | default site.Data.defaults.shortcodes.gallery.caption    -}}
-{{- $overlay    := .Get "overlay"    | default site.Params.shortcodes.gallery.overlay    | default site.Data.defaults.shortcodes.gallery.overlay    -}}
-{{- $exif       := .Get "exif"       | default site.Params.shortcodes.gallery.exif       | default site.Data.defaults.shortcodes.gallery.exif       -}}
-{{- $galcaption := .Get "galcaption" | default site.Params.shortcodes.gallery.galcaption | default site.Data.defaults.shortcodes.gallery.galcaption -}}
-{{- $lic        := .Get "licence"    | default site.Params.shortcodes.gallery.licence    | default site.Data.defaults.shortcodes.gallery.licence    -}}
+{{- $files      := .Get "files"      | default site.Params.shortcodes.gallery.files      | default hugo.Data.defaults.shortcodes.gallery.files      -}}
+{{- $size       := int (.Get "size"  | default site.Params.shortcodes.gallery.size       | default hugo.Data.defaults.shortcodes.gallery.size)      -}}
+{{- $ratio      := .Get "ratio"      | default site.Params.shortcodes.gallery.ratio      | default hugo.Data.defaults.shortcodes.gallery.ratio      -}}
+{{- $caption    := .Get "caption"    | default site.Params.shortcodes.gallery.caption    | default hugo.Data.defaults.shortcodes.gallery.caption    -}}
+{{- $overlay    := .Get "overlay"    | default site.Params.shortcodes.gallery.overlay    | default hugo.Data.defaults.shortcodes.gallery.overlay    -}}
+{{- $exif       := .Get "exif"       | default site.Params.shortcodes.gallery.exif       | default hugo.Data.defaults.shortcodes.gallery.exif       -}}
+{{- $galcaption := .Get "galcaption" | default site.Params.shortcodes.gallery.galcaption | default hugo.Data.defaults.shortcodes.gallery.galcaption -}}
+{{- $lic        := .Get "licence"    | default site.Params.shortcodes.gallery.licence    | default hugo.Data.defaults.shortcodes.gallery.licence    -}}
 
 {{- $images := slice -}}
 {{- if eq (path.Dir $files) "." -}}

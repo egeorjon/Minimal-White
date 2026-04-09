@@ -1,10 +1,10 @@
 {{- $current      := .current                        -}}
 {{- $method       := .params.method | default "path" -}}
 {{- $value        := .params.value  | default ""     -}}
-{{- $format_date  := .params.format_date  | default site.Data.defaults.format_date                                                                -}}
-{{- $display_date := .params.display_date | default site.Params.widgets.page.display_date  | default site.Data.defaults.widgets.page.display_date -}}
-{{- $heading_tag  := .params.heading      | default site.Params.widgets.serieslist.heading | default site.Data.defaults.widgets.heading           -}}
-{{- $title        := i18n (.params.title  | default site.Params.widgets.serieslist.title   | default site.Data.defaults.widgets.serieslist.title) -}}
+{{- $format_date  := .params.format_date  | default hugo.Data.defaults.format_date                                                                -}}
+{{- $display_date := .params.display_date | default site.Params.widgets.page.display_date  | default hugo.Data.defaults.widgets.page.display_date -}}
+{{- $heading_tag  := .params.heading      | default site.Params.widgets.serieslist.heading | default hugo.Data.defaults.widgets.heading           -}}
+{{- $title        := i18n (.params.title  | default site.Params.widgets.serieslist.title   | default hugo.Data.defaults.widgets.serieslist.title) -}}
 {{- $post         := .params.post         | default "" -}}
 {{- if eq $method "field" -}}
     {{- $post = where site.Pages (printf "Params.%s" $value) true -}}

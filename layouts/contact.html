@@ -2,7 +2,7 @@
     {{- $current_page  := . -}}
 
     {{/* ---- Get page parameters ---- */}}
-    {{- $def_params := index site.Params "contact" | default (index site.Data.defaults "contact") -}}
+    {{- $def_params := index site.Params "contact" | default (index hugo.Data.defaults "contact") -}}
 
     {{- partial "headline.html" (dict "current" $current_page "prefix" "contact" "display_img" $def_params.image "meta" (dict)) -}}
     <section class="search-main">
@@ -51,7 +51,7 @@
             </div><!-- end of row -->
         </div><!-- end of container -->
    </section>
-    {{- with site.Data.contact.rows -}}
+    {{- with hugo.Data.contact.rows -}}
     <footer class="search-footer">
         {{- partial "widget-area.html" (dict "current" $current_page "config" .) -}}
     </footer>

@@ -61,18 +61,18 @@
 {{- end -}}
 
 {{- if ne .Kind "404" -}}
-    {{- if eq (site.Params.schema | default site.Data.defaults.head.schema) "internal" -}}
+    {{- if eq (site.Params.schema | default hugo.Data.defaults.head.schema) "internal" -}}
         {{- partial "schema.html" . -}}
     {{- else -}}
         {{- $param := anchorize (print "%s-%s" .Kind .Title) -}}
         {{- partial "schema-theme.html" . $param -}}
     {{- end -}}
-    {{- if eq (site.Params.opengraph | default site.Data.defaults.head.opengraph) "internal" -}}
+    {{- if eq (site.Params.opengraph | default hugo.Data.defaults.head.opengraph) "internal" -}}
         {{- partial "opengraph.html" . -}}
     {{- else -}}
         {{- partial "opengraph-theme.html" . -}}
     {{- end -}}
-    {{- if eq (site.Params.twittercard | default site.Data.defaults.head.twittercard) "internal" -}}
+    {{- if eq (site.Params.twittercard | default hugo.Data.defaults.head.twittercard) "internal" -}}
         {{- partial "twitter_cards.html" . -}}
     {{- else -}}
         {{- partial "twitter_cards-theme.html" . -}}

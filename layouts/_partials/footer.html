@@ -1,5 +1,5 @@
 {{- $current   := . -}}
-{{- $footer    := site.Data.footer -}}
+{{- $footer    := hugo.Data.footer -}}
 {{- with index site.Data (printf "%s-footer" $current.Kind) -}}
     {{- $footer = . -}}
 {{- end -}}

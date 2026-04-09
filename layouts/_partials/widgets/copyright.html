@@ -1,6 +1,6 @@
 {{- $current := .current -}}
-{{- $long    := .params.long_pattern  | default site.Params.widgets.copyright.long_pattern  | default site.Data.defaults.widgets.copyright.long_pattern  -}}
-{{- $short   := .params.short_pattern | default site.Params.widgets.copyright.short_pattern | default site.Data.defaults.widgets.copyright.short_pattern -}}
+{{- $long    := .params.long_pattern  | default site.Params.widgets.copyright.long_pattern  | default hugo.Data.defaults.widgets.copyright.long_pattern  -}}
+{{- $short   := .params.short_pattern | default site.Params.widgets.copyright.short_pattern | default hugo.Data.defaults.widgets.copyright.short_pattern -}}
 {{- $start   := string (.params.start | default site.Params.widgets.copyright.start         | default "") -}}
 {{- $end     := time.Now | time.Format "2006" -}}
 {{- if eq $start "" -}}

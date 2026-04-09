@@ -1,6 +1,6 @@
-{{- $lic_text       :=  site.Params.licenceText -}} {{/* | default site.Data.defaults.params.licencetext */}}
-{{- $lic_short_text :=  site.Params.licenceShortText -}} {{/* | default site.Data.defaults.params.licenceshorttext */}}
-{{- $lic_url        :=  site.Params.licenceURL  -}} {{/* | default site.Data.defaults.params.licenceurl */}}
+{{- $lic_text       :=  site.Params.licenceText -}} {{/* | default hugo.Data.defaults.params.licencetext */}}
+{{- $lic_short_text :=  site.Params.licenceShortText -}} {{/* | default hugo.Data.defaults.params.licenceshorttext */}}
+{{- $lic_url        :=  site.Params.licenceURL  -}} {{/* | default hugo.Data.defaults.params.licenceurl */}}
 {{- $string := "" -}}
 {{- with $lic_text -}}
     {{- with $lic_short_text -}}
