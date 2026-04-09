@@ -1,6 +1,6 @@
 {{- define "main" -}}
     {{- $current_page := . -}}
-    {{- $def_params   := site.Params.page404 | default site.Data.defaults.page404 -}}
+    {{- $def_params   := site.Params.page404 | default hugo.Data.defaults.page404 -}}
     {{- $display_img  := $def_params.headerimage -}}
 
     {{- partial "headline.html" (dict "current" . "prefix" "list" "display_img" $display_img "meta" (dict)) -}}

@@ -1,4 +1,5 @@
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML -}}
+{{- $lang := "" -}}{{- if lt hugo.Version "0.158" -}}{{- $lang = .Language.LanguageCode      -}}{{- else -}}{{- $lang = .Language.Locale    -}}{{- end -}}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{- $exclude := slice "tags" -}}
@@ -20,13 +21,13 @@
                     {{- range .Translations -}}
                         <xhtml:link
                             rel="alternate"
-                            hreflang="{{- .Language.LanguageCode -}}"
+                            hreflang="{{- $lang -}}"
                             href="{{- .Permalink -}}"
                             />
                     {{- end -}}
                     <xhtml:link
                         rel="alternate"
-                        hreflang="{{- .Language.LanguageCode -}}"
+                        hreflang="{{- $lang -}}"
                         href="{{- .Permalink -}}"
                         />
                 {{- end -}}

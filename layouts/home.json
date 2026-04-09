@@ -1,4 +1,4 @@
-{{- $formatdate := site.Params.formatdate | default site.Data.defaults.formatdate -}}
+{{- $formatdate := site.Params.formatdate | default hugo.Data.defaults.formatdate -}}
 {{- if .IsHome -}}
     {{- $.Scratch.Add "index" slice -}}
     {{- range (where site.RegularPages "Type" "in" site.Params.mainsections) -}}

@@ -1,23 +1,24 @@
 {{- $list := slice -}}
+{{- $lang := "" -}}{{- if lt hugo.Version "0.158" -}}{{- $lang = .Language.LanguageCode      -}}{{- else -}}{{- $lang = .Language.Locale    -}}{{- end -}}
 {{- $list  = $list | append (printf "\"%s\": \"%s\"" "name"        (site.Params.Manifest.name         | default site.Title)) -}}
 {{- $list  = $list | append (printf "\"%s\": \"%s\"" "shortname"   (site.Params.Manifest.shortname    | default site.Title)) -}}
-{{- $list  = $list | append (printf "\"%s\": \"%s\"" "display"     (site.Params.Manifest.display))      -}} {{/*| default site.Data.defaults.manifest.display)) -*/}}
-{{- $list  = $list | append (printf "\"%s\": \"%s\"" "lang"        (site.Params.Manifest.languageCode | default site.LanguageCode)) -}} {{/*| default site.Data.defaults.languagecode)) -*/}}
+{{- $list  = $list | append (printf "\"%s\": \"%s\"" "display"     (site.Params.Manifest.display))      -}} {{/*| default hugo.Data.defaults.manifest.display)) -*/}}
+{{- $list  = $list | append (printf "\"%s\": \"%s\"" "lang"        (site.Params.Manifest.languageCode | default $lang)) -}} {{/*| default hugo.Data.defaults.languagecode)) -*/}}
 {{- $list  = $list | append (printf "\"%s\": \"%s\"" "startUrl"    (site.Params.Manifest.startUrl     | default site.BaseURL)) -}}
-{{- $list  = $list | append (printf "\"%s\": \"%s\"" "theme_color" (site.Params.Manifest.themeColor   | default site.Params.themeColor)) -}} {{/*-| default site.Data.defaults.favicons.themecolor)) -*/}}
-{{- with site.Params.Manifest.backgroundcolor -}}  {{/*- | default site.Data.defaults.manifest.backgroundcolor -*/}}
+{{- $list  = $list | append (printf "\"%s\": \"%s\"" "theme_color" (site.Params.Manifest.themeColor   | default site.Params.themeColor)) -}} {{/*-| default hugo.Data.defaults.favicons.themecolor)) -*/}}
+{{- with site.Params.Manifest.backgroundcolor -}}  {{/*- | default hugo.Data.defaults.manifest.backgroundcolor -*/}}
     {{- $list  = $list | append (printf "\"%s\": \"%s\"" "background_color" .) -}}
 {{- end -}}
 {{- with (site.Params.Manifest.description | default site.Params.Description) -}}
     {{- $list  = $list | append (printf "\"%s\": \"%s\"" "description" (. | plainify | htmlUnescape)) -}}
 {{- end -}}
-{{- with (site.Params.Manifest.orientation) -}}  {{/*- | default site.Data.defaults.Manifest.orientation) -*/}}
+{{- with (site.Params.Manifest.orientation) -}}  {{/*- | default hugo.Data.defaults.Manifest.orientation) -*/}}
     {{- $list  = $list | append (printf "\"%s\": \"%s\"" "orientation" .) -}}
 {{- end }}
-{{- with (site.Params.Manifest.scope) -}}  {{/*- | default site.Data.defaults.Manifest.scope) -*/}}
+{{- with (site.Params.Manifest.scope) -}}  {{/*- | default hugo.Data.defaults.Manifest.scope) -*/}}
     {{- $list  = $list | append (printf "\"%s\": \"%s\"" "scope" .) -}}
 {{- end -}}
-{{- $fav_path  := site.Params.Manifest.favicons -}}  {{/*- | default site.Data.defaults.manifest.favicons -*/}}
+{{- $fav_path  := site.Params.Manifest.favicons -}}  {{/*- | default hugo.Data.defaults.manifest.favicons -*/}}
 {{- $base_path := path.Join "/static" $fav_path -}}
 {{- if fileExists $base_path -}}
     {{ $icon_list := slice -}}

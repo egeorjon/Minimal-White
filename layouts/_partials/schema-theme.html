@@ -3,7 +3,12 @@
 {{- $website    := $values.website    -}}
 {{- $org_id     := $values.org_id     -}}
 {{- $org        := $values.org        -}}
-{{- $language   := site.LanguageCode | default site.Data.default_params.languagecode -}}
+{{- $language := "" -}}
+{{- if lt hugo.Version "0.158" -}}
+  {{- $language = .Language.LanguageCode | default hugo.Data.default_params.languagecode -}}
+{{- else -}}
+  {{- $language = .Language.Locale | default hugo.Data.default_params.languagecode -}}
+{{- end -}}
 <!-- Schema -->
 <!-- -------------------- Breadcrumb ----------------------- -->
 {{- $breadcrumb    := dict -}}

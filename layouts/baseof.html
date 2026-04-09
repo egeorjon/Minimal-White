@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-{{- $lang := .Site.Language.Code | default hugo.Language.Code      -}}
-{{- $dir  := .Language.Direction | default .Site.Language.Direction -}}
+{{- $lang := "" -}}{{- if lt hugo.Version "0.158" -}}{{- $lang = .Language.LanguageCode      -}}{{- else -}}{{- $lang = .Language.Locale    -}}{{- end -}}
+{{- $dir  := "" -}}{{- if lt hugo.Version "0.158" -}}{{- $dir  = .Language.LanguageDirection -}}{{- else -}}{{- $dir  = .Language.Direction -}}{{- end -}}
 <html lang="{{- $lang -}}" dir="{{- or $dir `ltr` -}}">
 <head>
   {{/*- partial "cache.html" . -*/}}

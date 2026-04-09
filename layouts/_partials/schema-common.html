@@ -1,3 +1,4 @@
+{{- $lang := "" -}}{{- if lt hugo.Version "0.158" -}}{{- $lang = .Language.LanguageCode      -}}{{- else -}}{{- $lang = .Language.Locale    -}}{{- end -}}
 <!-- -------------------- Organization logo -------------------- -->
 {{- $logo := dict -}}
 {{- $logo_id := false -}}
@@ -17,8 +18,8 @@
     {{- range . -}}
         {{- if .account -}}
             {{- $acc := .account}}
-            {{- if and (ne .id nil) (ne site.Data.socials.config nil) -}}
-                {{- with (index site.Data.socials.config .id) -}}
+            {{- if and (ne .id nil) (ne hugo.Data.socials.config nil) -}}
+                {{- with (index hugo.Data.socials.config .id) -}}
                     {{- $list_url = $list_url | append (printf .follow $acc) -}}
                 {{- end -}}
             {{- end -}}
@@ -30,7 +31,7 @@
 {{- end -}}
 <!-- -------------- Website ----------------- -->
 {{- $website_id := (printf "%s#website" site.BaseURL) -}}
-{{- $website := dict "@type" "WebSite" "@id" $website_id "url" site.BaseURL "name" site.Title "inLanguage" (site.LanguageCode | default site.Data.default_params.languagecode) -}}
+{{- $website := dict "@type" "WebSite" "@id" $website_id "url" site.BaseURL "name" site.Title "inLanguage" ($lang | default hugo.Data.default_params.languagecode) -}}
 {{- $website = merge $website (dict "publisher" (dict "@id" $org_id) "copyrightHolder" (dict "@id" $org_id)) -}}
 {{- with site.Params.Description -}}
   {{- $website = merge $website (dict "description" .) -}}

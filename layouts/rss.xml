@@ -32,7 +32,8 @@
 {{- end -}}
 {{- $protocol := "https" -}}
 {{- if hugo.IsServer -}}{{- $protocol = "http:" -}}{{- end -}}
-{{- $img_size := int (site.Params.services.rss.imgsize | default site.Data.defaults.rss.imgsize) -}}
+{{- $img_size := int (site.Params.services.rss.imgsize | default hugo.Data.defaults.rss.imgsize) -}}
+{{- $lang := "" -}}{{- if lt hugo.Version "0.158" -}}{{- $lang = .Language.LanguageCode      -}}{{- else -}}{{- $lang = .Language.Locale    -}}{{- end -}}
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML -}}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -40,7 +41,7 @@
     <link>{{- .Permalink -}}</link>
     <description>Recent content {{- if ne .Title site.Title -}}{{- with .Title -}}in {{- . -}} {{- end -}}{{- end -}}on {{- site.Title -}}</description>
     <generator>Hugo</generator>
-    <language>{{- site.Language.LanguageCode -}}</language>{{- with $authorEmail -}}
+    <language>{{- $lang -}}</language>{{- with $authorEmail -}}
     <managingEditor>{{.}}{{- with $authorName -}} ({{- . -}}){{- end -}}</managingEditor>{{- end -}}{{- with $authorEmail -}}
     <webMaster>{{- . -}}{{- with $authorName -}} ({{- . -}}){{- end -}}</webMaster>{{- end -}}{{- with site.Copyright -}}
     <copyright>{{- . -}}</copyright>{{- end -}}{{- if not .Date.IsZero -}}
