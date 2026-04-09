@@ -3,14 +3,15 @@
     shouldSort        : true,
     includeScore      : true,
     includeMatches    : true,
-    isCaseSensitive   : false,
+    // isCaseSensitive   : false,
     threshold         : 0.9,
-    tokenize          : true,
-    location          : 0,
-    distance          : 100,
+    // tokenize          : true,
+    // location          : 0,
+    // distance          : 100,
     minMatchCharLength: 3,
     maxPatternLength  : 32,
     minMatchCharLength: 3,
+    ignoreLocation: true,
     keys: [
       { name:"title",    weight:0.8 },
       { name:"contents", weight:0.2 },
@@ -34,8 +35,6 @@
           if (results.length == 0) {
             refNode = document.querySelector("#not-found");
             refNode.classList.remove("hidden-visibility");
-            // refNode.textContent += "toto"
-            //insertMsg(refNode, "Aucun article ne correspond aux critères - No post found, with this criteria" );
           }
           else {
             populateResults(results);
