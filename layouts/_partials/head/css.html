@@ -4,9 +4,9 @@
     "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")
     "targetPath" "css/main.css"
     "transpiler" "libsass"
-  -}}
+  -}}{{/* dartsass */}}
   {{/*- $opts := dict "outputStyle" "enableSourceMap" "transpiler" "libsass" "targetPath" "css/style.css" -*/}}
-  {{- with . | toCSS $opts -}}
+  {{- with . | css.Sass $opts -}}
     {{- if hugo.IsDevelopment -}}
       <link rel="stylesheet" href="{{- .RelPermalink -}}">
     {{- else -}}
