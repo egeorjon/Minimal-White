@@ -1,6 +1,6 @@
 {{- $current   := . -}}
 {{- $footer    := hugo.Data.footer -}}
-{{- with index site.Data (printf "%s-footer" $current.Kind) -}}
+{{- with index hugo.Data (printf "%s-footer" $current.Kind) -}}
     {{- $footer = . -}}
 {{- end -}}
 {{- with $footer.rows -}}

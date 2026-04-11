@@ -43,7 +43,7 @@
     {{- partial "pagination2.html" . -}}
 
     {{- $footer := hugo.Data.list -}}
-    {{- with index site.Data (printf "%s" (replace $list_type "_" "-")) -}}
+    {{- with index hugo.Data (printf "%s" (replace $list_type "_" "-")) -}}
         {{- $footer = . -}}
     {{- end -}}
     {{- with $footer.rows -}}

@@ -14,8 +14,8 @@
     {{/*- end -*/}}
 {{- end -}}
 {{- with $exif_values -}}
-    {{- with .ISOSpeedRatings -}}   {{- $exif_list = $exif_list | append (printf "ISO %d" .) -}}{{- end -}}
-    {{- with .ISO -}}               {{- $exif_list = $exif_list | append (printf "ISO %d" .) -}}{{- end -}}
+    {{- with .ISOSpeedRatings -}}{{- $exif_list = $exif_list | append (printf "ISO %d" .) -}}{{- end -}}
+    {{- with .ISO -}}{{- $exif_list = $exif_list | append (printf "ISO %d" .) -}}{{- end -}}
     {{- with .ApertureValue -}}
         {{- $value := float (printf "%.1f" .) -}}
         {{- if gt (sub $value (math.Floor $value)) 0 -}}
