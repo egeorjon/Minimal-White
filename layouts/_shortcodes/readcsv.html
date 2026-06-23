@@ -1,0 +1,30 @@
+{{- $csvfile := cond (.IsNamedParams) (.Get "file") (.Get 0) -}}
+{{- $data := "" -}}
+{{- with or (.Page.Resources.Get $csvfile) (resources.Get $csvfile) -}}
+    {{- $opts := (dict "delimiter" ";" "targetType" "slice") -}}
+    {{- with transform.Unmarshal $opts . -}}
+        {{- $data = . -}}
+    {{- end -}}
+{{- end -}}
+{{- with $data -}}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-black">
+                <tr>
+                    {{- range index . 0 -}}
+                    <th>{{- . -}}</th>
+                    {{- end -}}
+                </tr>
+            </thead>
+            <tbody>
+            {{- range . | after 1 -}}
+                <tr>
+                {{- range . -}}
+                    <td>{{- . -}}</td>
+                {{- end -}}
+                </tr>
+            {{- end -}}
+            </tbody>
+        </table>
+    </div>
+{{- end -}}
