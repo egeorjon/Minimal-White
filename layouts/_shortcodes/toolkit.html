@@ -1,0 +1,10 @@
+{{- $script := cond (.IsNamedParams) (.Get "script") (.Get 0) -}}
+<div class="row">
+    <div class="col-12">
+        {{- .Inner -}}
+    </div>
+</div>
+{{ if $script }}
+    <!--<script src="{{- "js/" | relURL -}}{{- $script -}}"></script>-->
+    <script type="module" src="{{- "js/" | relURL -}}{{- $script -}}"></script>
+{{- end -}}
