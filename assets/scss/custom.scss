@@ -214,11 +214,14 @@ $aspect-ratios: map-merge($aspect-ratios,
 
 $table-variants: map-remove($table-variants,
    "secondary",
+);
+
+/*
    "success",
    "info",
    "warning",
    "danger"
-);
+*/
 
 // 5. Include remainder of required parts
 @import "../bootstrap-538/scss/maps";
@@ -272,12 +275,12 @@ $utilities: map-remove($utilities,
     "align-content",
     "align-self",
     "order",
-  /*  "margin", */
+    "margin",
     "margin-x",
     "margin-y",
     "margin-top",
     "margin-end",
-    "margin-bottom",
+  /*  "margin-bottom",*/
   /*  "margin-start", */
     "negative-margin",
     "negative-margin-x",
@@ -329,8 +332,8 @@ $utilities: map-remove($utilities,
 );
 
 
-// @import "../bootstrap-538/scss/accordion";
-// @import "../bootstrap-538/scss/alert";
+@import "../bootstrap-538/scss/accordion";
+@import "../bootstrap-538/scss/alert";
 // @import "../bootstrap-538/scss/badge";
 @import "../bootstrap-538/scss/breadcrumb";
 // @import "../bootstrap-538/scss/button-group";
@@ -344,9 +347,9 @@ $utilities: map-remove($utilities,
   @import "../bootstrap-538/scss/forms/labels";
   @import "../bootstrap-538/scss/forms/form-text";
   @import "../bootstrap-538/scss/forms/form-control";
-    // @import "../bootstrap-538/scss/forms/form-select";
-    // @import "../bootstrap-538/scss/forms/form-check";
-    // @import "../bootstrap-538/scss/forms/form-range";
+  @import "../bootstrap-538/scss/forms/form-select";
+  @import "../bootstrap-538/scss/forms/form-check";
+  @import "../bootstrap-538/scss/forms/form-range";
     // @import "../bootstrap-538/scss/forms/floating-labels";
   @import "../bootstrap-538/scss/forms/input-group";
     // @import "../bootstrap-538/scss/forms/validation";
