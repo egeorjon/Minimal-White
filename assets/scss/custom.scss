@@ -32,7 +32,6 @@ $font-sizes: (
   6: $h6-font-size
 );
 
-
 // scss-docs-start theme-color-variables
 $primary:       #457B9D; // $blue !default;
 // $secondary:     $gray-600 !default;
@@ -215,12 +214,11 @@ $aspect-ratios: map-merge($aspect-ratios,
 $table-variants: map-remove($table-variants,
    "secondary",
 );
-
 /*
-   "success",
-   "info",
-   "warning",
-   "danger"
+  "success",
+  "info",
+  "warning",
+  "danger"
 */
 
 // 5. Include remainder of required parts
@@ -331,7 +329,6 @@ $utilities: map-remove($utilities,
     "z-index"
 );
 
-
 @import "../bootstrap-538/scss/accordion";
 @import "../bootstrap-538/scss/alert";
 // @import "../bootstrap-538/scss/badge";
@@ -356,7 +353,7 @@ $utilities: map-remove($utilities,
 @import "../bootstrap-538/scss/grid";
 // @import "../bootstrap-538/scss/helpers";
   @import "../bootstrap-538/scss/helpers/clearfix";
-    // @import "../bootstrap-538/scss/helpers/color-bg";
+  @import "../bootstrap-538/scss/helpers/color-bg";
     // @import "../bootstrap-538/scss/helpers/colored-links";
     // @import "../bootstrap-538/scss/helpers/focus-ring";
     // @import "../bootstrap-538/scss/helpers/icon-link";
