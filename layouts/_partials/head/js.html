@@ -17,21 +17,6 @@
 {{- with $final -}}
   <script defer src="{{- .RelPermalink -}}" integrity="{{- .Data.Integrity -}}" crossorigin="anonymous"></script>
 {{- end -}}
-{{- if .Params.math -}}
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
-  <!-- <script id="MathJax-script" async src="{{- .RelPermalink -}}"></script> -->
-  <script>
-    MathJax = {
-      tex: {
-        displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
-        inlineMath: [['\\(', '\\)']]                  // inline
-      },
-      loader:{
-        load: ['ui/safe']
-      },
-    };
-  </script>
-{{- end -}}
 {{- if eq "search" (.Layout | default "standard") -}}
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.2.0"></script>
   {{- with resources.Get "js/search.js" -}}
