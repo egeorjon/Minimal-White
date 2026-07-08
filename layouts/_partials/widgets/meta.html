@@ -39,7 +39,7 @@
             {{- $sl := slice -}}
             {{- with $current.GetTerms "tags" -}}
                 {{- range . -}}
-                    {{- $sl = $sl | append (printf "<a href=\"%s\" %s>%s</a>" .Permalink $robot (humanize .LinkTitle)) -}}
+                    {{- $sl = $sl | append (printf "<a href=\"%s\" %s>%s</a>" .Permalink $robot .LinkTitle) -}}{{/* (humanize .LinkTitle) */}}
                 {{- end -}}
             {{- end -}}
             {{- if $sl -}}

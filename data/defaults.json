@@ -53,9 +53,20 @@
         "post_format"       : "two-cols-no-image",
         "cols"              : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
         "meta"              : {
-            "bottom"        : [ ],
+            "bottom"        : [ "tags" ],
             "middle"        : [ ],
             "top"           : [ "linkedsection" ]
+        }
+    },
+    "list_series_term": {
+        "headerimage"       : true,
+        "display_summary"   : false,
+        "post_format"       : "two-cols-no-image",
+        "cols"              : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
+        "meta"              : {
+            "bottom"        : [ "tags", "reading"],
+            "middle"        : [ ],
+            "top"           : [ "date", "section" ]
         }
     },
     "list_tags": {
