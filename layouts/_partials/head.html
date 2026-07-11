@@ -125,8 +125,8 @@
 {{- with .OutputFormats.Get "rss" -}}
     {{- printf "<link rel=\"%s\" type=\"%s\" href=\"%s\" title=\"%s\" />" .Rel .MediaType.Type .Permalink site.Title | safeHTML -}}
 {{- end -}}
-{{- partialCached "head/css.html" . "unique" -}}
-{{- partialCached "head/js.html" . .Layout  -}}
+{{- partial "head/css.html" . -}}
+{{- partial "head/js.html" .  -}}
 
 {{- with site.Params.googleWMT | default false -}}
     <meta name="google-site-verification" content="{{- . -}}" />
