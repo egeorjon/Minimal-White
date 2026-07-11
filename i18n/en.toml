@@ -312,3 +312,6 @@
 
 [navigate-series]
     other = "Use the series"
+
+[tool-title]
+    other = "[TOOL] "

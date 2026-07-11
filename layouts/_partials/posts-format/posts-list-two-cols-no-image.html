@@ -6,6 +6,10 @@
 {{- with $meta.top -}}
   {{- $class = "class=\"col-12 col-md-9 col-xl-10\"" -}}
 {{- end -}}
+{{- $title := $current.LinkTitle -}}
+{{- with $current.GetTerms "tools" -}}
+  {{- $title = printf "%s%s" (i18n "tool-title") $title -}}
+{{- end -}}
 <article class="col">
   <div class="row">
     {{- with $meta.top -}}
@@ -17,7 +21,7 @@
       {{- with $meta.middle -}}
         {{- partial (path.Join "widgets" "meta.html") (dict "current" $current "context" $context "meta" . "class" "meta-middle") -}}
       {{- end -}}
-      <h2><a href="{{- $current.RelPermalink -}}" title="{{- $current.Title | safeHTMLAttr -}}">{{- $current.LinkTitle -}}</a></h2>
+      <h2><a href="{{- $current.RelPermalink -}}" title="{{- $current.Title | safeHTMLAttr -}}">{{- $title -}}</a></h2>
       {{/*- if eq $display_sum true -*/}}
       <div class="post-summary">
         {{- $current.Summary | safeHTML -}}

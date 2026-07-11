@@ -17,6 +17,9 @@
   {{- $summary     = $current.Summary      -}}
   {{- $img_path    = index $current.Params.images 0    -}}
 {{- end -}}
+{{- with $current.GetTerms "tools" -}}
+  {{- $title       = printf "%s%s" (i18n "tool-title") $title -}}
+{{- end -}}
 {{- $path_meta := path.Join "widgets" "meta.html" -}}
 {{- if isset $current.Params "images" -}}
   {{- $string := "" -}}
