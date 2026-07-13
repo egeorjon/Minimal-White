@@ -189,7 +189,7 @@ $pinks: map-remove($pinks,
 $teals: map-remove($teals,
   "teal-100", "teal-200", "teal-300", "teal-400", "teal-500", "teal-600", "teal-700", "teal-800", "teal-900"
 );
-
+/*
 $grid-breakpoints: map-remove($grid-breakpoints,
   xxl
 );
@@ -197,7 +197,7 @@ $grid-breakpoints: map-remove($grid-breakpoints,
 $container-max-widths: map-remove($container-max-widths,
   xxl
 );
-
+*/
 $border-widths:  map-remove($border-widths,
   2, 3, 4, 5
 );
@@ -251,7 +251,7 @@ $utilities: map-remove($utilities,
     "border-end",
     "border-bottom",
     "border-start",
-    "border-color",
+  /*  "border-color",*/
     "subtle-border-color",
     "border-width",
     "border-opacity",
