@@ -1,0 +1,40 @@
+{{- $current        := .current -}}
+{{- $heading_tag    := .params.heading     | default site.Params.widgets.linkedtool.heading    | default hugo.Data.defaults.widgets.heading         -}}
+{{- $subheading_tag := .params.subheading  | default site.Params.widgets.linkedtool.subheading | default hugo.Data.defaults.widgets.linkedtool.subheading | default hugo.Data.defaults.widgets.subheading -}}
+{{- $title          := i18n (.params.title | default site.Params.widgets.linkedtool.title      | default hugo.Data.defaults.widgets.linkedtool.title) -}}
+{{- $columns        := .params.columns | default site.Params.widgets.linkedtool.columns | default hugo.Data.defaults.widgets.linkedtool.columns    -}}
+{{- $class          := partialCached "class-columns.html" $columns (delimit $columns "-") -}}
+{{- with $current.Params.tooling -}}
+    {{- $pages := index site.Taxonomies.tools . -}}
+    {{- if $pages -}}
+        <section class="col widget widget-linked-tool" aria-label="{{- with $title -}}{{- . | anchorize -}}{{- end -}}">
+            <div class="widget-inner">
+                <div class="widget-header">
+                    {{- printf "<%s class=\"widget-title\">%s</%s>" $heading_tag (printf $title $current.Params.tooling) $heading_tag | safeHTML -}}
+                </div><!-- widget-header -->
+                <div class="widget-content {{ $class -}}">
+                {{- range $pages.Pages -}}
+                    {{- $icon_string := "" -}}
+                    {{- if .Params.icon -}}
+                        {{- $icon  := .Resources.GetMatch .Params.icon -}}
+                        {{- with $icon -}}
+                            {{- $icon_string = printf "<img class=\"tool-icon\" src=\"%s\" width=512 height=512 />" .Permalink -}}
+                        {{- end -}}
+                    {{- end -}}
+                    <div class="col mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                {{- (printf "<%s class=\"card-title\">%s<a href=\"%s\" title=\"%s\">%s</a></%s>" $subheading_tag $icon_string .RelPermalink (.Title | plainify | htmlUnescape) .Title $subheading_tag) | safeHTML -}}
+                                {{/*- (printf "%s<%s class=\"card-title\">%s</%s>" $icon_string $subheading_tag .Title $subheading_tag) | safeHTML -*/}}
+                            </div>
+                            <div class="card-body">
+                                {{- .Description | safeHTML -}}
+                            </div>
+                        </div><!-- card -->
+                    </div><!-- col -->
+                {{- end -}}
+                </div><!-- widget-content -->
+            </div><!-- widget-inner -->
+        </section>
+    {{- end -}}
+{{- end -}}
