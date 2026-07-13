@@ -733,6 +733,23 @@ figcaption.bottom span,
     }
 }
 
+.tool-list-item a {
+    text-decoration: none;
+    font-weight: bold;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.tool-icon {
+    display: inline;
+    max-height: 2em;
+    max-width: 2em;
+    margin-right: 0.5em;
+}
+
+
+
 /* -------------------------------------------------
    --- Print                                     ---
    ------------------------------------------------- */
