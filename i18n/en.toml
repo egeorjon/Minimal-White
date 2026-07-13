@@ -315,3 +315,14 @@
 
 [tool-title]
     other = "[TOOL] "
+
+[linked-tools]
+    one   = "Tool linked to the content of this post (&laquo; %s &raquo;)"
+    other = "Available tools (&laquo; %s &raquo;)"
+
+[same-tools]
+    one   = "Tool about the same subject (&laquo; %s &raquo;)"
+    other = "Tools about the same subject (&laquo; %s &raquo;)"
+
+[this-tool]
+    other = "This tool"

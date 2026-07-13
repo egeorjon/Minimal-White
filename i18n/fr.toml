@@ -319,3 +319,14 @@
 
 [tool-title]
     other = "[OUTIL] "
+
+[linked-tools]
+    one   = "Outil lié au contenu de cet articl (&laquo; %s &raquo;)"
+    other = "Outils liés au contenu de cet article (&laquo; %s &raquo;)"
+
+[same-tools]
+    one   = "Outil sur le même sujet (&laquo; %s &raquo;)"
+    other = "Outils sur le même sujet (&laquo; %s &raquo;)"
+
+[this-tool]
+    other = "Cet outil"
