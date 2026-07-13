@@ -164,16 +164,13 @@
             "format_date"   : ":date_medium"
         },
         "meta": {
-            "title"         : "post-meta"
+            "title"     : "post-meta"
         },
         "sections": {
-            "title"         : "sections-list",
-            "length"        : 100,
-            "summary"       : true,
-            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 4, "xl": 4 }
-        },
-        "tags_secion": {
-            "title"     : "tags-section"
+            "title"     : "sections-list",
+            "length"    : 100,
+            "summary"   : true,
+            "columns"   : { "xs": 1, "sm": 1, "md": 2, "lg": 4, "xl": 4 }
         },
         "popular"       : {
             "title"     : "popular-posts",
@@ -182,9 +179,9 @@
             "summary"   : true,
             "columns"   : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
             "meta"      : {
-                "top"       : [ "date" ],
-                "middle"    : [],
-                "bottom"    : [ "section", "reading" ]
+                "top"   : [ "date" ],
+                "middle": [],
+                "bottom": [ "section", "reading" ]
             }
         },
         "lastposts"     : {
@@ -194,9 +191,9 @@
             "summary"   : true,
             "columns"   : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
             "meta"      : {
-                "top"       : [ "date" ],
-                "middle"    : [ ],
-                "bottom"    : [ ]
+                "top"   : [ "date" ],
+                "middle": [ ],
+                "bottom": [ ]
             }
         },
         "related"       : {
@@ -206,9 +203,9 @@
             "summary"   : true,
             "columns"   : { "xs": 1, "sm": 1, "md": 1, "lg": 1, "xl": 1 },
             "meta"      : {
-                "top"       : [ "date" ],
-                "middle"    : [ ],
-                "bottom"    : [ "section", "reading" ]
+                "top"   : [ "date" ],
+                "middle": [ ],
+                "bottom": [ "section", "reading" ]
             }
         },
         "single_pagination": {
@@ -218,6 +215,16 @@
         },
         "sameserie": {
             "title"     : "same-serie"
+        },
+        "sametool": {
+            "title"     : "same-tools",
+            "columns"   : { "xs": 1, "sm": 1, "md": 2, "lg": 2, "xl": 3 },
+            "subheading": "h4"
+        },
+        "linkedtool": {
+            "title"     : "linked-tools",
+            "columns"   : { "xs": 1, "sm": 1, "md": 2, "lg": 2, "xl": 3 },
+            "subheading": "h4"
         }
     }
 }
