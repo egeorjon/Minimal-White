@@ -317,12 +317,21 @@
     other = "[TOOL] "
 
 [linked-tools]
-    one   = "Tool linked to the content of this post (&laquo; %s &raquo;)"
-    other = "Available tools (&laquo; %s &raquo;)"
+    one   = "Tool linked to the content of this post"
+    other = "Tools linked to the content of this post"
 
 [same-tools]
-    one   = "Tool about the same subject (&laquo; %s &raquo;)"
-    other = "Tools about the same subject (&laquo; %s &raquo;)"
+    one   = "Tool about the same subject"
+    other = "Tools about the same subject"
 
 [this-tool]
     other = "This tool"
+
+[tools-list]
+    other = "List of available tools"
+
+[see-all-tools]
+    other = "See all the tools"
+    
+[see-all-tools-alt]
+    other = "See all the tools' details"

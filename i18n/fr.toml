@@ -321,12 +321,21 @@
     other = "[OUTIL] "
 
 [linked-tools]
-    one   = "Outil lié au contenu de cet articl (&laquo; %s &raquo;)"
-    other = "Outils liés au contenu de cet article (&laquo; %s &raquo;)"
+    one   = "Outil lié au contenu de cet article"
+    other = "Outils liés au contenu de cet article"
 
 [same-tools]
-    one   = "Outil sur le même sujet (&laquo; %s &raquo;)"
-    other = "Outils sur le même sujet (&laquo; %s &raquo;)"
+    one   = "Outil sur le même sujet"
+    other = "Outils sur le même sujet"
 
 [this-tool]
     other = "Cet outil"
+
+[tools-list]
+    other = "Liste des outils disponibles"
+
+[see-all-tools]
+    other = "Voir tous les outils"
+
+[see-all-tools-alt]
+    other = "Voir le détail de tous les outils"
