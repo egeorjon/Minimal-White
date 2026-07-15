@@ -1,0 +1,22 @@
+{{/* ----------------------------------------
+     --- Parameters:
+     ---    .Text
+     ---    .Level
+     ---    .Class
+     ---    .Page
+     ---    .Prefix
+     ---------------------------------------- */}}
+{{- $level := replace .Level "h" ""  -}}
+{{- if .Page -}}
+    {{- $anchorID := .Page.Title | anchorize | urlize -}}
+    {{- $prefix_string := "" -}}
+    {{- with .Prefix -}}
+        {{- $prefix_string = . -}}
+    {{- end -}}
+    {{- printf "<h%s id=\"%s\" class=\"%s\">%s<a href=\"%s\" title=\"%s\">%s</a></h%s>" $level $anchorID .Class $prefix_string .Page.RelPermalink (.Page.Title | plainify | htmlUnescape) .Page.Title $level | safeHTML -}}
+{{- else -}}
+    {{- if .Text -}}
+        {{- $anchorID := .Text | anchorize | urlize -}}
+        {{- printf "<h%s id=\"%s\" class=\"%s\">%s</h%s>" $level $anchorID .Class .Text $level | safeHTML -}}
+    {{- end -}}
+{{- end -}}
