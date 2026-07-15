@@ -217,14 +217,46 @@
             "title"     : "same-serie"
         },
         "sametool": {
-            "title"     : "same-tools",
-            "columns"   : { "xs": 1, "sm": 1, "md": 2, "lg": 2, "xl": 3 },
-            "subheading": "h4"
+            "title"         : "same-tools",
+            "subheading"    : "h4",
+            "num"           : 6,
+            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 4, "xl": 4 },
+            "mode"          : "card",
+            "view_all"      : true,
+            "length"        : 100,
+            "meta"          : {
+                "bottom"    : [ "section", "tags" ],
+                "middle"    : [],
+                "top"       : []
+            }
         },
         "linkedtool": {
-            "title"     : "linked-tools",
-            "columns"   : { "xs": 1, "sm": 1, "md": 2, "lg": 2, "xl": 3 },
-            "subheading": "h4"
+            "title"         : "linked-tools",
+            "subheading"    : "h4",
+            "num"           : 6,
+            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 4, "xl": 4 },
+            "mode"          : "card",
+            "view_all"      : true,
+            "length"        : 100,
+            "meta"          : {
+                "bottom"    : [ "section", "tags" ],
+                "middle"    : [],
+                "top"       : []
+            }
+        },
+        "toolslist": {
+            "title"         : "tools-list",
+            "subheading"    : "h4",
+            "num"           : 6,
+            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 4, "xl": 4 },
+            "mode"          : "card",
+            "view_all"      : true,
+            "length"        : 100,
+            "meta"          : {
+                "bottom"    : [ "section", "tags" ],
+                "middle"    : [],
+                "top"       : []
+            }
         }
     }
 }
