@@ -1,0 +1,97 @@
+{{- $current  := .current -}}
+{{- $config   := .config | default "toolslist" -}}
+{{- $subtitle := .subtitle | default "" -}}
+
+{{- $widget_def  := index hugo.Data.defaults.widgets $config -}}
+{{- $widget_conf := index site.Params.widgets $config        -}}
+
+{{- $heading_tag    := .params.heading    | default $widget_conf.heading    | default $widget_def.heading    | default hugo.Data.defaults.widgets.heading    -}}
+{{- $subheading_tag := .params.subheading | default $widget_conf.subheading | default $widget_def.subheading | default hugo.Data.defaults.widgets.subheading -}}
+{{- $title          := .params.title      | default $widget_conf.title      | default $widget_def.title      | default ""                                    -}}
+{{- $num            := .params.num        | default $widget_conf.num        | default $widget_def.num        | default ""                                    -}}
+{{- $length         := .params.length     | default $widget_conf.length     | default $widget_def.length                                                     -}}
+{{- $columns        := .params.columns    | default $widget_conf.columns    | default $widget_def.columns                                                    -}}
+{{- $mode           := .params.mode       | default $widget_conf.mode       | default $widget_def.mode                                                       -}}
+{{- $meta           := .params.meta       | default $widget_conf.meta       | default $widget_def.meta                                                       -}}
+{{- $view_all       := .params.view_all   | default $widget_conf.view_all   | default ""                                                                     -}}
+
+{{/*- $heading_tag    := .params.heading      | default site.Params.widgets.toolslist.heading    | default hugo.Data.defaults.widgets.heading            -}}
+{{- $subheading_tag := .params.subheading   | default site.Params.widgets.toolslist.subheading | default hugo.Data.defaults.widgets.subheading         -}}
+{{- $title          := i18n (.params.title  | default site.Params.widgets.toolslist.title      | default hugo.Data.defaults.widgets.toolslist.title)   -}}
+{{- $num            := int (.params.num     | default site.Params.widgets.toolslist.num        | default hugo.Data.defaults.widgets.toolslist.num)     -}}
+{{- $length         := int (.params.length  | default site.Params.widgets.toolslist.length     | default hugo.Data.defaults.widgets.toolslist.length)  -}}
+{{- $columns        :=      .params.columns | default site.Params.widgets.toolslist.columns    | default hugo.Data.defaults.widgets.toolslist.columns  -}}
+{{- $mode           :=      .params.mode    | default site.Params.widgets.toolslist.mode       | default hugo.Data.defaults.widgets.toolslist.mode     -}}
+{{- $view_all       := .params.view_all     | default site.Params.widgets.toolslist.view_all   | default hugo.Data.defaults.widgets.toolslist.view_all -}}
+{{- $meta           :=      .params.meta    | default site.Params.widgets.toolslist.meta      | default hugo.Data.defaults.widgets.toolslist.meta      -*/}}
+{{- $class          := partialCached "class-columns.html" $columns (delimit $columns "-") -}}
+
+{{- $filterkey    := .filterkey | default false -}}
+{{- $filtervalues := .filtervalues | default false -}}
+
+{{- $path_meta := "meta.html" -}}
+{{- $tools     := where site.RegularPages "Type" "tool" -}}
+{{- if and $filterkey $filtervalues -}}
+    {{- if eq $filterkey "Section" -}}
+        {{- $tools = where $tools $filterkey $filtervalues -}}
+    {{- else -}}
+        {{- $tools = where $tools $filterkey "intersect" $filtervalues -}}
+    {{- end -}}
+{{- end -}}
+{{- with $tools -}}
+    {{- if eq $mode "list" -}}
+        {{/* to be done later */}}
+    {{- else -}}
+        <section class="col widget widget-tools widget-tools-card">
+            <div class="widget-inner">
+                <div class="widget-header clearfix">
+                    {{- with $title -}}
+                        {{- with $subtitle -}}
+                            {{- $title = printf (i18n $title) $subtitle -}}
+                        {{- else -}}
+                            {{- $title = i18n $title -}}
+                        {{- end -}}
+                        {{/* Add a link to view all */}}
+                        {{- partial "headings.html" (dict "Text" $title "Class" "widget-title" "Level" $heading_tag) -}}
+                    {{- end -}}
+                </div><!-- widget-header -->
+                <div class="widget-content {{ $class -}}">
+                    {{- range $tools | shuffle -}}
+                        {{- $class_current := "" -}}
+                        {{- if eq . $current -}}
+                            {{- $class_current = "text-bg-light border-dark" -}}
+                        {{- end -}}
+                        {{- $icon_string := "" -}}
+                        {{- if .Params.icon -}}
+                            {{- $icon  := .Resources.GetMatch .Params.icon -}}
+                            {{- with $icon -}}
+                                {{- $icon_string = printf "<img class=\"tool-icon\" src=\"%s\" width=256 height=256 />" .RelPermalink -}}
+                            {{- end -}}
+                        {{- end -}}
+                        <div class="col mb-3 ">
+                            <aside class="card h-100 {{ $class_current -}}" aria-label="{{- . -}}">
+                                <div class="card-header">
+                                    {{- partial "headings.html" (dict "Page" . "Prefix" $icon_string "Class" "card-title" "Level" $subheading_tag) -}}
+                                    {{/*- (printf "<%s class=\"card-title\"><a href=\"%s\" title=\"%s\">%s</a></%s>" $subheading_tag .RelPermalink (.Title | plainify | htmlUnescape) .Title $subheading_tag) | safeHTML -*/}}
+                                </div>
+                                <div class="card-body">
+                                    {{- with .Params.Description -}}
+                                        {{- $string := . -}}
+                                        {{- if gt $length 0 -}}
+                                            {{- $string = $string | truncate $length "..." -}}
+                                        {{- end -}}
+                                        <p>{{- $string | safeHTML -}}</p>
+                                    {{- end -}}
+                                    {{- if $meta.bottom -}}
+                                        {{- partial $path_meta (dict "current" . "context" .Parent "meta" $meta.bottom "class" "post-meta-bottom") -}}
+                                    {{- end -}}
+                                </div>
+                            </aside>
+                        </div><!-- col -->
+                    {{- end -}}
+                </div><!-- end of widget-content -->
+            </div><!-- end of widget-inner -->
+        </section>
+    {{- end -}}
+{{- end -}}
+

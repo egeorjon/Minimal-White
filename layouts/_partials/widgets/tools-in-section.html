@@ -1,0 +1,3 @@
+{{- if .current.IsSection -}}
+    {{- partial "widgets/tools-common.html" (dict "current" .current "filterkey" "Section" "filtervalues" .current.Section) -}}
+{{- end -}}
