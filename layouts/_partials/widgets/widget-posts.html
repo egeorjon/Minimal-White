@@ -13,6 +13,10 @@
 {{- $view_all       := .params.view_all   | default $widget_conf.view_all   | default ""                                                                     -}}
 {{- $widget_class   := .widgetclass       | default "posts"  -}}
 {{- $class          := partialCached "class-columns.html" $columns (delimit $columns "-") -}}
+
+{{/*- $path_meta := path.Join "widgets" "meta.html" -*/}}
+{{- $path_meta := "meta.html" -}}
+
 {{- with .posts -}}
     {{- $posts := . -}}
     <section class="col widget widget-{{- $widget_class -}}">
@@ -35,12 +39,12 @@
                         <div class="row">
                             {{- with $meta.top -}}
                                 <div class="col-12 col-md-3">
-                                    {{- partial (path.Join "widgets" "meta.html") (dict "current" $post "context" $post.Parent "meta" . "class" "meta-top") -}}
+                                    {{- partial $path_meta (dict "current" $post "context" $post.Parent "meta" . "class" "meta-top") -}}
                                 </div><!-- col -->
                             {{- end -}}
                             <div class="col-12 {{ with $meta.top -}}col-md-9{{- end -}}">
                                 {{- with $meta.middle -}}
-                                    {{- partial (path.Join "widgets" "meta.html") (dict "current" $post "context" $post.Parent "meta" . "class" "meta-middle") -}}
+                                    {{- partial $path_meta (dict "current" $post "context" $post.Parent "meta" . "class" "meta-middle") -}}
                                 {{- end -}}
                                 {{- (printf "<%s class=\"widget-title\"><a href=\"%s\" title=\"%s\">%s</a></%s>" $subheading_tag .RelPermalink (.Title | plainify) .Title $subheading_tag) | safeHTML -}}
                                 {{- if $summary -}}
@@ -54,7 +58,7 @@
                                     {{- end -}}
                                 {{- end -}}
                                 {{- with $meta.bottom -}}
-                                    {{- partial (path.Join "widgets" "meta.html") (dict "current" $post "context" $post.Parent "meta" . "class" "meta-bottom") -}}
+                                    {{- partial $path_meta (dict "current" $post "context" $post.Parent "meta" . "class" "meta-bottom") -}}
                                 {{- end -}}
                             </div><!-- col -->
                         </div><!-- row -->
