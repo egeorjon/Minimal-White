@@ -2,25 +2,25 @@
 {{- $prefix      := .prefix      -}}
 {{- $display_img := .display_img -}}
 {{- $meta        := .meta        -}}
-
-{{- $title       := "" -}}
-{{- $description := "" -}}
-{{- $summary     := "" -}}
-{{- $img_path    := "" -}}
-{{- if eq $current.Kind "404" -}}
-  {{- $title       = i18n "404-page-not-found" -}}
-  {{- $description = i18n "404-error-desc" -}}
+{{- $title       := ""           -}}
+{{- $description := ""           -}}
+{{- $summary     := ""           -}}
+{{- $img_path    := ""           -}}
+{{- if eq $current.Kind "404"    -}}
+  {{- $title       = i18n "404-page-not-found"      -}}
+  {{- $description = i18n "404-error-desc"          -}}
   {{- $img_path    = hugo.Data.defaults.page404.img -}}
 {{- else -}}
-  {{- $title       = $current.Title        -}}
-  {{- $description = $current.Description  -}}
-  {{- $summary     = $current.Summary      -}}
-  {{- $img_path    = index $current.Params.images 0    -}}
+  {{- $title       = $current.Title                 -}}
+  {{- $description = $current.Description           -}}
+  {{- $summary     = $current.Summary               -}}
+  {{- $img_path    = index $current.Params.images 0 -}}
 {{- end -}}
-{{- with $current.GetTerms "tools" -}}
-  {{- $title       = printf "%s%s" (i18n "tool-title") $title -}}
+{{- if eq $current.Type "tool" -}}
+  {{- $title = printf "<i class=\"bi bi-tools\" aria-hidden=\"true\"> </i>%s" $title | safeHTML -}}
 {{- end -}}
-{{- $path_meta := path.Join "widgets" "meta.html" -}}
+{{/*- $path_meta := path.Join "widgets" "meta.html" -*/}}
+{{- $path_meta := "meta.html" -}}
 {{- if isset $current.Params "images" -}}
   {{- $string := "" -}}
   {{- if ne $img_path "" -}}
