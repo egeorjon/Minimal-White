@@ -38,7 +38,7 @@
 {{/* "Internal" image, display the licence */}}
 {{- if gt $imgtype 1 -}}
     {{- with $image.Params.lic -}}
-        {{- $lic_string = partial "image-lic.html" . -}}
+        {{- $lic_string = partialCached "image-lic.html" . . -}}
     {{- end -}}
 {{- end -}}
 {{- if eq $imgtype 1 -}}
