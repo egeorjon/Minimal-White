@@ -1,1 +1,4 @@
-{{- partial "widgets/tools-common.html" (dict "current" .current ) -}}
+{{- $tools := where site.RegularPages "Type" "tool" -}}
+{{- if $tools -}}
+    {{- partial "widgets/tools-common.html" (dict "current" .current "tools" $tools "params" .params) -}}
+{{- end -}}

@@ -1,0 +1,19 @@
+{{- $current := .current -}}
+{{- $params  := .params  -}}
+{{- if eq $current.Type "tool" -}}
+    {{- $tl := slice -}}
+    {{- with $current.GetTerms "tags" -}}
+        {{- $first_tag := (index . 0).Title -}}
+        {{- range . -}}
+            {{- $tl = $tl | append (lower .Title) -}}
+        {{- end -}}
+        {{- if $tl -}}
+            {{- $tools := where site.RegularPages "Type" "tool" -}}
+            {{/*- if and $filterkey $filtervalues -*/}}
+            {{- $tools = where $tools "Params.tags" "intersect" $tl -}}
+            {{- if $tools -}}
+                {{- partial "widgets/tools-common.html" (dict "current" $current "config" "sametool" "subtitle" $first_tag "tools" $tools "params" $params) -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}

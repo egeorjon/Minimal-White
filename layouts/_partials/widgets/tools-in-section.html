@@ -1,3 +1,9 @@
-{{- if .current.IsSection -}}
-    {{- partial "widgets/tools-common.html" (dict "current" .current "filterkey" "Section" "filtervalues" .current.Section) -}}
+{{- $section := .section | default .current.Section -}}
+{{- if $section -}}
+    {{- $tools   := where site.RegularPages "Type" "tool" -}}
+    {{- $tools    = where $tools "Section" $section  -}}
+    {{- if $tools -}}
+        {{- partial "widgets/tools-common.html" (dict "current" .current "tools" $tools "config" "toolssection") -}}
+    {{- end -}}
+    {{/*- partial "widgets/tools-common.html" (dict "current" $current "config" "linkedtool" "filterkey" "Params.tags" "filtervalues" (slice .)) -*/}}
 {{- end -}}

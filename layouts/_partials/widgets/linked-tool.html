@@ -1,4 +1,0 @@
-{{- $current := .current -}}
-{{- with $current.Params.tooling -}}
-    {{- partial "widgets/tools-common.html" (dict "current" $current "config" "linkedtool" "filterkey" "Params.tags" "filtervalues" (slice .)) -}}
-{{- end -}}
