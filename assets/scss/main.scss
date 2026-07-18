@@ -748,6 +748,11 @@ figcaption.bottom span,
     margin-right: 0.5em;
 }
 
+h4.card-title,
+h3.card-title  {
+    margin-top: 0!important;
+}
+
 /* -------------------------------------------------
    --- Print                                     ---
    ------------------------------------------------- */
