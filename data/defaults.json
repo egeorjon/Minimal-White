@@ -220,9 +220,9 @@
             "title"         : "same-tools",
             "subheading"    : "h4",
             "num"           : 6,
-            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 4, "xl": 4 },
+            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 3, "xl": 3, "xxl": 4 },
             "mode"          : "card",
-            "view_all"      : true,
+            "view_all"      : "/pages/tools",
             "length"        : 100,
             "meta"          : {
                 "bottom"    : [ "section", "tags" ],
@@ -234,9 +234,23 @@
             "title"         : "linked-tools",
             "subheading"    : "h4",
             "num"           : 6,
-            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 4, "xl": 4 },
+            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 3, "xl": 3, "xxl": 4 },
             "mode"          : "card",
-            "view_all"      : true,
+            "view_all"      : "/pages/tools",
+            "length"        : 100,
+            "meta"          : {
+                "bottom"    : [ "section", "tags" ],
+                "middle"    : [],
+                "top"       : []
+            }
+        },
+        "toolssection": {
+            "title"         : "tools-list-section",
+            "subheading"    : "h4",
+            "num"           : 6,
+            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 3, "xl": 3, "xxl": 4 },
+            "mode"          : "card",
+            "view_all"      : "/pages/tools",
             "length"        : 100,
             "meta"          : {
                 "bottom"    : [ "section", "tags" ],
@@ -248,9 +262,9 @@
             "title"         : "tools-list",
             "subheading"    : "h4",
             "num"           : 6,
-            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 4, "xl": 4 },
+            "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 3, "xl": 3, "xxl": 4 },
             "mode"          : "card",
-            "view_all"      : true,
+            "view_all"      : "/pages/tools",
             "length"        : 100,
             "meta"          : {
                 "bottom"    : [ "section", "tags" ],
