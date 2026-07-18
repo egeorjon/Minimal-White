@@ -325,17 +325,24 @@
     other = "Outils liés au contenu de cet article"
 
 [same-tools]
-    one   = "Outil sur le même sujet"
-    other = "Outils sur le même sujet"
+    one   = "Outil sur le même sujet (%s)"
+    other = "Outils sur le même sujet (%s)"
+
+[tools-list-section]
+    one   = "Outil disponible dans cette section"
+    other = "Outils disponibles dans cette section"
 
 [this-tool]
     other = "Cet outil"
 
 [tools-list]
-    other = "Liste des outils disponibles"
+    other = "Liste des outils disponibles sur ce site"
 
 [see-all-tools]
     other = "Voir tous les outils"
 
 [see-all-tools-alt]
     other = "Voir le détail de tous les outils"
+
+[other-topics]
+    other = "Autres sujets"

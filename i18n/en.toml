@@ -324,14 +324,21 @@
     one   = "Tool about the same subject"
     other = "Tools about the same subject"
 
+[tools-list-section]
+    one   = "Tool available in this section"
+    other = "Tools available in this section"
+
 [this-tool]
     other = "This tool"
 
 [tools-list]
-    other = "List of available tools"
+    other = "List of available tools in this site"
 
 [see-all-tools]
     other = "See all the tools"
     
 [see-all-tools-alt]
     other = "See all the tools' details"
+
+[other-topics]
+    other = "Other subjects"
