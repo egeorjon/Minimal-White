@@ -17,12 +17,11 @@
         <div class="row">
         <article class="single-content col">
             {{- .ContentWithoutSummary -}}
-
-            {{- range 
-
-
-
-
+            {{- $tools := where site.RegularPages "Type" "tool" -}}
+            {{- range site.Params.mainSections -}}
+                {{- $tools_section := where $tools "Section" . -}}
+                {{- partial "widgets/tools-common.html" (dict "current" $current_page "tools" $tools_section "config" "toolslist") -}}
+            {{- end -}}
         </article><!-- col -->
         </div><!-- end of row -->
     </div><!-- end of container -->
