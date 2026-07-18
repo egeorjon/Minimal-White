@@ -125,8 +125,12 @@
 {{- with .OutputFormats.Get "rss" -}}
     {{- printf "<link rel=\"%s\" type=\"%s\" href=\"%s\" title=\"%s\" />" .Rel .MediaType.Type .Permalink site.Title | safeHTML -}}
 {{- end -}}
-{{- partial "head/css.html" . -}}
-{{- partial "head/js.html" .  -}}
+{{- $cache_value := "nomath" -}}
+{{- with .Params.math -}}
+    {{- $cache_value = "math" -}}
+{{- end -}}
+{{- partialCached "head/css.html" . $cache_value -}}
+{{- partialCached "head/js.html" .  .Layout -}}
 
 {{- with site.Params.googleWMT | default false -}}
     <meta name="google-site-verification" content="{{- . -}}" />
@@ -137,5 +141,5 @@
 {{- end -}}
 
 {{- if $production -}}
-    {{- partialCached "cloudflare.html" . -}}
+    {{- partialCached "cloudflare.html" . "unique" -}}
 {{- end -}}
