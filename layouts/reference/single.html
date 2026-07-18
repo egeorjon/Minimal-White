@@ -15,7 +15,7 @@
                 {{- $table := dict -}}
                 {{- range .Parent.Pages -}}
                     {{- if .Params.references -}}
-                        {{- $first_tag := index .Params.Tags 0 -}}
+                        {{- $first_tag := (index .Params.Tags 0) | default (i18n "other-topics") -}}
                         {{- $slice := slice -}}
                         {{- if isset $table $first_tag -}}
                             {{- $slice = index $table $first_tag -}}
