@@ -7,7 +7,8 @@
 {{- if ne $section "" -}}
     {{- $section_page := site.GetPage "Section" $section -}}
     {{- with $section_page -}}
-        {{- $posts  = where site.RegularPages "Section" $section | first $numposts -}}
+        {{- $posts  = where site.RegularPages "Section" $section -}}
+        {{- $posts  = where $posts "Type" "!=" "tool" | first $numposts -}}
         {{- $params = merge $params (dict "title" .Title) -}}
     {{- end -}}
 {{- else -}}
