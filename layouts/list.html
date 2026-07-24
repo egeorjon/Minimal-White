@@ -10,9 +10,9 @@
   {{- $def_params := index site.Params $list_type | default (index hugo.Data.defaults $list_type)  | default (index hugo.Data.defaults "list") -}}
 
   {{/* ---- Get page parameters ---- */}}
-  {{- $meta         := $def_params.meta         -}} {{/* (index $def_params "meta") */}}
-  {{- $display_img  := $def_params.headerimage  -}}
-  {{- $post_format  := $def_params.post_format  -}}
+  {{- $meta         := $def_params.meta        -}} {{/* (index $def_params "meta") */}}
+  {{- $display_img  := $def_params.headerimage -}}
+  {{- $post_format  := $def_params.post_format -}}
   {{- $partial_path := path.Join "posts-format" (printf "%s%s%s" "posts-list-" $post_format ".html") -}}
   {{- $columns      := (index $def_params "cols") | default (dict "xs" 1 "sm" 1 "md" 1 "lg" 1 "xl" 1) -}}
 
