@@ -328,9 +328,13 @@
     one   = "Outil sur le même sujet (%s)"
     other = "Outils sur le même sujet (%s)"
 
-[tools-list-section]
+[tools-list-this-section]
     one   = "Outil disponible dans cette section"
-    other = "Outils disponibles dans cette section"
+    other = "Outils disponibles cette section"
+
+[tools-list-section]
+    one   = "Outil disponible dans la section <i>%s</i>"
+    other = "Outils disponibles dans la section <i>%s</i>"
 
 [this-tool]
     other = "Cet outil"

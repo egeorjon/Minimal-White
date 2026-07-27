@@ -19,8 +19,9 @@
             {{- .ContentWithoutSummary -}}
             {{- $tools := where site.RegularPages "Type" "tool" -}}
             {{- range site.Params.mainSections -}}
+                {{- $section := site.GetPage . -}}
                 {{- $tools_section := where $tools "Section" . -}}
-                {{- partial "widgets/tools-common.html" (dict "current" $current_page "tools" $tools_section "config" "toolslist") -}}
+                {{- partial "widgets/tools-common.html" (dict "current" $current_page "tools" $tools_section "config" "toolssection" "subtitle" $section.Title "params" (dict "title" "tools-list-section" "num" 0)) -}}
             {{- end -}}
         </article><!-- col -->
         </div><!-- end of row -->

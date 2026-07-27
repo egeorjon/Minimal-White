@@ -245,7 +245,7 @@
             }
         },
         "toolssection": {
-            "title"         : "tools-list-section",
+            "title"         : "tools-list-this-section",
             "subheading"    : "h4",
             "num"           : 6,
             "columns"       : { "xs": 1, "sm": 1, "md": 2, "lg": 3, "xl": 3, "xxl": 4 },
@@ -253,7 +253,7 @@
             "view_all"      : "/pages/tools",
             "length"        : 100,
             "meta"          : {
-                "bottom"    : [ "section", "tags" ],
+                "bottom"    : [ "tags" ],
                 "middle"    : [],
                 "top"       : []
             }
