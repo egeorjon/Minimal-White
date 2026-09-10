@@ -560,6 +560,16 @@ li > p {
 }
 */
 
+.table .figure {
+    margin-bottom: 0;
+}
+
+.table figcaption {
+    display: none;
+}
+
+
+
 .see-all {
     margin-bottom: 2 * $paragraph-margin-bottom;
 }
