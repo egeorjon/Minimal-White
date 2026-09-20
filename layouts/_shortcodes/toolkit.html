@@ -1,24 +1,33 @@
-{{- $script   := cond (.IsNamedParams) (.Get "script") (.Get 0)   -}}
-{{- $funcname := cond (.IsNamedParams) (.Get "funcname") (.Get 1) -}}
 <div class="row">
     <div class="col-12">
         {{- .Inner -}}
     </div>
 </div>
+{{- $params := dict -}}
+{{- $script := ""   -}}
+{{- $func   := ""   -}}
+{{- range $key,$value := .Params -}}
+    {{- if eq $key "script" -}}
+	    {{- $script = $value -}}
+    {{- else if eq $key "funcname" -}}
+	    {{- $func = $value -}}
+    {{- else }}
+	    {{- $params = merge $params (dict $key $value) -}}
+    {{- end -}}
+{{- end -}}
 {{- if $script -}}
     {{- if not (.Page.Store.Get $script) -}}
         <script type="module" src="{{- printf "js/%s" $script | relURL -}}"></script>
         {{- .Page.Store.Set $script true -}}
     {{- end -}}
-    {{- if $funcname -}}
+    {{- if $func -}}
+	    {{- $params = $params | jsonify | safeJS -}}
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                // console.log(window.egetools[{{- $funcname -}}].name);
-                // console.log(typeof window.egetools[{{- $funcname -}}]);
-                if (typeof window.egetools[{{- $funcname -}}] === "function") {
-                    window.egetools[{{- $funcname -}}]();
+                if (typeof window.egetools[{{- $func -}}] === "function") {
+                    window.egetools[{{- $func -}}]({{- $params -}});
                 }
             });
         </script>
-    {{- end -}}
+    {{- end -}}	
 {{- end -}}
