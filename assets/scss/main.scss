@@ -568,8 +568,6 @@ li > p {
     display: none;
 }
 
-
-
 .see-all {
     margin-bottom: 2 * $paragraph-margin-bottom;
 }
@@ -761,6 +759,10 @@ figcaption.bottom span,
 h4.card-title,
 h3.card-title  {
     margin-top: 0!important;
+}
+
+.highlight, pre {
+    margin-bottom: $paragraph-margin-bottom;
 }
 
 /* -------------------------------------------------
