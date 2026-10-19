@@ -17,7 +17,14 @@
 {{- end -}}
 {{- if $script -}}
     {{- if not (.Page.Store.Get $script) -}}
-        <script type="module" src="{{- printf "js/%s" $script | relURL -}}"></script>
+        {{- $jsPath := printf "js/%s" $script    -}}
+        {{- $jsResource := resources.Get $jsPath -}}
+        {{- if $jsResource -}}
+            {{/*- $minifiedJS := $jsResource | js.Build | minify | fingerprint -*/}}
+            {{ $minifiedJS := $jsResource | js.Build (dict "minify" true "target" "es2020") }}
+            <script type="module" src="{{ $minifiedJS.RelPermalink }}" integrity="{{ $minifiedJS.Data.Integrity }}" defer></script>
+        {{- end -}}
+        {{/* <script type="module" src="{{- printf "js/%s" $script | relURL -}}"></script> */}}
         {{- .Page.Store.Set $script true -}}
     {{- end -}}
     {{- if $func -}}
